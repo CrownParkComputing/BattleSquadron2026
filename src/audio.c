@@ -887,6 +887,7 @@ static void audio_tee_close(void)
     memcpy(h + 36, "data", 4); v = (uint32_t)data; memcpy(h + 40, &v, 4);
     fseek(tee_f, 0, SEEK_SET); fwrite(h, 1, 44, tee_f); fclose(tee_f); tee_f = NULL;
 }
+long audio_capture_frames(void) { return tee_frames; }
 static void audio_tee(const int16_t *pcm, size_t frames)
 {
     static int checked;

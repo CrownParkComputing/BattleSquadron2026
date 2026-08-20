@@ -21,4 +21,5 @@ void audio_tick(void);              /* call once per 50 Hz display frame: CIA ca
 void audio_sfx(int n);              /* the engine's sfx(n): n >= 0 -> PlaySoundEffect;
                                        n < 0 -> the $2470E-table jingle entries (engine passes -0x732 etc) */
 void audio_set(float master, int music_on, int sfx_on);
+long audio_capture_frames(void);     /* frames written to BS_AUDIO_WAV so far (video sync) */
 #endif

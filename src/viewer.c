@@ -91,7 +91,7 @@ static void options_load(void)
 
 static void options_apply(void)
 {
-    audio_set(opt.master / 10.0f, opt.music_on, opt.sfx_on);
+    audio_set(opt.master / 10.0f, opt.music_on == 1, opt.sfx_on);
     render_hiscore = (int)opt.hiscore;
     if (opt.fullscreen != IsWindowFullscreen()) {
         if (opt.fullscreen) {
@@ -364,6 +364,8 @@ static int title_sel, title_page;                  /* page 0 = main menu, 1 = de
 #define TITLE_MAIN_N 7
 #define TITLE_DBG_N  4
 static int title_count(void) { return title_page ? TITLE_DBG_N : TITLE_MAIN_N; }
+static int remix_ok;
+#define MUSIC_NAME() (opt.music_on == 2 ? "REMIX" : opt.music_on ? "ORIGINAL" : "OFF")
 static void title_line(int i, char *out, size_t n)
 {
     if (title_page) {
@@ -374,7 +376,7 @@ static void title_line(int i, char *out, size_t n)
     switch (i) {
     case 0: snprintf(out, n, "START GAME"); break;
     case 1: snprintf(out, n, "SOUND FX %s", opt.sfx_on ? "ON" : "OFF"); break;
-    case 2: snprintf(out, n, "MUSIC %s", opt.music_on ? "ON" : "OFF"); break;
+    case 2: snprintf(out, n, "MUSIC %s", MUSIC_NAME()); break;
     case 3: snprintf(out, n, "HIGH SCORES"); break;
     case 4: snprintf(out, n, "OPTIONS"); break;
     case 5: snprintf(out, n, "DEBUG"); break;
@@ -575,6 +577,64 @@ static void menu_row_lr(int canvas_y, const char *label, const char *val, int se
 static int ui_pressed(void);
 static int ui_hit(Rectangle r);
 #define PAUSE_ITEMS 3
+/* BS_VIDEO=out.mp4 records the presented frames straight into ffmpeg at the
+ * game's own 50 Hz -- grabbing the X root gives a black rectangle on this
+ * setup, and this way the capture is exact rather than whatever the desktop
+ * compositor happened to show.  Pair it with BS_AUDIO_WAV: the frame count
+ * printed at open is where the video starts inside that WAV. */
+static FILE *vid_pipe;
+static void video_open(int w, int h)
+{
+    const char *path = getenv("BS_VIDEO");
+    if (!path) return;
+    char cmd[768];
+    snprintf(cmd, sizeof cmd,
+             "ffmpeg -y -loglevel error -f rawvideo -pix_fmt rgba -s %dx%d -framerate 50 "
+             "-i - -c:v libx264 -preset veryfast -crf 20 -pix_fmt yuv420p -movflags +faststart '%s'",
+             w, h, path);
+    vid_pipe = popen(cmd, "w");
+    if (!vid_pipe) { perror("BS_VIDEO"); return; }
+    fprintf(stderr, "video: recording %dx%d to %s (audio offset %ld frames)\n",
+            w, h, path, audio_capture_frames());
+}
+static void video_frame(void)
+{
+    if (!vid_pipe) return;
+    Image img = LoadImageFromScreen();
+    fwrite(img.data, 4, (size_t)img.width * img.height, vid_pipe);
+    UnloadImage(img);
+}
+static void video_close(void) { if (vid_pipe) { pclose(vid_pipe); vid_pipe = NULL; } }
+
+/* ---- optional remix soundtrack ----
+ * MUSIC cycles OFF / ORIGINAL / REMIX; REMIX only appears when
+ * assets/music/remix.mp3 is there.  The sequencer is muted while it plays and
+ * the game's own effects keep running over it. */
+static Music remix_mus;
+static int remix_playing;
+static void remix_load(void)
+{
+    if (!FileExists("assets/music/remix.mp3")) return;
+    remix_mus = LoadMusicStream("assets/music/remix.mp3");
+    remix_ok = remix_mus.stream.buffer != NULL;
+    if (remix_ok) remix_mus.looping = true;
+}
+static void remix_check_option(void)
+{
+    if (!remix_ok && opt.music_on == 2) opt.music_on = 1;   /* no track installed: back to the original */
+}
+static void remix_update(int in_game)
+{
+    if (!remix_ok) return;
+    int want = in_game && opt.music_on == 2;
+    if (want && !remix_playing) { PlayMusicStream(remix_mus); remix_playing = 1; }
+    else if (!want && remix_playing) { StopMusicStream(remix_mus); remix_playing = 0; }
+    if (remix_playing) {
+        SetMusicVolume(remix_mus, opt.master / 10.0f);
+        UpdateMusicStream(remix_mus);
+    }
+}
+
 static void draw_pause_ui(int sw, int sh)
 {
     const int H = sh;                                /* in game the bar is gone: the panel owns the window */
@@ -601,7 +661,7 @@ static void option_adjust(int d)
 {
     switch (opt_sel) {
     case 0: opt.master += d; if (opt.master < 0) opt.master = 0; if (opt.master > 10) opt.master = 10; break;
-    case 1: opt.music_on = !opt.music_on; break;
+    case 1: { int n = remix_ok ? 3 : 2; opt.music_on = (opt.music_on + d + n) % n; } break;
     case 2: opt.sfx_on = !opt.sfx_on; break;
     case 3: opt.difficulty = (opt.difficulty + d + 3) % 3; break;
     case 4: opt.weapon = (opt.weapon + d + 4) % 4; break;
@@ -953,7 +1013,7 @@ static void sfx_menu_music(void)
     bs_load_module(&data, "LODMUS");     /* over LODS0S ($3D800) */
     data.stage = -1;
     map_tex_stage = -1;
-    audio_set(opt.master / 10.0f, 1, opt.sfx_on);
+    audio_set(opt.master / 10.0f, opt.music_on == 1, opt.sfx_on);
     audio_start_title();
     sfx_amode = 2; sfx_track = 0;
 }
@@ -1189,8 +1249,15 @@ int main(int argc, char **argv)
     title_enter();                       /* menu music + the boot welcome speech */
 
     if (start_mode >= 0) mode = start_mode;      /* testing: open a page directly */
+    const int trailer = getenv("BS_TRAILER") != NULL;   /* title, then it plays itself */
+    const long trailer_start = trailer ? atol(getenv("BS_TRAILER")) : 0;
+    remix_load();
+    remix_check_option();
+    video_open(GetScreenWidth(), GetScreenHeight());
     while (!WindowShouldClose()) {
         audio_tick();
+        if (trailer && mode == 0 && vbl == (trailer_start > 0 ? trailer_start : 300)) start_game();
+        if (trailer && mode == 0) title_idle = 0;    /* no attract cut-in while recording */
         if (getenv("BS_DEMO_SMOKE")) {               /* attract-demo smoke: straight into the demo */
             if (vbl == 10 && mode == 0) demo_enter();
             if (mode == 3 && vbl == atol(getenv("BS_DEMO_SMOKE"))) {
@@ -1251,7 +1318,7 @@ int main(int argc, char **argv)
                       else { title_page = 0; title_sel = 5; }
                   }
               } else if (title_sel == 1 && (dx || ok)) { opt.sfx_on = !opt.sfx_on; options_apply(); options_save(); }
-              else if (title_sel == 2 && (dx || ok)) { opt.music_on = !opt.music_on; options_apply(); options_save(); }
+              else if (title_sel == 2 && (dx || ok)) { int n = remix_ok ? 3 : 2; opt.music_on = (opt.music_on + (dx ? dx : 1) + n) % n; options_apply(); options_save(); }
               else if (ok) {
                   if (getenv("BS_MENU_DEBUG")) TraceLog(LOG_INFO, "menu: fire on row %d (page %d)", title_sel, title_page);
                   if (title_sel == 0) start_game();
@@ -1264,7 +1331,7 @@ int main(int argc, char **argv)
             if (IsKeyPressed(KEY_F1)) { players_sel = 1; start_game(); }
             else if (IsKeyPressed(KEY_F2)) { players_sel = 2; start_game(); }
             else if (IsKeyPressed(KEY_F3)) { opt.sfx_on = !opt.sfx_on; options_apply(); options_save(); }
-            else if (IsKeyPressed(KEY_F4)) { opt.music_on = !opt.music_on; options_apply(); options_save(); }
+            else if (IsKeyPressed(KEY_F4)) { int n = remix_ok ? 3 : 2; opt.music_on = (opt.music_on + 1) % n; options_apply(); options_save(); }
             else if (IsKeyPressed(KEY_F5)) players_sel = players_sel == 2 ? 1 : 2;
             else if (IsKeyPressed(KEY_O)) { opt_sel = 0; mode = 2; }
             else if (title_idle > 600 && !smoke) demo_enter();   /* 12 s idle -> attract */
@@ -1316,6 +1383,16 @@ int main(int argc, char **argv)
                 if ((vbl & 1) == 0) {
                     uint8_t joy[2] = { joy_p1(), joy_p2() };
                     if (smoke) joy[0] |= (vbl % 100) < 40 ? JOY_FIRE : 0;
+                    if (trailer) {                   /* BS_TRAILER: flies itself, for capture */
+                        long ph = g.dframe % 400;
+                        joy[0] = (uint8_t)((ph < 150 ? JOY_LEFT : ph < 200 ? JOY_UP :
+                                            ph < 350 ? JOY_DOWN : JOY_RIGHT) |
+                                           ((g.dframe % 100) < 30 ? JOY_FIRE : 0));
+                        for (int pi = 0; pi < 2; pi++) {   /* stays alive: the reel is about the game, not my flying */
+                            Player *pl = &g.players[pi];
+                            if (pl->explode49 == 0 && (uint16_t)pl->invuln52 < 100) pl->invuln52 = 100;
+                        }
+                    }
                     hook_n = 0;
                     eng_frame(joy);
                 }
@@ -1389,7 +1466,7 @@ int main(int argc, char **argv)
                     char val[24] = "";
                     switch (i) {
                     case 0: snprintf(val, sizeof val, "%d", opt.master); break;
-                    case 1: snprintf(val, sizeof val, "%s", opt.music_on ? "ON" : "OFF"); break;
+                    case 1: snprintf(val, sizeof val, "%s", MUSIC_NAME()); break;
                     case 2: snprintf(val, sizeof val, "%s", opt.sfx_on ? "ON" : "OFF"); break;
                     case 3: snprintf(val, sizeof val, "%s", DIFF[opt.difficulty % 3]); break;
                     case 4: snprintf(val, sizeof val, "%s", W_NAMES[opt.weapon & 3]); break;
@@ -1458,9 +1535,12 @@ int main(int argc, char **argv)
         }
         if (mode == 1 && paused && !smoke) draw_pause_ui(sw, sh);
         EndDrawing();
+        remix_update(mode == 1 && !paused);
+        video_frame();
         vbl++;
     }
     options_save();
+    video_close();
     audio_close();
     CloseWindow();
     return 0;

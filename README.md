@@ -39,6 +39,14 @@ are not distributed here. Point the loader at your own copy.
 
 Player two joins at any time by pressing fire.
 
+## Soundtrack
+
+MUSIC cycles OFF / ORIGINAL / REMIX. REMIX appears only if you drop an mp3 at
+`assets/music/remix.mp3` — the game's own effects keep playing over it. No
+track is bundled: the one this was built against is Tony "Fluke73" Wiren's
+*Battle Squadron (Genos 2 Edition)* from AmigaRemix, which is the remixer's
+work to distribute, not ours.
+
 ## How it was verified
 
 Every stage was checked against the original rather than against itself: 14,300 game
