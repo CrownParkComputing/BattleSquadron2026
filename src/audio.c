@@ -98,12 +98,22 @@ static void paula_render(int16_t *stereo, size_t frames)
             PaulaCh *c = &pch[i];
             if (!c->active || !c->period || !c->bytelen) continue;
             uint32_t a = (c->play + c->pos) & 0x7FFFF;
-            double lvl = (int8_t)bs_chip[a] * c->volume * 2.0;
+            double lvl = (int8_t)bs_chip[a] * (double)c->volume;   /* same scale as the machine's mixer */
             if (i == 0 || i == 3) l += lvl; else r += lvl;
             c->frac += PAULA_CLOCK / (c->period * (double)OUT_RATE);
             uint32_t adv = (uint32_t)c->frac;
             c->frac -= adv; c->pos += adv;
-            if (c->pos >= c->bytelen) { c->pos %= c->bytelen; c->play = c->lc; }
+            if (c->pos >= c->bytelen) {
+                /* end of the block: Paula re-latches BOTH pointer and length.
+                 * The sequencer's instruments are one-shot attack + short loop
+                 * (it rewrites AUDxLEN mid-note), so without the length re-latch
+                 * the whole attack sample repeats and that instrument sits far
+                 * too loud over the rest of the mix. */
+                c->play = c->lc;
+                c->bytelen = (uint32_t)c->lenw * 2u;
+                if (!c->bytelen) { c->active = 0; continue; }
+                c->pos %= c->bytelen;
+            }
         }
         /* soft A500-style stereo blend, then Paula's output filter: the
          * machine does not put the raw step waveform on the jacks, and without

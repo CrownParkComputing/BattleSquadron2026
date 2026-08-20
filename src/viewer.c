@@ -17,6 +17,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 #include <strings.h>
 
 #define SCALE 3
@@ -57,7 +58,7 @@ static long vbl;
 static struct {
     int master, music_on, sfx_on, fullscreen, difficulty, weapon, lives;
     long hiscore;
-} opt = { 8, 1, 1, 0, 1, 3, 3, 1000000 };
+} opt = { 10, 1, 1, 0, 1, 3, 3, 1000000 };   /* volume 10 = the machine's own output level */
 
 static void options_save(void)
 {
@@ -381,19 +382,51 @@ static void title_line(int i, char *out, size_t n)
     }
 }
 /* a drifting starfield fills the menu panels instead of flat black */
+/* ---- animated menu backdrop: drifting cloud haze under three parallax star layers ---- */
+static float bd_hash(int gx, int gy)             /* value noise lattice */
+{
+    uint32_t h = (uint32_t)gx * 374761393u + (uint32_t)gy * 668265263u;
+    h = (h ^ (h >> 13)) * 1274126177u;
+    return (float)((h ^ (h >> 16)) & 0xFFFF) / 65535.0f;
+}
+static float bd_smooth(float a, float b, float t) { t = t * t * (3 - 2 * t); return a + (b - a) * t; }
+static float bd_noise(float x, float y)          /* bilinear, smoothstepped */
+{
+    int xi = (int)floorf(x), yi = (int)floorf(y);
+    float fx = x - xi, fy = y - yi;
+    return bd_smooth(bd_smooth(bd_hash(xi, yi), bd_hash(xi + 1, yi), fx),
+                     bd_smooth(bd_hash(xi, yi + 1), bd_hash(xi + 1, yi + 1), fx), fy);
+}
 static void menu_backdrop(uint32_t *c, int y0, int y1)
 {
-    for (int y = y0; y < y1; y++)
-        for (int x = 8; x < BS_TITLE_W - 8; x++) c[y * BS_TITLE_W + x] = 0xFF000000u;
+    const float t = vbl * 0.01f;
+    for (int y = y0; y < y1; y++) {
+        for (int x = 8; x < BS_TITLE_W - 8; x++) {
+            /* two octaves scrolling at different speeds: the clouds shear as they pass */
+            float n = bd_noise(x * 0.035f + t * 0.35f, y * 0.05f + t * 0.08f) * 0.65f
+                    + bd_noise(x * 0.085f - t * 0.6f, y * 0.11f + t * 0.15f) * 0.35f;
+            n = n * n * 1.35f;                    /* squared: keeps the dark sky dark */
+            if (n > 1) n = 1;
+            uint32_t r = (uint32_t)(n * 54), g_ = (uint32_t)(n * 34), b = (uint32_t)(n * 96);
+            c[y * BS_TITLE_W + x] = 0xFF000000u | (b << 16) | (g_ << 8) | r;
+        }
+    }
+    /* three star layers, the nearest moving fastest, each twinkling on its own phase */
     static const uint32_t COL[4] = { 0xFF6688AAu, 0xFFAACCEEu, 0xFF88AAFFu, 0xFF445577u };
-    uint32_t r = 0x1234567u;
-    int drift = (int)(vbl / 3);
-    for (int i = 0; i < 150; i++) {
-        r = r * 1103515245u + 12345u;
-        int x = 10 + (int)((r >> 16) % (uint32_t)(BS_TITLE_W - 20));
-        r = r * 1103515245u + 12345u;
-        int y = y0 + (int)(((r >> 16) + (uint32_t)drift) % (uint32_t)(y1 - y0));
-        c[y * BS_TITLE_W + x] = COL[(i + (drift >> 4)) & 3];
+    static const uint32_t DIM[4] = { 0xFF33445Fu, 0xFF556B80u, 0xFF44557Fu, 0xFF22293Bu };
+    const int H = y1 - y0;
+    for (int layer = 0; layer < 3; layer++) {
+        uint32_t r = 0x1234567u + (uint32_t)layer * 0x9E3779B9u;
+        int drift = (int)(vbl * (layer + 1) / 6);
+        int n = layer == 2 ? 40 : 55;
+        for (int i = 0; i < n; i++) {
+            r = r * 1103515245u + 12345u;
+            int x = 10 + (int)((r >> 16) % (uint32_t)(BS_TITLE_W - 20));
+            r = r * 1103515245u + 12345u;
+            int y = y0 + (int)(((r >> 16) + (uint32_t)drift) % (uint32_t)H);
+            int twinkle = ((int)vbl / 7 + i * 5 + layer) & 15;
+            c[y * BS_TITLE_W + x] = twinkle < 4 ? DIM[(i + layer) & 3] : COL[(i + layer) & 3];
+        }
     }
 }
 static void draw_title(uint32_t *c)
