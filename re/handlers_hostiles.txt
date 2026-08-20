@@ -1,0 +1,17 @@
+# Battle Squadron hostile pool ($2DC80, 12x80) -- one line per type. handler = CMPI.B #type,31(A4) chain in LAB_79E2.
+# fires = how it raises the fire request (flags bit5 + (+58,+60), consumed by LAB_4704 -> effect-pool bullet $4976).
+# seen_in_capture = appears in re/trace/objlog_*.txt (stage0 auto/invuln/fire, stage1/2/3). Details: re/ENGINE_hostiles.md
+type=$00 handler=$9752 name=scripted plane (wave of 4, vector-script at +12, 100 pts, hp 0, last of wave -> nova pickup) fires=never seen_in_capture=yes
+type=$01 handler=$95D8 name=aimed bullet-drone (vx steers to nearest player, vy 3/4 px, 50 pts, hp 2) fires=aimed at y>=256 and y>=416 from (x+11,y+32) seen_in_capture=yes
+type=$02 handler=$8F92 name=end mothership (4 fixed slots 8..11: hull/2 turrets/cannon, boss mode g-26242) fires=turrets every 16f random dir, cannon every 8f aimed/random, hull every 8f when dying seen_in_capture=no
+type=$03 handler=$8D6E name=scripted ground pop-up (rise/sit/sink script at +12, armoured when phase bit6, 500 pts, hp 5) fires=never seen_in_capture=yes
+type=$04 handler=$8B48 name=swooping fighter (dives 4/5 px weaving, turns at player altitude, climbs off, 100 pts, hp 2) fires=aimed once at y>=256 (x+11,y+32), once more when heading left/right (x-8|+32,y+11) seen_in_capture=yes
+type=$05 handler=$8A8A name=pickup (t28 $0A nova / 0,2,4,6 weapon; drifts sideways, sinks 0.5 px, immune) fires=never seen_in_capture=yes(stage1)
+type=$06 handler=$890C name=bomber (random x, 1.25 px down, weaves, 1000 pts, hp 23, death -> random weapon pickup) fires=every g-2198(50)f: aimed (x+11,y+40), dir(-32,dn) (x+2,y+40), dir(+32,dn) (x+20,y+40) seen_in_capture=yes
+type=$07 handler=$87E4 name=rising ground gun (grows 32 rows, climbs while map under it is blank, 500 pts, hp 5) fires=aimed every g-2199(50)f from (x+12,y+10) once 20 rows out seen_in_capture=yes
+type=$08 handler=$8664 name=homing missile (homes 200f on nearer player at 2.5 px, then flies off; smoke puffs; 750 pts, hp 2) fires=aimed every g-2197(75)f from (x+12,y+12), first after 20f seen_in_capture=yes
+type=$09 handler=$7FC4 name=stage boss body (slot 8) + gun pod (slot 9); stage-1 variant follows path $2EF20 (5000 pts, hp 95) fires=mines (y+$26, sound 56) + random-dir shots on gframe cycle; pod must die first seen_in_capture=yes(stage1)
+type=$0A handler=$7F56 name=boss explosion puff (reads puff slot $790A/$7910 written by LAB_85E4, 8 frames, relative to slot 8) fires=never seen_in_capture=yes(stage1)
+type=$0B handler=$7E12 name=flypast decoration (4 slots fly right at 4 px with plane/missile/smoke gfx; no spawner found in loader.asm) fires=never seen_in_capture=no
+type=$0C handler=$7CF0 name=tank (80x50, creeps down, steers x to the higher player, 2500 pts, hp 35, wreck frame stays) fires=aimed every 20f from (x+29,y+40) seen_in_capture=yes(stage1)
+type=$0D handler=$7A9A name=pop-up drone (emerging script mode t28=0 / launched: rises 16 rows, sinks then climbs at -4 px, hp 1) fires=aimed from (x+4,y+8) when vy==0 and vy==-3.875 seen_in_capture=yes(stage2)

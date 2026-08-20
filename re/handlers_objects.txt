@@ -1,0 +1,17 @@
+# Battle Squadron object pool ($2E040, 18 x 64) — one line per object type (+17). handler = entry in LAB_5F34.
+# seen_in_capture: stage-0 objlogs (auto/invuln/fire) and objlog_stage{1,2,3}_16000.txt. Details: re/ENGINE_objects.md
+type=$00 handler=$5F68 template(s)=$2B68 name=stage-3 opening bunker (hull hp 63 + core hp 31, opens after rnd 1..128 frames, fires 3 aimed bullets, closes; score 500) seen_in_capture=yes (stage 3)
+type=$01 handler=$6170 template(s)=$2B98 name=launch pad (unhittable; after rnd 1..64 half-frames opens frames 1..9 and spawns hostile type 07 at x+14,y+31 via LAB_75E4) seen_in_capture=yes (stage 0)
+type=$02 handler=$61F0 template(s)=$2BF8 name=stage-3 rising turret (25% of $92E0 tiles; rises 24 frames, fires 2 aimed bullets per g-2194 period; hp 31, score 1500) seen_in_capture=yes (stage 3)
+type=$03 handler=$632E template(s)=$2BC8 name=stage-2 emerging turret (appears at y=$F0+rnd, 1/32 per frame burst of 2 aimed bullets, recoil anim on hit; hp 47, score 2500) seen_in_capture=yes (stage 2)
+type=$04 handler=$6492 template(s)=$2C28 name=stage-1 two-phase cannon (phase 1: 4-bullet fan per g-2195 period, hp 31; phase 2: core hp 15, 1 aimed bullet per period; score 1000) seen_in_capture=no (mode-1 tile $0D70 never exposed)
+type=$05 handler=$6640 template(s)=$2C58 (visible, hp 23, 2500 pts) $2C88 $2CB8 $2CE8 $2D18 $2D48 $2D78 (hidden variants f25=6..11, hp 7, 250 pts) name=stage-3 crate / hidden targets (visible one sprays random-velocity bullets, only shootable when isolated; hidden ones drawn only when hit) seen_in_capture=no
+type=$20 handler=$6A40 (+shared $686C) template(s)=$2DA8 (mode 0 turret, 250) $2DD8 (mode 1 hatch gun, 400) $2E08 (mode 2 silo: launches hostile 0D, 2000) $2E38 (mode 3 static block, 400) name=gun emplacement family (behaviour selected by g7228; wreck at last frame is a bonus pickup +1 BCD at p+97, sound 53) seen_in_capture=yes (all 4 modes)
+type=$21 handler=$6C9A (shared only) template(s)=$2E68 (150) $2EF8 (200) $2F28 (400) name=static scenery / buildings (hit flash, death anim frames 2..8, no behaviour) seen_in_capture=yes (stage 0)
+type=$22 handler=$6CA6 template(s)=$2E98 (mode 2, 250) $2EC8 (mode 0, 300) name=blinking beacon (toggles frame 0/1 every 8 frames; per-hit flash steps) seen_in_capture=yes (stage 0, 2)
+type=$25 handler=$6CE0 template(s)=$2F58 name=mine A (50%: after 64..127 frames drops a stationary hazard effect at x+2,y+7, sound 56; 100 pts) seen_in_capture=yes (stage 0)
+type=$26 handler=$6CE0 template(s)=$2F88 name=mine B (same, hazard at x+20,y+9; 100 pts) seen_in_capture=yes (stage 0)
+type=$27 handler=$6D44 template(s)=$2FB8 name=STAGE GATE (spawned at progress $F10/$1490/$1DD0 -> g7230=1/2/3; every live player inside [x-16,x+16]x[y-16,y+16) for 10 consecutive frames toggles g-4100 -> LAB_7002 stage clear; unshootable, blinks) seen_in_capture=yes (stage 0; counter ran, 10-frame toggle never)
+type=$28 handler=$6DFE template(s)=$2FE8 $3018 name=stage-1 hatch spinner (spins frames 0..7, opens via table $5F0A for 24 frames per g-2196 period, fires one aimed bullet at f18==12; 100 pts) seen_in_capture=no
+type=$29 handler=$6E68 template(s)=$3048 name=invisible spawner (no gfx/box; after rnd 64..127 frames (50%: never) spawns hostile type 08 at x+6,y-6, warning sound 24 at 20; freed at y>=$1CE) seen_in_capture=yes (stage 1)
+# Types $23,$24 (and anything else >= $20 not listed) fall through LAB_6C9A..$6E6E to LAB_6FEC: no behaviour, no box, NOT rendered, never freed except by the y-limit in the shared tail (which they never reach).

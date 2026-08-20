@@ -1,0 +1,8 @@
+master 10
+music 1
+sfx 1
+fullscreen 0
+difficulty 1
+weapon 3
+lives 3
+hiscore 1000000

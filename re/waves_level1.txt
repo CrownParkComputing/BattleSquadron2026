@@ -1,0 +1,460 @@
+Battle Squadron -- stage 0 (surface / level 1) wave tables, dumped from re/trace/chip_2700.bin
+Source: stage descriptor $14EA + stage*$8C: +0 = main list ($D00A), +4 = restart list ($CFCE, used by LAB_9D7E when the
+level wraps: progress 7206 := 1, list := desc+4).  LAB_7556 ($CDA, once per game frame, after the hostile passes):
+    while (progress7206 >= entry.trigger) { if (g7222 == 0) break;  pop entry; spawn }      (V: trace PC $755E/$7564 and objlog)
+Entry = 12 bytes {trigger.w, x.w, y.w, type.b, pad.b, script.l}.  x == $FFFF => clear the whole hostile pool (no spawn).
+Trigger $FFFF terminates (never reached).  Spawn (LAB_75E4/7608): x < $320 ? x + scroll7204 : x - 1000 + 256 ;  y + 256.
+Screen position = (x - scroll7204, y - 256).  Type 6 ignores x: x := rnd&$7f + $40, type := 6.  Types 8 and 1: x += rnd + (rnd&$7f) - $40.
+Hub re-entry points after an underground stage (LAB_7260): stage1 -> list $D3BE progress 3744, stage2 -> $D562 progress 5152,
+stage3 -> $D796 progress 7536.  'script' is +12 of the new record: type 0/3/D = script pointer, type 1 = vx (16.16), type 8 = vy (16.16).
+
+== restart list (desc+4) at $0CFCE
+  addr    trig     x     y  type  script    name
+  0CFCE     40     0   -32   01  00000000  aimed bullet-drone
+  0CFDA     80     0   -32   01  00000000  aimed bullet-drone
+  0CFE6    120     0   -32   01  00000000  aimed bullet-drone
+  0CFF2    200   180   -32   08  00010000  homing missile
+  0CFFE    250    70   -32   08  00010000  homing missile
+  0D00A    330     0   -32   01  00000000  aimed bullet-drone
+  0D016    360     0   -32   01  00000000  aimed bullet-drone
+  0D022    390     0   -32   01  00000000  aimed bullet-drone
+  0D02E    500   288    20   00  0000e96c  plane (scripted wave)
+  0D03A    500   328    20   00  0000e97e  plane (scripted wave)
+  0D046    500   368    20   00  0000e990  plane (scripted wave)
+  0D052    500   408    20   00  0000e9a2  plane (scripted wave)
+  0D05E    650     0   -32   01  00000000  aimed bullet-drone
+  0D06A    675     0   -32   01  00000000  aimed bullet-drone
+  0D076    700     0   -32   01  00000000  aimed bullet-drone
+  0D082    725     0   -32   01  00000000  aimed bullet-drone
+  0D08E    800     0   -44   06  00000000  bomber
+  0D09A    950   200   -32   04  00000000  swooping fighter
+  0D0A6    975   170   -32   04  00000000  swooping fighter
+  0D0B2   1025    60   -32   04  00000000  swooping fighter
+  0D0BE   1050   100   -32   04  00000000  swooping fighter
+  0D0CA   1200     0   -32   01  00000000  aimed bullet-drone
+  0D0D6   1230     0   -32   01  00000000  aimed bullet-drone
+  0D0E2   1260     0   -32   01  00000000  aimed bullet-drone
+  0D0EE   1290     0   -32   01  00000000  aimed bullet-drone
+  0D0FA   1320     0   -32   01  00000000  aimed bullet-drone
+  0D106   1450   -32    20   00  0000e924  plane (scripted wave)
+  0D112   1450   -72    20   00  0000e936  plane (scripted wave)
+  0D11E   1450  -112    20   00  0000e948  plane (scripted wave)
+  0D12A   1450  -152    20   00  0000e95a  plane (scripted wave)
+  0D136   1600    50   -32   04  00000000  swooping fighter
+  0D142   1625    90   -32   04  00000000  swooping fighter
+  0D14E   1675   200   -32   04  00000000  swooping fighter
+  0D15A   1700   150   -32   04  00000000  swooping fighter
+  0D166   1800     0   -44   06  00000000  bomber
+  0D172   2000    70   -32   08  00010000  homing missile
+  0D17E   2050   200   -32   08  00010000  homing missile
+  0D18A   2300     0   -32   01  00000000  aimed bullet-drone
+  0D196   2325     0   -32   01  00000000  aimed bullet-drone
+  0D1A2   2350     0   -32   01  00000000  aimed bullet-drone
+  0D1AE   2375     0   -32   01  00000000  aimed bullet-drone
+  0D1BA   2400     0   -32   01  00000000  aimed bullet-drone
+  0D1C6   2484  1272   100   03  0002e768  ground pop-up (scripted)
+  0D1D2   2600   200   -32   04  00000000  swooping fighter
+  0D1DE   2620    30   -32   04  00000000  swooping fighter
+  0D1EA   2650   150   -32   04  00000000  swooping fighter
+  0D1F6   2670   100   -32   04  00000000  swooping fighter
+  0D202   2700   180   -32   04  00000000  swooping fighter
+  0D20E   2720    80   -32   04  00000000  swooping fighter
+  0D21A   2850   288    20   00  0000e96c  plane (scripted wave)
+  0D226   2850   328    20   00  0000e97e  plane (scripted wave)
+  0D232   2850   368    20   00  0000e990  plane (scripted wave)
+  0D23E   2850   408    20   00  0000e9a2  plane (scripted wave)
+  0D24A   3000    40   -32   08  00010000  homing missile
+  0D256   3040   180   -32   08  00010000  homing missile
+  0D262   3080   100   -32   08  00010000  homing missile
+  0D26E   3250     0   -32   01  00000000  aimed bullet-drone
+  0D27A   3280     0   -32   01  00000000  aimed bullet-drone
+  0D286   3310     0   -32   01  00000000  aimed bullet-drone
+  0D292   3340     0   -32   01  00000000  aimed bullet-drone
+  0D29E   3500   -32    20   00  0000e924  plane (scripted wave)
+  0D2AA   3500   -72    20   00  0000e936  plane (scripted wave)
+  0D2B6   3500  -112    20   00  0000e948  plane (scripted wave)
+  0D2C2   3500  -152    20   00  0000e95a  plane (scripted wave)
+  0D2CE   3586  1336    50   03  0002e826  ground pop-up (scripted)
+  0D2DA   3610     0   -32   01  00000000  aimed bullet-drone
+  0D2E6   3640     0   -32   01  00000000  aimed bullet-drone
+  0D2F2   3670     0   -32   01  00000000  aimed bullet-drone
+  0D2FE   3700     0   -32   01  00000000  aimed bullet-drone
+  0D30A   3716  1048    20   03  0002e77e  ground pop-up (scripted)
+  0D316   3720     0   -32   01  00000000  aimed bullet-drone
+  0D322   3750     0   -32   01  00000000  aimed bullet-drone
+  0D32E   3780     0   -32   01  00000000  aimed bullet-drone
+  0D33A   3784  1048    88   03  0002e794  ground pop-up (scripted)
+  0D346   3810     0   -32   01  00000000  aimed bullet-drone
+  0D352   3840     0   -32   01  00000000  aimed bullet-drone
+  0D35E   3900    40   -32   04  00000000  swooping fighter
+  0D36A   3920   200   -32   04  00000000  swooping fighter
+  0D376   3950    60   -32   04  00000000  swooping fighter
+  0D382   3970   180   -32   04  00000000  swooping fighter
+  0D38E   4000    80   -32   04  00000000  swooping fighter
+  0D39A   4020   160   -32   04  00000000  swooping fighter
+  0D3A6   4050   100   -32   04  00000000  swooping fighter
+  0D3B2   4070   140   -32   04  00000000  swooping fighter
+  0D3BE   4106  1352    10   03  0002e802  ground pop-up (scripted)
+  0D3CA   4136  1000    40   03  0002e7e2  ground pop-up (scripted)
+  0D3D6   4166  1320    22   03  0002e810  ground pop-up (scripted)
+  0D3E2   4186  1032    42   03  0002e7f4  ground pop-up (scripted)
+  0D3EE   4250     0   -32   01  00000000  aimed bullet-drone
+  0D3FA   4280     0   -32   01  00000000  aimed bullet-drone
+  0D406   4310     0   -32   01  00000000  aimed bullet-drone
+  0D412   4340     0   -32   01  00000000  aimed bullet-drone
+  0D41E   4368  1144   -16   03  0002e7a2  ground pop-up (scripted)
+  0D42A   4368  1208   -16   03  0002e7b8  ground pop-up (scripted)
+  0D436   4416  1144   -16   03  0002e7ce  ground pop-up (scripted)
+  0D442   4416  1208   -16   03  0002e7d8  ground pop-up (scripted)
+  0D44E   4440     0   -44   06  00000000  bomber
+  0D45A   4550    80   -32   08  00010000  homing missile
+  0D466   4575    20   -32   08  00010000  homing missile
+  0D472   4750  1272   110   03  0002e84a  ground pop-up (scripted)
+  0D47E   4770  1080   130   03  0002e838  ground pop-up (scripted)
+  0D48A   4800  1128   -32   03  0002e88a  ground pop-up (scripted)
+  0D496   4880  1272    48   03  0002e8c4  ground pop-up (scripted)
+  0D4A2   4900  1080    68   03  0002e868  ground pop-up (scripted)
+  0D4AE   5000     0   -32   01  00000000  aimed bullet-drone
+  0D4BA   5030     0   -32   01  00000000  aimed bullet-drone
+  0D4C6   5056  1032   -32   03  0002e904  ground pop-up (scripted)
+  0D4D2   5056  1224   -32   03  0002e922  ground pop-up (scripted)
+  0D4DE   5100     0   -44   06  00000000  bomber
+  0D4EA   5200   140   -32   04  00000000  swooping fighter
+  0D4F6   5225   100   -32   04  00000000  swooping fighter
+  0D502   5250   160   -32   04  00000000  swooping fighter
+  0D50E   5275    80   -32   04  00000000  swooping fighter
+  0D51A   5300   180   -32   04  00000000  swooping fighter
+  0D526   5325    60   -32   04  00000000  swooping fighter
+  0D532   5350   140   -32   04  00000000  swooping fighter
+  0D53E   5375    40   -32   04  00000000  swooping fighter
+  0D54A   5400   160   -32   04  00000000  swooping fighter
+  0D556   5425    20   -32   04  00000000  swooping fighter
+  0D562   5550   200   -32   08  00010000  homing missile
+  0D56E   5600   170   -32   08  00010000  homing missile
+  0D57A   5650    50   -32   08  00010000  homing missile
+  0D586   5744  1072   -32   03  0002e940  ground pop-up (scripted)
+  0D592   5744  1296   -32   03  0002e95a  ground pop-up (scripted)
+  0D59E   5840  1096   -32   03  0002e974  ground pop-up (scripted)
+  0D5AA   5840  1184   -32   03  0002e996  ground pop-up (scripted)
+  0D5B6   5936  1032   -32   03  0002e9b0  ground pop-up (scripted)
+  0D5C2   5936  1336   -32   03  0002e9c2  ground pop-up (scripted)
+  0D5CE   6036  1336    68   03  0002e9d4  ground pop-up (scripted)
+  0D5DA   6100     0   -32   01  00000000  aimed bullet-drone
+  0D5E6   6125     0   -32   01  00000000  aimed bullet-drone
+  0D5F2   6175     0   -32   01  00000000  aimed bullet-drone
+  0D5FE   6200     0   -32   01  00000000  aimed bullet-drone
+  0D60A   6250   140   -32   04  00000000  swooping fighter
+  0D616   6251   100   -32   04  00000000  swooping fighter
+  0D622   6300   200   -32   04  00000000  swooping fighter
+  0D62E   6301    40   -32   04  00000000  swooping fighter
+  0D63A   6350   180   -32   04  00000000  swooping fighter
+  0D646   6351    60   -32   04  00000000  swooping fighter
+  0D652   6400   220   -32   04  00000000  swooping fighter
+  0D65E   6401    20   -32   04  00000000  swooping fighter
+  0D66A   6450     0   -44   06  00000000  bomber
+  0D676   6550  1032   102   03  0002e9e2  ground pop-up (scripted)
+  0D682   6640  1336    96   03  0002ea00  ground pop-up (scripted)
+  0D68E   6656  1336   -32   03  0002ea0a  ground pop-up (scripted)
+  0D69A   6700   140   -32   04  00000000  swooping fighter
+  0D6A6   6750   100   -32   04  00000000  swooping fighter
+  0D6B2   6760  1032   104   03  0002ea3e  ground pop-up (scripted)
+  0D6BE   6816  1032   -32   03  0002ea4c  ground pop-up (scripted)
+  0D6CA   6900    50   -32   04  00000000  swooping fighter
+  0D6D6   6910   200   -32   04  00000000  swooping fighter
+  0D6E2   6944  1336   -32   03  0002ea28  ground pop-up (scripted)
+  0D6EE   7072  1032    80   03  0002ea6e  ground pop-up (scripted)
+  0D6FA   7100   230   -32   04  00000000  swooping fighter
+  0D706   7150    20   -32   04  00000000  swooping fighter
+  0D712   7250   200   -32   08  00010000  homing missile
+  0D71E   7300   120   -32   08  00010000  homing missile
+  0D72A   7350    40   -32   08  00010000  homing missile
+  0D736   7600   140   -32   04  00000000  swooping fighter
+  0D742   7625   100   -32   04  00000000  swooping fighter
+  0D74E   7650   160   -32   04  00000000  swooping fighter
+  0D75A   7675    80   -32   04  00000000  swooping fighter
+  0D766   7700   180   -32   04  00000000  swooping fighter
+  0D772   7725    60   -32   04  00000000  swooping fighter
+  0D77E   7750   140   -32   04  00000000  swooping fighter
+  0D78A   7775    40   -32   04  00000000  swooping fighter
+  0D796   7850   -32    20   00  0000e924  plane (scripted wave)
+  0D7A2   7850   -72    20   00  0000e936  plane (scripted wave)
+  0D7AE   7850  -112    20   00  0000e948  plane (scripted wave)
+  0D7BA   7850  -152    20   00  0000e95a  plane (scripted wave)
+  0D7C6   8000   240   -32   04  00000000  swooping fighter
+  0D7D2   8040    15   -32   04  00000000  swooping fighter
+  0D7DE   8080   210   -32   04  00000000  swooping fighter
+  0D7EA   8120    45   -32   04  00000000  swooping fighter
+  0D7F6  65535   300    40   ff  04000000  END
+
+== main list (desc+0) at $0D00A
+  addr    trig     x     y  type  script    name
+  0D00A    330     0   -32   01  00000000  aimed bullet-drone
+  0D016    360     0   -32   01  00000000  aimed bullet-drone
+  0D022    390     0   -32   01  00000000  aimed bullet-drone
+  0D02E    500   288    20   00  0000e96c  plane (scripted wave)
+  0D03A    500   328    20   00  0000e97e  plane (scripted wave)
+  0D046    500   368    20   00  0000e990  plane (scripted wave)
+  0D052    500   408    20   00  0000e9a2  plane (scripted wave)
+  0D05E    650     0   -32   01  00000000  aimed bullet-drone
+  0D06A    675     0   -32   01  00000000  aimed bullet-drone
+  0D076    700     0   -32   01  00000000  aimed bullet-drone
+  0D082    725     0   -32   01  00000000  aimed bullet-drone
+  0D08E    800     0   -44   06  00000000  bomber
+  0D09A    950   200   -32   04  00000000  swooping fighter
+  0D0A6    975   170   -32   04  00000000  swooping fighter
+  0D0B2   1025    60   -32   04  00000000  swooping fighter
+  0D0BE   1050   100   -32   04  00000000  swooping fighter
+  0D0CA   1200     0   -32   01  00000000  aimed bullet-drone
+  0D0D6   1230     0   -32   01  00000000  aimed bullet-drone
+  0D0E2   1260     0   -32   01  00000000  aimed bullet-drone
+  0D0EE   1290     0   -32   01  00000000  aimed bullet-drone
+  0D0FA   1320     0   -32   01  00000000  aimed bullet-drone
+  0D106   1450   -32    20   00  0000e924  plane (scripted wave)
+  0D112   1450   -72    20   00  0000e936  plane (scripted wave)
+  0D11E   1450  -112    20   00  0000e948  plane (scripted wave)
+  0D12A   1450  -152    20   00  0000e95a  plane (scripted wave)
+  0D136   1600    50   -32   04  00000000  swooping fighter
+  0D142   1625    90   -32   04  00000000  swooping fighter
+  0D14E   1675   200   -32   04  00000000  swooping fighter
+  0D15A   1700   150   -32   04  00000000  swooping fighter
+  0D166   1800     0   -44   06  00000000  bomber
+  0D172   2000    70   -32   08  00010000  homing missile
+  0D17E   2050   200   -32   08  00010000  homing missile
+  0D18A   2300     0   -32   01  00000000  aimed bullet-drone
+  0D196   2325     0   -32   01  00000000  aimed bullet-drone
+  0D1A2   2350     0   -32   01  00000000  aimed bullet-drone
+  0D1AE   2375     0   -32   01  00000000  aimed bullet-drone
+  0D1BA   2400     0   -32   01  00000000  aimed bullet-drone
+  0D1C6   2484  1272   100   03  0002e768  ground pop-up (scripted)
+  0D1D2   2600   200   -32   04  00000000  swooping fighter
+  0D1DE   2620    30   -32   04  00000000  swooping fighter
+  0D1EA   2650   150   -32   04  00000000  swooping fighter
+  0D1F6   2670   100   -32   04  00000000  swooping fighter
+  0D202   2700   180   -32   04  00000000  swooping fighter
+  0D20E   2720    80   -32   04  00000000  swooping fighter
+  0D21A   2850   288    20   00  0000e96c  plane (scripted wave)
+  0D226   2850   328    20   00  0000e97e  plane (scripted wave)
+  0D232   2850   368    20   00  0000e990  plane (scripted wave)
+  0D23E   2850   408    20   00  0000e9a2  plane (scripted wave)
+  0D24A   3000    40   -32   08  00010000  homing missile
+  0D256   3040   180   -32   08  00010000  homing missile
+  0D262   3080   100   -32   08  00010000  homing missile
+  0D26E   3250     0   -32   01  00000000  aimed bullet-drone
+  0D27A   3280     0   -32   01  00000000  aimed bullet-drone
+  0D286   3310     0   -32   01  00000000  aimed bullet-drone
+  0D292   3340     0   -32   01  00000000  aimed bullet-drone
+  0D29E   3500   -32    20   00  0000e924  plane (scripted wave)
+  0D2AA   3500   -72    20   00  0000e936  plane (scripted wave)
+  0D2B6   3500  -112    20   00  0000e948  plane (scripted wave)
+  0D2C2   3500  -152    20   00  0000e95a  plane (scripted wave)
+  0D2CE   3586  1336    50   03  0002e826  ground pop-up (scripted)
+  0D2DA   3610     0   -32   01  00000000  aimed bullet-drone
+  0D2E6   3640     0   -32   01  00000000  aimed bullet-drone
+  0D2F2   3670     0   -32   01  00000000  aimed bullet-drone
+  0D2FE   3700     0   -32   01  00000000  aimed bullet-drone
+  0D30A   3716  1048    20   03  0002e77e  ground pop-up (scripted)
+  0D316   3720     0   -32   01  00000000  aimed bullet-drone
+  0D322   3750     0   -32   01  00000000  aimed bullet-drone
+  0D32E   3780     0   -32   01  00000000  aimed bullet-drone
+  0D33A   3784  1048    88   03  0002e794  ground pop-up (scripted)
+  0D346   3810     0   -32   01  00000000  aimed bullet-drone
+  0D352   3840     0   -32   01  00000000  aimed bullet-drone
+  0D35E   3900    40   -32   04  00000000  swooping fighter
+  0D36A   3920   200   -32   04  00000000  swooping fighter
+  0D376   3950    60   -32   04  00000000  swooping fighter
+  0D382   3970   180   -32   04  00000000  swooping fighter
+  0D38E   4000    80   -32   04  00000000  swooping fighter
+  0D39A   4020   160   -32   04  00000000  swooping fighter
+  0D3A6   4050   100   -32   04  00000000  swooping fighter
+  0D3B2   4070   140   -32   04  00000000  swooping fighter
+  0D3BE   4106  1352    10   03  0002e802  ground pop-up (scripted)
+  0D3CA   4136  1000    40   03  0002e7e2  ground pop-up (scripted)
+  0D3D6   4166  1320    22   03  0002e810  ground pop-up (scripted)
+  0D3E2   4186  1032    42   03  0002e7f4  ground pop-up (scripted)
+  0D3EE   4250     0   -32   01  00000000  aimed bullet-drone
+  0D3FA   4280     0   -32   01  00000000  aimed bullet-drone
+  0D406   4310     0   -32   01  00000000  aimed bullet-drone
+  0D412   4340     0   -32   01  00000000  aimed bullet-drone
+  0D41E   4368  1144   -16   03  0002e7a2  ground pop-up (scripted)
+  0D42A   4368  1208   -16   03  0002e7b8  ground pop-up (scripted)
+  0D436   4416  1144   -16   03  0002e7ce  ground pop-up (scripted)
+  0D442   4416  1208   -16   03  0002e7d8  ground pop-up (scripted)
+  0D44E   4440     0   -44   06  00000000  bomber
+  0D45A   4550    80   -32   08  00010000  homing missile
+  0D466   4575    20   -32   08  00010000  homing missile
+  0D472   4750  1272   110   03  0002e84a  ground pop-up (scripted)
+  0D47E   4770  1080   130   03  0002e838  ground pop-up (scripted)
+  0D48A   4800  1128   -32   03  0002e88a  ground pop-up (scripted)
+  0D496   4880  1272    48   03  0002e8c4  ground pop-up (scripted)
+  0D4A2   4900  1080    68   03  0002e868  ground pop-up (scripted)
+  0D4AE   5000     0   -32   01  00000000  aimed bullet-drone
+  0D4BA   5030     0   -32   01  00000000  aimed bullet-drone
+  0D4C6   5056  1032   -32   03  0002e904  ground pop-up (scripted)
+  0D4D2   5056  1224   -32   03  0002e922  ground pop-up (scripted)
+  0D4DE   5100     0   -44   06  00000000  bomber
+  0D4EA   5200   140   -32   04  00000000  swooping fighter
+  0D4F6   5225   100   -32   04  00000000  swooping fighter
+  0D502   5250   160   -32   04  00000000  swooping fighter
+  0D50E   5275    80   -32   04  00000000  swooping fighter
+  0D51A   5300   180   -32   04  00000000  swooping fighter
+  0D526   5325    60   -32   04  00000000  swooping fighter
+  0D532   5350   140   -32   04  00000000  swooping fighter
+  0D53E   5375    40   -32   04  00000000  swooping fighter
+  0D54A   5400   160   -32   04  00000000  swooping fighter
+  0D556   5425    20   -32   04  00000000  swooping fighter
+  0D562   5550   200   -32   08  00010000  homing missile
+  0D56E   5600   170   -32   08  00010000  homing missile
+  0D57A   5650    50   -32   08  00010000  homing missile
+  0D586   5744  1072   -32   03  0002e940  ground pop-up (scripted)
+  0D592   5744  1296   -32   03  0002e95a  ground pop-up (scripted)
+  0D59E   5840  1096   -32   03  0002e974  ground pop-up (scripted)
+  0D5AA   5840  1184   -32   03  0002e996  ground pop-up (scripted)
+  0D5B6   5936  1032   -32   03  0002e9b0  ground pop-up (scripted)
+  0D5C2   5936  1336   -32   03  0002e9c2  ground pop-up (scripted)
+  0D5CE   6036  1336    68   03  0002e9d4  ground pop-up (scripted)
+  0D5DA   6100     0   -32   01  00000000  aimed bullet-drone
+  0D5E6   6125     0   -32   01  00000000  aimed bullet-drone
+  0D5F2   6175     0   -32   01  00000000  aimed bullet-drone
+  0D5FE   6200     0   -32   01  00000000  aimed bullet-drone
+  0D60A   6250   140   -32   04  00000000  swooping fighter
+  0D616   6251   100   -32   04  00000000  swooping fighter
+  0D622   6300   200   -32   04  00000000  swooping fighter
+  0D62E   6301    40   -32   04  00000000  swooping fighter
+  0D63A   6350   180   -32   04  00000000  swooping fighter
+  0D646   6351    60   -32   04  00000000  swooping fighter
+  0D652   6400   220   -32   04  00000000  swooping fighter
+  0D65E   6401    20   -32   04  00000000  swooping fighter
+  0D66A   6450     0   -44   06  00000000  bomber
+  0D676   6550  1032   102   03  0002e9e2  ground pop-up (scripted)
+  0D682   6640  1336    96   03  0002ea00  ground pop-up (scripted)
+  0D68E   6656  1336   -32   03  0002ea0a  ground pop-up (scripted)
+  0D69A   6700   140   -32   04  00000000  swooping fighter
+  0D6A6   6750   100   -32   04  00000000  swooping fighter
+  0D6B2   6760  1032   104   03  0002ea3e  ground pop-up (scripted)
+  0D6BE   6816  1032   -32   03  0002ea4c  ground pop-up (scripted)
+  0D6CA   6900    50   -32   04  00000000  swooping fighter
+  0D6D6   6910   200   -32   04  00000000  swooping fighter
+  0D6E2   6944  1336   -32   03  0002ea28  ground pop-up (scripted)
+  0D6EE   7072  1032    80   03  0002ea6e  ground pop-up (scripted)
+  0D6FA   7100   230   -32   04  00000000  swooping fighter
+  0D706   7150    20   -32   04  00000000  swooping fighter
+  0D712   7250   200   -32   08  00010000  homing missile
+  0D71E   7300   120   -32   08  00010000  homing missile
+  0D72A   7350    40   -32   08  00010000  homing missile
+  0D736   7600   140   -32   04  00000000  swooping fighter
+  0D742   7625   100   -32   04  00000000  swooping fighter
+  0D74E   7650   160   -32   04  00000000  swooping fighter
+  0D75A   7675    80   -32   04  00000000  swooping fighter
+  0D766   7700   180   -32   04  00000000  swooping fighter
+  0D772   7725    60   -32   04  00000000  swooping fighter
+  0D77E   7750   140   -32   04  00000000  swooping fighter
+  0D78A   7775    40   -32   04  00000000  swooping fighter
+  0D796   7850   -32    20   00  0000e924  plane (scripted wave)
+  0D7A2   7850   -72    20   00  0000e936  plane (scripted wave)
+  0D7AE   7850  -112    20   00  0000e948  plane (scripted wave)
+  0D7BA   7850  -152    20   00  0000e95a  plane (scripted wave)
+  0D7C6   8000   240   -32   04  00000000  swooping fighter
+  0D7D2   8040    15   -32   04  00000000  swooping fighter
+  0D7DE   8080   210   -32   04  00000000  swooping fighter
+  0D7EA   8120    45   -32   04  00000000  swooping fighter
+  0D7F6  65535   300    40   ff  04000000  END
+
+== type-0 velocity scripts (LAB_9752).  Command = 4 bytes {duration, dir, turn, turn_timer}; $FF,$00,ptr.l = chain,
+   $FF,$01 = end (record freed).  dir: bits 0-4 = index into the 32-entry vector table $CCF2 (vx.w, vy.w), bits 5-7 = scale
+   (speed = table * (((dir & $E0) >> 2) + 8) / 65536 px per game frame, i.e. scale 8..64).  Every turn_timer frames the
+   WHOLE dir byte += turn (so a turn also changes the scale bits) and turn_timer reloads from the command's own byte 3.
+   Note the vector table is NOT a circle: idx 8..24 are a half-ellipse (vx = 4096 cos, vy = 5957 sin, downwards);
+   idx 0..7 and 25..31 have vy = 17873..22667 (== 23830 - 5957 cos), i.e. they move DOWN fast (V: RAM + pristine
+   build/loader-rebuilt.bin).  Only idx 8/10/12/14/16/22/24 occur in these scripts (V: state_2000 A1 at $979A).
+
+  script $0E924:
+       40 frames dir=$e8 (idx  8, scale 64: vx=+4.00 vy=+0.00 px/f)
+       32 frames dir=$e8 (idx  8, scale 64: vx=+4.00 vy=+0.00 px/f) turn -30 every 8
+       32 frames dir=$70 (idx 16, scale 32: vx=+0.00 vy=+2.91 px/f) turn +34 every 8
+       70 frames dir=$f8 (idx 24, scale 64: vx=-4.00 vy=+0.00 px/f)
+      END
+  script $0E936:
+       50 frames dir=$e8 (idx  8, scale 64: vx=+4.00 vy=+0.00 px/f)
+       32 frames dir=$e8 (idx  8, scale 64: vx=+4.00 vy=+0.00 px/f) turn -30 every 8
+       32 frames dir=$70 (idx 16, scale 32: vx=+0.00 vy=+2.91 px/f) turn +34 every 8
+       70 frames dir=$f8 (idx 24, scale 64: vx=-4.00 vy=+0.00 px/f)
+      END
+  script $0E948:
+       60 frames dir=$e8 (idx  8, scale 64: vx=+4.00 vy=+0.00 px/f)
+       32 frames dir=$e8 (idx  8, scale 64: vx=+4.00 vy=+0.00 px/f) turn -30 every 8
+       32 frames dir=$70 (idx 16, scale 32: vx=+0.00 vy=+2.91 px/f) turn +34 every 8
+       70 frames dir=$f8 (idx 24, scale 64: vx=-4.00 vy=+0.00 px/f)
+      END
+  script $0E95A:
+       70 frames dir=$e8 (idx  8, scale 64: vx=+4.00 vy=+0.00 px/f)
+       32 frames dir=$e8 (idx  8, scale 64: vx=+4.00 vy=+0.00 px/f) turn -30 every 8
+       32 frames dir=$70 (idx 16, scale 32: vx=+0.00 vy=+2.91 px/f) turn +34 every 8
+       70 frames dir=$f8 (idx 24, scale 64: vx=-4.00 vy=+0.00 px/f)
+      END
+  script $0E96C:
+       40 frames dir=$f8 (idx 24, scale 64: vx=-4.00 vy=+0.00 px/f)
+       32 frames dir=$f8 (idx 24, scale 64: vx=-4.00 vy=+0.00 px/f) turn -34 every 8
+       32 frames dir=$70 (idx 16, scale 32: vx=+0.00 vy=+2.91 px/f) turn +30 every 8
+       70 frames dir=$e8 (idx  8, scale 64: vx=+4.00 vy=+0.00 px/f)
+      END
+  script $0E97E:
+       50 frames dir=$f8 (idx 24, scale 64: vx=-4.00 vy=+0.00 px/f)
+       32 frames dir=$f8 (idx 24, scale 64: vx=-4.00 vy=+0.00 px/f) turn -34 every 8
+       32 frames dir=$70 (idx 16, scale 32: vx=+0.00 vy=+2.91 px/f) turn +30 every 8
+       70 frames dir=$e8 (idx  8, scale 64: vx=+4.00 vy=+0.00 px/f)
+      END
+  script $0E990:
+       60 frames dir=$f8 (idx 24, scale 64: vx=-4.00 vy=+0.00 px/f)
+       32 frames dir=$f8 (idx 24, scale 64: vx=-4.00 vy=+0.00 px/f) turn -34 every 8
+       32 frames dir=$70 (idx 16, scale 32: vx=+0.00 vy=+2.91 px/f) turn +30 every 8
+       70 frames dir=$e8 (idx  8, scale 64: vx=+4.00 vy=+0.00 px/f)
+      END
+  script $0E9A2:
+       70 frames dir=$f8 (idx 24, scale 64: vx=-4.00 vy=+0.00 px/f)
+       32 frames dir=$f8 (idx 24, scale 64: vx=-4.00 vy=+0.00 px/f) turn -34 every 8
+       32 frames dir=$70 (idx 16, scale 32: vx=+0.00 vy=+2.91 px/f) turn +30 every 8
+       70 frames dir=$e8 (idx  8, scale 64: vx=+4.00 vy=+0.00 px/f)
+      END
+
+  Path of $E924 (x=-32 wave, entering from the LEFT): 40 f right at 4 px/f -> 32 f right while the dir byte steps
+  $E8->$CA->$AC->$8E->$70 (turn -30 every 8 f: idx 8,10,12,14,16; scale 64,56,48,40,32 = a banking arc to straight down)
+  -> 32 f down at 2.9 px/f while turning back +34 ($70->$92->$B4->$D6->$F8: idx 16,18,20,22,24) -> 70 f LEFT at 4 px/f -> END.
+  The four planes of a wave differ only in the first leg (40/50/60/70 frames) so they peel off in sequence.
+  $E96C.. is the mirror image entering from the RIGHT (x=288..408 = off the right edge).
+
+== type-3 path scripts (LAB_8D6E).  Step = 4 bytes {dur (signed: <0 = move x, >=0 = move y), step px/f, phase, phase_step};
+   word 0 terminates (record freed).  phase bits 0-5 = visible height rows (+50), bit 6 = hidden/armoured (flags bit7 set,
+   no damage, gfx +$600/$900); y always also += scroll 7222 (ground-locked).  (dur,step,phase,phase_step):
+  $2E768: (32,-1,$00,1) (30,-1,$20,0) (25,0,$20,0) (34,-1,$20,0) (31,0,$a0,-1) END
+  $2E77E: (32,0,$80,1) (5,1,$20,0) (15,0,$20,0) (50,1,$20,0) (75,0,$20,0) END
+  $2E794: (32,0,$80,1) (5,1,$20,0) (125,0,$20,0) END
+  $2E7A2: (20,0,$50,0) (16,1,$50,-1) (1,32,$00,0) (32,0,$80,1) (80,1,$20,0) END
+  $2E7B8: (50,0,$50,0) (16,1,$50,-1) (1,32,$00,0) (32,0,$80,1) (60,1,$20,0) END
+  $2E7CE: (90,0,$d0,0) (16,0,$d0,-1) END
+  $2E7D8: (50,0,$d0,0) (16,0,$d0,-1) END
+  $2E7E2: (-32,1,$00,1) (-35,1,$20,0) (-70,0,$20,0) (-70,0,$20,0) END
+  $2E7F4: (-32,1,$00,1) (-100,1,$20,0) (-75,1,$20,0) END
+  $2E802: (-32,-1,$80,1) (-105,-1,$20,0) (-105,-1,$20,0) END
+  $2E810: (-32,-1,$80,1) (-35,-1,$20,0) (-20,0,$20,0) (-35,1,$20,0) (-32,1,$a0,-1) END
+  $2E826: (32,0,$80,1) (32,1,$20,0) (32,0,$20,0) (40,1,$20,0) END
+  $2E838: (32,-1,$00,1) (40,-1,$20,0) (80,0,$20,0) (80,0,$20,0) END
+  $2E84A: (32,-1,$00,1) (60,-1,$20,0) (52,-1,$20,0) (32,0,$a0,-1) (16,-3,$00,0) (-32,1,$40,1) (-96,1,$60,0) END
+  $2E868: (32,-1,$00,1) (46,-1,$20,0) (20,0,$20,0) (50,-1,$20,0) (32,0,$a0,-1) (8,-4,$00,0) (-32,-1,$c0,1) (-80,-1,$60,0) END
+  $2E88A: (-90,0,$60,0) (-16,1,$60,0) (-32,1,$e0,-1) (32,-1,$00,1) (32,-1,$20,0) (32,0,$a0,-1) (1,-32,$00,0) (32,-1,$40,1) (32,0,$e0,-1) (1,-32,$00,0) (32,-1,$00,1) (25,-1,$20,0) (99,0,$20,0) (50,0,$20,0) END
+  $2E8C4: (32,-1,$00,1) (80,-1,$20,0) (20,0,$20,0) (16,-1,$20,0) (32,0,$a0,-1) (8,-4,$00,0) (-32,1,$40,1) (-80,1,$60,0) END
+  $2E904: (-30,0,$60,0) (-16,1,$60,0) (-32,1,$e0,-1) (8,4,$00,0) (32,0,$80,1) (16,1,$20,0) (99,0,$20,0) END
+  $2E922: (-70,0,$60,0) (-16,1,$60,0) (-32,1,$e0,-1) (8,4,$00,0) (32,0,$80,1) (8,1,$20,0) (89,0,$20,0) END
+  $2E940: (-40,0,$60,0) (-8,1,$e0,0) (-32,1,$e0,-1) (-32,1,$00,1) (-30,1,$20,0) (125,0,$20,0) END
+  $2E95A: (-60,0,$60,0) (-8,-1,$e0,0) (-32,-1,$60,-1) (-32,-1,$80,1) (-8,-1,$20,0) (125,0,$20,0) END
+  $2E974: (-50,0,$20,0) (-16,1,$20,0) (-32,1,$a0,-1) (-32,1,$40,1) (-16,1,$60,0) (-32,1,$e0,-1) (-32,1,$00,1) (-125,0,$20,0) END
+  $2E996: (-80,0,$60,0) (-8,1,$60,0) (-32,1,$e0,-1) (-32,1,$00,1) (-32,1,$20,0) (-125,0,$20,0) END
+  $2E9B0: (-80,0,$00,0) (-32,1,$00,1) (-40,1,$20,0) (-125,0,$20,0) END
+  $2E9C2: (-32,-1,$80,1) (-70,-1,$20,0) (-125,0,$20,0) (-125,0,$20,0) END
+  $2E9D4: (-32,-1,$80,1) (-20,-1,$20,0) (-125,0,$20,0) END
+  $2E9E2: (32,-1,$40,1) (16,-1,$60,0) (32,0,$e0,-1) (1,-32,$00,0) (32,-1,$00,1) (16,-1,$20,0) (125,0,$20,0) END
+  $2EA00: (32,0,$80,1) (125,0,$20,0) END
+  $2EA0A: (60,0,$60,0) (32,0,$e0,-1) (1,-32,$00,0) (32,-1,$00,1) (60,-1,$20,0) (125,0,$20,0) (125,0,$20,0) END
+  $2EA28: (16,1,$60,0) (32,1,$60,-1) (1,32,$00,0) (32,0,$80,1) (125,0,$20,0) END
+  $2EA3E: (32,-1,$00,1) (30,-1,$20,0) (125,0,$20,0) END
+  $2EA4C: (50,0,$60,0) (16,-1,$60,0) (32,0,$e0,-1) (1,-32,$00,0) (32,-1,$00,1) (20,-1,$20,0) (125,0,$20,0) (125,0,$20,0) END
+  $2EA6E: (32,0,$80,1) (30,0,$20,0) (10,1,$20,0) (125,0,$20,0) END

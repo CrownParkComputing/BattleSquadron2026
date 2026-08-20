@@ -1,0 +1,53 @@
+# Battle Squadron -- every sound/music trigger in LOADER (asm/loader.asm), 2026-08-19
+# Effect number n (D0) for EXT_2470E -> LODGAM $24D6E:  channel = (n>>4)&3  (channel state at
+#   $24E22[ch] -> $252A4/$252E2/$25320/$2535E),  sample = n&15 -> 12-byte descriptor at
+#   LODGAM $2539C + idx*12 = {ptr.l, len_words.w, period.w, volume.w, 0.b, duration_ticks.b}.
+# Descriptor table (V: chip_2700.bin, LODGAM resident):
+#  idx ptr     len_w period vol dur    (ptr in LODGAM: six distinct samples)
+#   0  $28DD2   789   856   56  40      1 same 428/20   2 same 214/10
+#   3  $2902A   489   856   63  40      4 same 428/20   5 same 214/10
+#   6  $293FC  1108   428   56  20
+#   7  $29CA4  2838   214   56  10      8 same 428/20   9 same 856/48/40
+#  10  $2B2D0  1665   528   56  20     14 same 700/63/40
+#  11  $2BFD2   318   428   56  10
+#  12  $2C24E  3262   628   50  50     13 same 856/48/80   15 same 428/58/50
+#
+# addr   LAB        call           D0 (effect)            meaning (V=objlog/runtime.c, L=listing)
+# ---- direct constants ----
+00e1a  LAB_E04    JSR 2470E      #59 ($3B ch3 idx11)     title/start (L)
+034b8  LAB_34A8   JSR 2470E      #29 ($1D ch1 idx13)     scenery object destroyed by player shot (V runtime.c $34B2)
+034d6  LAB_34CE   JSR 2470E      obj+46 (template byte)  scenery object hit, survives: template sfx (V)
+035ac  LAB_35A4   JSR 2470E      hostile+25 (desc+13)    hostile hit, survives: per-type sfx (V)
+035ea  LAB_35CE/EA JMP 2470E     #28 / #29 / #20         hostile destroyed: 28 default, 29 if type 2, 20 if type 2 and $2E02F>=7 (V)
+03f7e  LAB_3F54   JSR 2470E      #57 ($39 ch3 idx9)      nova bomb fired (V runtime.c $3F7C)
+0409c  LAB_4076   JMP 2470E      byte $3F40[player+58]   weapon fire sound per weapon index (L); table $3F40 = 48,54,49,55,40,124,0,0,78,60,97,0,0,8,40,124
+0475c  LAB_471C   JSR 2470E      #56 ($38 ch3 idx8)      effect pool (LAB_4704 path) (L)
+047aa  LAB_47A4   JSR 2470E      #56                     same (L)
+0612c  LAB_6102   JSR 2470E      #25 ($19 ch1 idx9)      object type 03/04 path (L)
+0622c  LAB_61F0   JSR 2470E      #30 ($1E ch1 idx14)     object type 02 path (L)
+0635c  LAB_632E   JSR 2470E      #30                     object type 04 path (L)
+06866  LAB_6848   JMP 2470E      #31 ($1F ch1 idx15)     object type $2x shared (L)
+069fc  LAB_69C2   JSR 2470E      #53 ($35 ch3 idx5)      type-$20 wreck collected (bonus) (V runtime.c 1885)
+06eda  LAB_6ECE   JSR 2470E      #24 ($18 ch1 idx8)      object type $28 path (L)
+0744e  LAB_743E   JSR 2470E      #59                     stage clear / bonus (L)
+081de  LAB_81D0   JSR 2470E      #26 ($1A ch1 idx10)     hostile script op (L)
+0865c  LAB_8650   JMP 2470E      #31                     hostile script op (L)
+# ---- data-driven sfx values (V chip_2700.bin) ----
+# hostile desc+13 by type 0..D: 0,59,59,50,53,0,59,59,51,52,0,0,51,50
+# object template +46 (26 templates $2B68+48*t): 52,59,51,50,53,51x7,59,59,59,53,59,59,50,59,59,59,59,0,50,50
+# ---- music / driver entries (LODGAM jump table $246F0, 6 bytes each) ----
+002a0  LAB_266    JSR 246F6      -                       audio shutdown ($24CBE) (L)
+00e7c  LAB_E58    JSR 246F6      -                       shutdown before overlay swap (L)
+00fc8  LAB_FC8    JSR 246F6      -
+0419c  LAB_416A   JSR 246F6      -                       level end: shutdown, then MOVE.W #$4E75,$2470E (mute sfx), JSR 24708 (L)
+00a5c  LAB_A42    JSR 2471A      -                       select_music(1) = in-game track ($24DDE) (V runtime.c 1547)
+00a76  LAB_A42    JSR 24708      -                       $24D06 flip sequencer bit (L)
+00a82  LAB_A7C    JSR 24702      -                       $24CFC reset channels (L)
+041da  LAB_416A   JSR 24708      -
+0731c  LAB_72F2   JSR 24720      -                       select_music(2) on stage restart (L)
+07010  LAB_7002   JSR 2472C      -                       stage clear, stage!=0: track 4 (L)
+07018  LAB_7002   JSR 2474A      -                       stage clear, stage 0: later entry (track >5? table only has 5 song sets) (L, UNKNOWN)
+(runtime.c $52BA)  24726          -                       game over: track 3 (V)
+# Song table: $251F8+12 + (track-1)*16 = four pattern-list pointers; tracks 1..5 =
+#  1 {$2593C,$25B68,$26034,$2617C} 2 {$2708E..} 3 {$271C2..} 4 {$2725E..} 5 {$2731C..}  (V chip_2700)
+# Entry map: $2471A..$24732 -> $24756+8*k = track k+1 (k=0..4); $24738/3E/44/4A -> $24786.. (L, unverified)

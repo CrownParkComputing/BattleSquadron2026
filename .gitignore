@@ -1,0 +1,10 @@
+build/
+re/trace/*.bin
+re/trace/shots/
+*.ppm
+build/
+tools/__pycache__/
+re/assets_preview/
+re/trace/
+re/stats/
+bs_hiscores.txt
