@@ -89,6 +89,7 @@ static void paula_write(uint16_t reg, uint16_t v)
 static int16_t clamp16(double v)
 { return v > 32767 ? 32767 : v < -32768 ? -32768 : (int16_t)lrint(v); }
 
+static double filt_l, filt_r;            /* Paula output filter state */
 static void paula_render(int16_t *stereo, size_t frames)
 {
     for (size_t f = 0; f < frames; f++) {
@@ -104,10 +105,16 @@ static void paula_render(int16_t *stereo, size_t frames)
             c->frac -= adv; c->pos += adv;
             if (c->pos >= c->bytelen) { c->pos %= c->bytelen; c->play = c->lc; }
         }
-        /* soft A500-style stereo blend */
+        /* soft A500-style stereo blend, then Paula's output filter: the
+         * machine does not put the raw step waveform on the jacks, and without
+         * it the sequencer's short wavetables alias into a metallic buzz.  Same
+         * one-pole the oracle's mixer runs (host amiga.c audio_mix), so a
+         * capture from either side matches. */
         double lo = 0.75 * l + 0.25 * r, ro = 0.75 * r + 0.25 * l;
-        stereo[f * 2] = clamp16(lo * master_gain);
-        stereo[f * 2 + 1] = clamp16(ro * master_gain);
+        filt_l += 0.45 * (lo - filt_l);
+        filt_r += 0.45 * (ro - filt_r);
+        stereo[f * 2] = clamp16(filt_l * 1.8 * master_gain);
+        stereo[f * 2 + 1] = clamp16(filt_r * 1.8 * master_gain);
     }
 }
 
@@ -840,11 +847,51 @@ void audio_stop(void)
 void audio_sfx(int n)
 {
     if (amode != 1 || !lodgam_resident()) return;
+    if (getenv("BS_SFX_LOG")) {                      /* which effect numbers the engine actually asks for */
+        static FILE *lf;
+        if (!lf) lf = fopen(getenv("BS_SFX_LOG"), "w");
+        if (lf) { fprintf(lf, "%d\n", n); fflush(lf); }
+    }
     if (n >= 0) { play_sound_effect((uint16_t)n); return; }
     /* engine jingle entries: sfx(-0xNNN) = JSR $24NNN; stubs at $2471A + 6k select track k+1 */
     int addr = 0x24000 + (-n);
     if (addr >= 0x2471A && addr <= 0x24750 && (addr - 0x2471A) % 6 == 0)
         select_music((uint16_t)((addr - 0x2471A) / 6 + 1));
+}
+
+/* BS_AUDIO_WAV=path: tee the mix to a WAV so a run can be compared against the
+ * oracle's --dump-audio capture (header patched on exit). */
+static FILE *tee_f;
+static long tee_frames;
+static void audio_tee_close(void)
+{
+    if (!tee_f) return;
+    long data = tee_frames * 4;
+    uint8_t h[44];
+    memcpy(h, "RIFF", 4); uint32_t riff = (uint32_t)(36 + data); memcpy(h + 4, &riff, 4);
+    memcpy(h + 8, "WAVEfmt ", 8);
+    uint32_t v = 16; memcpy(h + 16, &v, 4);
+    uint16_t w = 1; memcpy(h + 20, &w, 2); w = 2; memcpy(h + 22, &w, 2);
+    v = OUT_RATE; memcpy(h + 24, &v, 4); v = OUT_RATE * 4; memcpy(h + 28, &v, 4);
+    w = 4; memcpy(h + 32, &w, 2); w = 16; memcpy(h + 34, &w, 2);
+    memcpy(h + 36, "data", 4); v = (uint32_t)data; memcpy(h + 40, &v, 4);
+    fseek(tee_f, 0, SEEK_SET); fwrite(h, 1, 44, tee_f); fclose(tee_f); tee_f = NULL;
+}
+static void audio_tee(const int16_t *pcm, size_t frames)
+{
+    static int checked;
+    if (!checked) {
+        const char *e = getenv("BS_AUDIO_WAV");
+        checked = 1;
+        if (e && (tee_f = fopen(e, "wb"))) {
+            uint8_t z[44] = { 0 };
+            fwrite(z, 1, 44, tee_f);
+            atexit(audio_tee_close);
+        }
+    }
+    if (!tee_f) return;
+    fwrite(pcm, 4, frames, tee_f);
+    tee_frames += (long)frames;
 }
 
 void audio_tick(void)
@@ -867,6 +914,7 @@ void audio_tick(void)
     while (IsAudioStreamProcessed(stream)) {
         paula_render(sbuf, 1024);
         UpdateAudioStream(stream, sbuf, 1024);
+        audio_tee(sbuf, 1024);              /* BS_AUDIO_WAV: same mix the speakers get */
         fed++;
     }
     if (dbg && (++calls % 50) == 0) {
