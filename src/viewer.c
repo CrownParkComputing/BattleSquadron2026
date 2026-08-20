@@ -476,6 +476,39 @@ static void draw_side_stats(int sw, int margin, int right_x)
     }
 }
 
+/* ---- attract demo: logo both sides, player one's controls left, player two's right ---- */
+static void draw_side_controls(int sw, int margin, int right_x)
+{
+    const Color C_GOLD = { 255, 238, 136, 255 }, C_CY = { 136, 221, 255, 255 },
+                C_GY = { 150, 152, 166, 255 }, C_WHT = { 225, 227, 236, 255 };
+    static const char *K1[4] = { "ARROWS", "SPACE / CTRL", "X / SHIFT", "P / ESC" };
+    static const char *K2[4] = { "WASD", "ALT / C", "V / TAB", "START" };
+    static const char *LB[4] = { "MOVE", "FIRE", "SMART BOMB", "PAUSE" };
+    for (int pi = 0; pi < 2; pi++) {
+        int rt = (pi == 1);
+        int x = rt ? sw - 24 : 24;
+        int cx = rt ? right_x + margin / 2 : margin / 2;
+        panel_logo(cx, 12, margin - 48);
+        int y = 12 + (int)(rr_logo.id ? rr_logo.height * 0.46f : 40) + 30;
+        const char *h = rt ? "PLAYER 2" : "PLAYER 1";
+        ui_text(h, rt ? x - ui_measure(h, 28) : x, y, 28, rt ? C_CY : C_GOLD);
+        y += 44;
+        for (int i = 0; i < 4; i++) {
+            const char *k = rt ? K2[i] : K1[i];
+            if (rt) {
+                ui_text(k, x - ui_measure(k, 24), y, 24, C_WHT);
+                ui_text(LB[i], x - ui_measure(LB[i], 20), y + 26, 20, C_GY);
+            } else {
+                ui_text(k, x, y, 24, C_WHT);
+                ui_text(LB[i], x, y + 26, 20, C_GY);
+            }
+            y += 62;
+        }
+        const char *pad = rt ? "PAD: B BOMB" : "PAD: A FIRE";
+        ui_text(pad, rt ? x - ui_measure(pad, 20) : x, y + 10, 20, C_GY);
+    }
+}
+
 static void option_adjust(int d);
 static int button(Rectangle r, const char *label, int active);
 /* menu text for the title / options / high-score pages: drawn in the raylib
@@ -1268,7 +1301,8 @@ int main(int argc, char **argv)
         int sw = GetScreenWidth(), sh = GetScreenHeight();
         int top = 0;                                 /* never crop the canvas: the logo uses the side margin */
         int in_game = (mode == 1 && !smoke);         /* playing: no bottom bar, stats live in the side margins */
-        int view_h = sh - (in_game ? 0 : BAR_H);
+        int in_demo = (mode == 3 && !smoke);         /* attract: same layout, controls instead of stats */
+        int view_h = sh - (in_game || in_demo ? 0 : BAR_H);
         float sx_ = (float)sw / cw, sy_ = (float)view_h / ch;
         float fs_ = sx_ < sy_ ? sx_ : sy_;
         if (fs_ < 1) fs_ = 1;
@@ -1277,7 +1311,7 @@ int main(int argc, char **argv)
                        (Rectangle){ (float)((sw - dw) / 2), (float)(top + (view_h - dh) / 2), (float)dw, (float)dh },
                        (Vector2){ 0, 0 }, 0, WHITE);
         /* ---- grey bar: Retro Recompilation logo + scrolling message ---- */
-        if (!in_game) {
+        if (!in_game && !in_demo) {
             int by = sh - BAR_H;
             DrawRectangle(0, by, sw, BAR_H, (Color){ 28, 28, 34, 255 });
             int lw = 8;
@@ -1303,6 +1337,7 @@ int main(int argc, char **argv)
             }
         }
         if (in_game) draw_side_stats(sw, (sw - dw) / 2, (sw - dw) / 2 + dw);
+        if (in_demo) draw_side_controls(sw, (sw - dw) / 2, (sw - dw) / 2 + dw);
         if (in_game && continue_prompt && (vbl & 16)) {   /* initials entered: wait for fire */
             const char *cp = "PRESS FIRE TO CONTINUE";
             int cfs = 30;
