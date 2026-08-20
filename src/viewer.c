@@ -23,7 +23,7 @@
 #define WIN_PREF_W 1920
 #define WIN_PREF_H 1080
 #define TOP_H 72                                    /* strip above the canvas: the Retro Recompilation logo */
-#define BAR_H 96                                   /* grey bar under the canvas (logo + marquee), as SWIV */
+#define BAR_H 44                                   /* grey bar under the canvas: one row, the marquee */
 #define WIN_W WIN_PREF_W
 #define WIN_H WIN_PREF_H
 
@@ -1326,14 +1326,10 @@ int main(int argc, char **argv)
             BeginScissorMode(0, by, sw, BAR_H);
             for (int k = 0; k < 2; k++) {
                 float tx = lw + mx + k * tw;
-                if (ui_font_ok) DrawTextEx(ui_font, msg, (Vector2){ tx, (float)(by + BAR_H - 32) }, (float)fs, 1, (Color){ 255, 238, 136, 255 });
-                else ui_text(msg, (int)tx, by + BAR_H - 32, fs, (Color){ 255, 238, 136, 255 });
+                if (ui_font_ok) DrawTextEx(ui_font, msg, (Vector2){ tx, (float)(by + (BAR_H - fs) / 2) }, (float)fs, 1, (Color){ 255, 238, 136, 255 });
+                else ui_text(msg, (int)tx, by + (BAR_H - fs) / 2, fs, (Color){ 255, 238, 136, 255 });
             }
             EndScissorMode();
-            if (rr_logo.id) {                        /* centred in the bar, the message scrolls behind it */
-                float ls = (BAR_H - 16) / (float)rr_logo.height;
-                DrawTextureEx(rr_logo, (Vector2){ (sw - rr_logo.width * ls) / 2, (float)(by + 8) }, 0, ls, WHITE);
-            }
             }
         }
         if (in_game) draw_side_stats(sw, (sw - dw) / 2, (sw - dw) / 2 + dw);
