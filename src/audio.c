@@ -11,8 +11,9 @@
  * (23 x 32 B), driver state $251F8 (+1 master volume, +4 mute-all/music-off,
  * +5($251FD) sfx mute), song table $251F8+12 (+16/track), periods $25166,
  * sfx descriptors $2539C (16 x 12 B).  The CIA-B timer latch is $3100 ->
- * 709379/12544 = 56.55 Hz; audio_tick accumulates that against the 50 Hz
- * display frame so tempo matches the original.
+ * 709379/12544 = 56.55 Hz.  CIA ticks are scheduled in the generated PCM
+ * sample timeline, independently of display cadence, so Android compositor
+ * stalls cannot slow the music or make one-shot speech loop.
  */
 #include <math.h>
 #include <string.h>
@@ -784,7 +785,8 @@ static void menu_speech(uint32_t ptr, uint16_t words, uint16_t per, uint16_t vol
 /* ---------------- public API ---------------- */
 static AudioStream stream;
 static int ready;
-static double cia_acc;
+static double cia_next_sample;
+static uint64_t audio_sample_clock;
 static int16_t sbuf[2048];
 
 static int lodgam_resident(void)
@@ -812,6 +814,12 @@ void audio_close(void)
 
 static int amode;                        /* 0 silent, 1 LODGAM (game), 2 LODMUS (title/attract) */
 
+static void audio_clock_reset(void)
+{
+    cia_next_sample = 0;
+    audio_sample_clock = 0;
+}
+
 void audio_start_game(void)
 {
     if (!lodgam_resident()) return;
@@ -823,6 +831,7 @@ void audio_start_game(void)
     wr8(0x251FD, sfx_enabled ? 0 : 1);
     select_music(1);
     amode = 1;
+    audio_clock_reset();
 }
 
 void audio_start_title(void)
@@ -831,6 +840,7 @@ void audio_start_title(void)
     audio_stop();
     menu_start();
     amode = 2;
+    audio_clock_reset();
 }
 
 void audio_title_speech(void)
@@ -852,6 +862,7 @@ void audio_stop(void)
     wr16(0xDFF096, 0x000F);
     for (int i = 0; i < 4; i++) { pch[i].active = 0; wr16(0xDFF0A0 + (uint32_t)i * 16 + 8, 0); }
     amode = 0;
+    audio_clock_reset();
 }
 
 void audio_sfx(int n)
@@ -867,6 +878,28 @@ void audio_sfx(int n)
     int addr = 0x24000 + (-n);
     if (addr >= 0x2471A && addr <= 0x24750 && (addr - 0x2471A) % 6 == 0)
         select_music((uint16_t)((addr - 0x2471A) / 6 + 1));
+}
+
+static void audio_render_timed(int16_t *out, size_t frames)
+{
+    size_t done = 0;
+    const double samples_per_tick = OUT_RATE * (amode == 1 ? 12544.0 : 9472.0) / 709379.0;
+    while (done < frames) {
+        /* This is a cumulative fractional schedule: interrupt at sample zero,
+         * then alternate integer spans around the exact CIA period without
+         * accumulating rounding drift. */
+        if (audio_sample_clock >= (uint64_t)cia_next_sample) {
+            if (amode == 1) music_interrupt(); else menu_interrupt();
+            cia_next_sample += samples_per_tick;
+        }
+        uint64_t until_tick = (uint64_t)cia_next_sample - audio_sample_clock;
+        size_t chunk = frames - done;
+        if (until_tick < chunk) chunk = (size_t)until_tick;
+        if (chunk == 0) continue;
+        paula_render(out + done * 2, chunk);
+        done += chunk;
+        audio_sample_clock += chunk;
+    }
 }
 
 /* BS_AUDIO_WAV=path: tee the mix to a WAV so a run can be compared against the
@@ -915,15 +948,8 @@ void audio_tick(void)
             fprintf(stderr, "audio: idle (ready=%d amode=%d)\n", ready, amode);
         return;
     }
-    if (amode == 1) {
-        cia_acc += 709379.0 / 12544.0 / 50.0;   /* LODGAM: CIA-B latch $3100 = 56.55 Hz */
-        while (cia_acc >= 1.0) { cia_acc -= 1.0; music_interrupt(); }
-    } else {
-        cia_acc += 709379.0 / 9472.0 / 50.0;    /* LODMUS: CIA-B latch $2500 = 74.90 Hz */
-        while (cia_acc >= 1.0) { cia_acc -= 1.0; menu_interrupt(); }
-    }
     while (IsAudioStreamProcessed(stream)) {
-        paula_render(sbuf, 1024);
+        audio_render_timed(sbuf, 1024);
         UpdateAudioStream(stream, sbuf, 1024);
         audio_tee(sbuf, 1024);              /* BS_AUDIO_WAV: same mix the speakers get */
         fed++;

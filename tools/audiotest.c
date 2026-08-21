@@ -19,30 +19,33 @@ int main(int argc, char **argv)
         if (bs_load_module(&data, "LODMUS") || bs_load_module(&data, "LODSPE")) return 1;
         if (!lodmus_resident()) { fprintf(stderr, "LODMUS not resident\n"); return 1; }
         menu_start();
+        amode = 2;
         if (track != 101) { wr16(MG + 4, (uint16_t)(track - 100)); wr8(MG + 0, 1); }
     } else {
         if (!lodgam_resident()) { fprintf(stderr, "LODGAM not resident\n"); return 1; }
         for (int i = 0; i < 4; i++) init_channel(chans[i]);
         wr16(0xDFF096, 0x800F);
         select_music((uint16_t)track);
+        amode = 1;
     }
+    audio_clock_reset();
     long frames = (long)(secs * OUT_RATE);
     int16_t *pcm = malloc((size_t)frames * 4);
     long done = 0;
-    double tickper = OUT_RATE * (menu ? 9472.0 : 12544.0) / 709379.0;   /* samples per CIA tick */
-    double next = 0;
-    long tick = 0;
+    long next_sfx = (long)(119.0 * OUT_RATE * (menu ? 9472.0 : 12544.0) / 709379.0);
     while (done < frames) {
-        if (menu) menu_interrupt(); else music_interrupt();
-        tick++;
-        if (sfx_n >= 0 && tick == 120) {
+        long count = frames - done;
+        if (count > 1024) count = 1024;
+        if (sfx_n >= 0 && done <= next_sfx && done + count > next_sfx) {
+            audio_render_timed(pcm + done * 2, (size_t)(next_sfx - done));
+            done = next_sfx;
             if (menu) menu_speech(0x246F0, 0x17CD, 0x01AC, 64, 110);
             else play_sound_effect((uint16_t)sfx_n);
+            sfx_n = -1;
+            continue;
         }
-        next += tickper;
-        long upto = (long)next; if (upto > frames) upto = frames;
-        paula_render(pcm + done * 2, (size_t)(upto - done));
-        done = upto;
+        audio_render_timed(pcm + done * 2, (size_t)count);
+        done += count;
     }
     /* wav */
     FILE *f = fopen(out, "wb");

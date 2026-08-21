@@ -116,7 +116,7 @@ static int real_pad(int nth)
     return (nth == 0 && IsGamepadAvailable(0)) ? 0 : -1;
 #else
     int found = 0;
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < 9; i++) {
         if (!IsGamepadAvailable(i)) continue;
         const char *n = GetGamepadName(i);
         if (!n) n = "";
@@ -307,7 +307,7 @@ static void hs_load(void);
 static void end_game(void)
 {
     long s1 = 0, s2 = 0;
-    for (int i = 0; i < 9; i++) {
+    for (int i = 0; i < 8; i++) {
         char c1 = g.players[0].score[i], c2 = g.players[1].score[i];
         s1 = s1 * 10 + (c1 >= '0' && c1 <= '9' ? c1 - '0' : 0);
         s2 = s2 * 10 + (c2 >= '0' && c2 <= '9' ? c2 - '0' : 0);
