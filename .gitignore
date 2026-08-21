@@ -9,3 +9,7 @@ re/trace/
 re/stats/
 bs_hiscores.txt
 assets/music/
+android/.gradle/
+android/local.properties
+android/app/.cxx/
+android/app/build/

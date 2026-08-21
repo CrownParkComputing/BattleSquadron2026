@@ -31,6 +31,21 @@ clean:
 
 .PHONY: all test clean
 
+# Fully native Android build.  The original modules are supplied locally at
+# build time and are never copied into the repository.
+ANDROID_DATA ?=
+ANDROID_RAYLIB ?= ../raylib-src
+
+android-debug:
+	test -n "$(ANDROID_DATA)"
+	./android/gradlew -p android assembleDebug \
+		-PbattleSquadronDataDir="$(ANDROID_DATA)" -PraylibDir="$(ANDROID_RAYLIB)"
+
+android-install: android-debug
+	adb install -r android/app/build/outputs/apk/debug/app-debug.apk
+
+.PHONY: android-debug android-install
+
 build/framecmp: tools/framecmp.c src/render.c src/render.h $(ENGINE) $(CORE) $(HDRS) | build
 	$(CC) $(CFLAGS) tools/framecmp.c src/render.c $(ENGINE) $(CORE) -o $@
 

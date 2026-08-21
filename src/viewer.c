@@ -35,6 +35,8 @@ static Texture2D tex;
 static uint32_t show[BS_VIEW_W * BS_VIEW_H];
 static int view_layers = BS_L_ALL;      /* play hides BS_L_HUD: the panel is drawn in the grey bar */
 static Texture2D rr_logo; static Font ui_font; static int ui_font_ok;
+static uint32_t title_base[BS_TITLE_W * BS_TITLE_H];
+static int title_base_ready;
 /* all viewer UI text goes through the same TTF SWIV uses (assets/DejaVuSans.ttf) */
 static void ui_text(const char *t, int x, int y, int fs, Color c)
 { if (ui_font_ok) DrawTextEx(ui_font, t, (Vector2){ (float)x, (float)y }, (float)fs, 1, c); else DrawText(t, x, y, fs, c); }
@@ -93,6 +95,7 @@ static void options_apply(void)
 {
     audio_set(opt.master / 10.0f, opt.music_on == 1, opt.sfx_on);
     render_hiscore = (int)opt.hiscore;
+#ifndef __ANDROID__
     if (opt.fullscreen != IsWindowFullscreen()) {
         if (opt.fullscreen) {
             int m = GetCurrentMonitor();
@@ -103,6 +106,7 @@ static void options_apply(void)
             SetWindowSize(WIN_W, WIN_H);
         }
     }
+#endif
 }
 
 /* ---- gamepads: skip keyboard/mouse receivers reported as joysticks ---- */
@@ -112,7 +116,7 @@ static int real_pad(int nth)
     return (nth == 0 && IsGamepadAvailable(0)) ? 0 : -1;
 #else
     int found = 0;
-    for (int i = 0; i < 9; i++) {
+    for (int i = 0; i < 8; i++) {
         if (!IsGamepadAvailable(i)) continue;
         const char *n = GetGamepadName(i);
         if (!n) n = "";
@@ -402,15 +406,24 @@ static float bd_noise(float x, float y)          /* bilinear, smoothstepped */
 static void menu_backdrop(uint32_t *c, int y0, int y1)
 {
     const float t = vbl * 0.01f;
-    for (int y = y0; y < y1; y++) {
-        for (int x = 8; x < BS_TITLE_W - 8; x++) {
+    /* Cloud noise is deliberately sampled in 2x2 pixel cells.  It keeps the
+     * soft, low-resolution Amiga look while cutting the title's most costly
+     * CPU loop by 75%--important on Android, where a slow menu starved audio. */
+    for (int y = y0; y < y1; y += 2) {
+        for (int x = 8; x < BS_TITLE_W - 8; x += 2) {
             /* two octaves scrolling at different speeds: the clouds shear as they pass */
             float n = bd_noise(x * 0.035f + t * 0.35f, y * 0.05f + t * 0.08f) * 0.65f
                     + bd_noise(x * 0.085f - t * 0.6f, y * 0.11f + t * 0.15f) * 0.35f;
             n = n * n * 1.35f;                    /* squared: keeps the dark sky dark */
             if (n > 1) n = 1;
             uint32_t r = (uint32_t)(n * 54), g_ = (uint32_t)(n * 34), b = (uint32_t)(n * 96);
-            c[y * BS_TITLE_W + x] = 0xFF000000u | (b << 16) | (g_ << 8) | r;
+            uint32_t col = 0xFF000000u | (b << 16) | (g_ << 8) | r;
+            c[y * BS_TITLE_W + x] = col;
+            if (x + 1 < BS_TITLE_W - 8) c[y * BS_TITLE_W + x + 1] = col;
+            if (y + 1 < y1) {
+                c[(y + 1) * BS_TITLE_W + x] = col;
+                if (x + 1 < BS_TITLE_W - 8) c[(y + 1) * BS_TITLE_W + x + 1] = col;
+            }
         }
     }
     /* three star layers, the nearest moving fastest, each twinkling on its own phase */
@@ -431,9 +444,19 @@ static void menu_backdrop(uint32_t *c, int y0, int y1)
         }
     }
 }
+
+static void copy_title_base(uint32_t *c)
+{
+    if (!title_base_ready) {
+        render_title(title_base);
+        title_base_ready = 1;
+    }
+    memcpy(c, title_base, sizeof title_base);
+}
+
 static void draw_title(uint32_t *c)
 {
-    render_title(c);
+    copy_title_base(c);
     /* measured bands of the baked picture: 1UP/2UP 95..102, F1..F4 105..117,
      * FX/MUSIC text 119..130, F5 + player line 144..156, PRESS BUTTON 165..178 */
     menu_backdrop(c, 90, 190);
@@ -442,7 +465,7 @@ static void draw_title(uint32_t *c)
 
 static void draw_options(uint32_t *c)            /* same chip font / look as the title menu */
 {
-    render_title(c);
+    copy_title_base(c);
     menu_backdrop(c, 90, 200);
 }
 
@@ -727,7 +750,7 @@ static void hs_submit(const char *name, long score, int shots, int hits)
 }
 static void draw_hiscores(uint32_t *c)          /* same chip font as the title menu */
 {
-    render_title(c);
+    copy_title_base(c);
     menu_backdrop(c, 90, 200);
 }
 
@@ -1215,7 +1238,14 @@ static void debug_frame(void)
 
 int main(int argc, char **argv)
 {
+#ifdef __ANDROID__
+    /* The Gradle build stages the user's original modules under assets/data.
+     * raylib's Android fopen wrapper makes that directory look like a normal
+     * read-only filesystem while keeping the copyrighted data out of Git. */
+    const char *dir = "data";
+#else
     const char *dir = "/home/jon/BattleSquadron-Amiga/original/whdload/BattleSquadron/data";
+#endif
     for (int i = 1; i < argc; i++) {
         if (!strcmp(argv[i], "--data") && i + 1 < argc) dir = argv[++i];
         else if (!strcmp(argv[i], "--smoke") && i + 1 < argc) smoke = atol(argv[++i]);
@@ -1231,8 +1261,18 @@ int main(int argc, char **argv)
     if (getenv("BS_START_MODE")) start_mode = atoi(getenv("BS_START_MODE"));
     SetConfigFlags(FLAG_VSYNC_HINT);
     InitWindow(WIN_W, WIN_H, "Battle Squadron");
+#ifdef __ANDROID__
+    /* FileExists() uses stat() and cannot see inside an APK.  raylib's asset
+     * loader can, so load directly and validate the returned texture ids. */
+    rr_logo = LoadTexture("assets/retro_recomp_logo.png");
+    if (rr_logo.id) SetTextureFilter(rr_logo, TEXTURE_FILTER_BILINEAR);
+    ui_font = LoadFontEx("assets/DejaVuSans.ttf", 40, NULL, 0);
+    ui_font_ok = ui_font.texture.id != 0;
+    if (ui_font_ok) SetTextureFilter(ui_font.texture, TEXTURE_FILTER_BILINEAR);
+#else
     if (FileExists("assets/retro_recomp_logo.png")) { rr_logo = LoadTexture("assets/retro_recomp_logo.png"); SetTextureFilter(rr_logo, TEXTURE_FILTER_BILINEAR); }
     if (FileExists("assets/DejaVuSans.ttf")) { ui_font = LoadFontEx("assets/DejaVuSans.ttf", 40, NULL, 0); ui_font_ok = ui_font.texture.id != 0; if (ui_font_ok) SetTextureFilter(ui_font.texture, TEXTURE_FILTER_BILINEAR); }
+#endif
     SetExitKey(KEY_NULL);
     SetTargetFPS(50);
     audio_init();

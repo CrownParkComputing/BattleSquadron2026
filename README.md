@@ -39,6 +39,26 @@ are not distributed here. Point the loader at your own copy.
 
 Player two joins at any time by pressing fire.
 
+## Android
+
+The Android app is built from the same fully native C engine, renderer and
+Paula audio implementation as the desktop executable.  It does not include an
+emulator or a 68000 core.
+
+Install Android SDK 36, NDK 26.1.10909125 and CMake 3.25 or newer, and keep a
+raylib source checkout beside this repository (or set `ANDROID_RAYLIB`).  Then
+point `ANDROID_DATA` at the `data` directory in your own Battle Squadron
+WHDLoad installation:
+
+```sh
+ANDROID_DATA=/path/to/BattleSquadron/data make android-debug
+adb install -r android/app/build/outputs/apk/debug/app-debug.apk
+```
+
+The original modules are staged directly into the local APK build and remain
+ignored by Git.  The resulting app is landscape-only and supports Android
+gamepads: d-pad/stick moves, A fires, B uses a smart bomb, and START pauses.
+
 ## Soundtrack
 
 MUSIC cycles OFF / ORIGINAL / REMIX. REMIX appears only if you drop an mp3 at
