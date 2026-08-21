@@ -34,7 +34,7 @@ clean:
 # Fully native Android build.  The original modules are supplied locally at
 # build time and are never copied into the repository.
 ANDROID_DATA ?=
-ANDROID_RAYLIB ?= ../raylib-src
+ANDROID_RAYLIB ?= ../../raylib-src
 
 android-debug:
 	test -n "$(ANDROID_DATA)"
