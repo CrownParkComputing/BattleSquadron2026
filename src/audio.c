@@ -819,6 +819,7 @@ void audio_close(void)
 }
 
 static int amode;                        /* 0 silent, 1 LODGAM (game), 2 LODMUS (title/attract) */
+static int title_speech_played;          /* Android can re-enter the title during activity startup */
 
 static void audio_clock_reset(void)
 {
@@ -852,8 +853,12 @@ void audio_start_title(void)
 void audio_title_speech(void)
 {
     /* the boot's "welcome to Battle Squadron": the whole LODSPE payload as
-     * one Paula one-shot (exact descriptor from the runtime.c bootstrap) */
-    if (amode != 2 || !lodmus_resident()) return;
+     * one Paula one-shot (exact descriptor from the runtime.c bootstrap).
+     * Keep the guard beside the playback event: title_enter() can run again
+     * during an Android activity/configuration transition, but the welcome
+     * must only be queued once in this process. */
+    if (title_speech_played || amode != 2 || !lodmus_resident()) return;
+    title_speech_played = 1;
     menu_speech(0x246F0, 0x17CD, 0x01AC, 64, 110);
 }
 

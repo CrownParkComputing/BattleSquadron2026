@@ -254,12 +254,11 @@ static void hook(void)               /* eng_display_hook: one display frame rend
  * swaps them back */
 static void title_enter(void)
 {
-    static int welcomed;
     audio_stop();
     if (!bs_load_module(&data, "LODMUS") && !bs_load_module(&data, "LODSPE")) {
         data.stage = -1;                 /* LODMUS clobbered LODS0S: force a stage reload */
         audio_start_title();
-        if (!welcomed) { welcomed = 1; audio_title_speech(); }
+        audio_title_speech();            /* audio owns the once-per-session guard */
     }
     mode = 0;
     title_guard = 20;                    /* ignore a stray fire/A on the frame we arrive */
