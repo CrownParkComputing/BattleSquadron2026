@@ -40,6 +40,7 @@ static void UpdateAudioStream(AudioStream s, const void *d, int n) { (void)s;(vo
 
 #define PAULA_CLOCK 3546895.0
 #define OUT_RATE 44100
+#define STREAM_FRAMES 2048
 
 /* ---------------- Paula model ---------------- */
 typedef struct {
@@ -787,7 +788,7 @@ static AudioStream stream;
 static int ready;
 static double cia_next_sample;
 static uint64_t audio_sample_clock;
-static int16_t sbuf[2048];
+static int16_t sbuf[STREAM_FRAMES * 2];
 
 static int lodgam_resident(void)
 { return rd16(0x246F0) == 0x4EF9 && rd32(0x246F2) == UINT32_C(0x00024C6E); }
@@ -796,7 +797,12 @@ int audio_init(void)
 {
     InitAudioDevice();
     if (!IsAudioDeviceReady()) return -1;
-    SetAudioStreamBufferSizeDefault(1024);
+    /* Always submit a complete stream half.  Some Android AAudio devices use
+     * periods larger than the old 1024-frame update; raylib zero-pads a short
+     * update, which turns title speech/music into alternating audio and
+     * silence.  2048 frames is above the Retroid period while keeping effect
+     * latency below 47 ms. */
+    SetAudioStreamBufferSizeDefault(STREAM_FRAMES);
     stream = LoadAudioStream(OUT_RATE, 16, 2);
     PlayAudioStream(stream);
     ready = 1;
@@ -949,16 +955,16 @@ void audio_tick(void)
         return;
     }
     while (IsAudioStreamProcessed(stream)) {
-        audio_render_timed(sbuf, 1024);
-        UpdateAudioStream(stream, sbuf, 1024);
-        audio_tee(sbuf, 1024);              /* BS_AUDIO_WAV: same mix the speakers get */
+        audio_render_timed(sbuf, STREAM_FRAMES);
+        UpdateAudioStream(stream, sbuf, STREAM_FRAMES);
+        audio_tee(sbuf, STREAM_FRAMES);      /* BS_AUDIO_WAV: same mix the speakers get */
         fed++;
     }
     if (dbg && (++calls % 50) == 0) {
         double rms = 0;
-        for (int i = 0; i < 2048; i++) rms += (double)sbuf[i] * sbuf[i];
+        for (int i = 0; i < STREAM_FRAMES * 2; i++) rms += (double)sbuf[i] * sbuf[i];
         fprintf(stderr, "audio: %ld buffers fed, last rms=%.0f, ch act %d%d%d%d per %d %d %d %d\n",
-                fed, sqrt(rms / 2048),
+                fed, sqrt(rms / (STREAM_FRAMES * 2)),
                 pch[0].active, pch[1].active, pch[2].active, pch[3].active,
                 pch[0].period, pch[1].period, pch[2].period, pch[3].period);
     }
