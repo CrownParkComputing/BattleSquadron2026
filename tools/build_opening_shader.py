@@ -6,6 +6,9 @@ body='''uniform sampler2D texture0; // 24x32 original map tile identities
 uniform sampler2D originalAtlas;
 uniform float landMode;
 uniform float animationTime;
+uniform vec2 worldOrigin;
+uniform float terrainStage;
+uniform sampler2D rockAtlas;
 
 float tileAt(vec2 world) {
     vec2 cell = clamp(floor(world / 16.0), vec2(0.0), vec2(23.0,31.0));
@@ -64,6 +67,52 @@ vec3 lava(vec2 p) {
     return mix(vec3(0.38,0.025,0.003),vec3(1.0,0.48,0.025),heat);
 }
 void main() {
+    if(landMode>1.5) {
+        vec2 size=vec2(288,256), pixel=fragTexCoord*size;
+        vec4 original=SAMPLE(texture0,(floor(pixel)+0.5)/size);
+        float material=floor(original.a*255.0+0.5);
+        vec2 world=worldOrigin+pixel;
+        vec3 colour=original.rgb;
+        // Smooth material interiors only: preserve boundaries between classes.
+        vec2 base=floor(pixel-0.5), fraction=fract(pixel-0.5);
+        vec3 smoothColour=vec3(0); float weight=0.0;
+        for(int y=0;y<2;y++) for(int x=0;x<2;x++) {
+            vec4 neighbour=SAMPLE(texture0,(base+vec2(float(x),float(y))+0.5)/size);
+            float same=1.0-step(0.5,abs(floor(neighbour.a*255.0+0.5)-material));
+            float w=(x==0?1.0-fraction.x:fraction.x)*(y==0?1.0-fraction.y:fraction.y)*same;
+            smoothColour+=neighbour.rgb*w; weight+=w;
+        }
+        if(weight>0.001) smoothColour/=weight; else smoothColour=colour;
+        if(material==1.0) {
+            // Reuse a clean rock patch from the approved HD artwork as a
+            // fine material layer; native shading still defines every ridge.
+            vec2 uv=vec2(0.24,0.02)+abs(fract(world/320.0)*2.0-1.0)*vec2(0.20,0.12);
+            vec3 detail=SAMPLE(rockAtlas,uv).rgb;
+            float relief=dot(detail,vec3(0.3,0.6,0.1));
+            colour=smoothColour*(0.78+relief*0.65);
+            float grain=noise2(world*1.1)*0.045;
+            colour+=smoothColour*grain;
+            if(terrainStage!=2.0) {
+                float dark=1.0-smoothstep(0.10,0.28,max(original.r,max(original.g,original.b)));
+                float crack=1.0-smoothstep(0.02,0.075,abs(noise2(world/12.0)-0.5));
+                colour=mix(colour,lava(world),dark*crack*0.75);
+            }
+        } else if(material==2.0) {
+            colour=clouds(world);
+            if(terrainStage==1.0) colour*=0.60;
+            if(terrainStage==2.0) colour*=vec3(0.80,0.93,1.0);
+        } else if(material==3.0) {
+            colour=mix(smoothColour,lava(world),0.70);
+        } else if(material==4.0) {
+            colour=stars(world);
+        } else if(material==5.0) {
+            // Restrained finish for panel interiors, with fixed geometry.
+            colour=mix(colour,smoothColour,0.65);
+            colour*=0.97+0.04*noise2(world*0.7);
+        }
+        OUTPUT=vec4(colour,1.0)*fragColor;
+        return;
+    }
     if (landMode > 0.5) {
         vec3 colour=SAMPLE(texture0,fragTexCoord).rgb;
         vec3 reference=SAMPLE(originalAtlas,fragTexCoord).rgb;

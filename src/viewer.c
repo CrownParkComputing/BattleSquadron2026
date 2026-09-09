@@ -36,21 +36,27 @@ static Texture2D tex;
 static uint32_t show[BS_VIEW_W * BS_VIEW_H];
 static Texture2D opening_reference, opening_indices;
 static Texture2D opening_land, opening_land_reference;
+static Texture2D terrain_material_texture;
 static Shader opening_shader;
 static int opening_reference_loc, opening_land_mode_loc, opening_time_loc, opening_ready;
+static int terrain_origin_loc, terrain_stage_loc, terrain_rock_loc;
 static struct OpeningFrame {
     int active, progress, camx, shake;
     float animation_time;
+    int opening, stage;
+    uint32_t materials[BS_VIEW_W * BS_VIEW_H];
     uint16_t cells[32][24];
 } opening_frames[2];
 
 static void capture_opening_frame(int frame)
 {
     struct OpeningFrame *f = &opening_frames[frame];
-    f->active = render_remaster && opening_ready && !g.demo && g.stage7228 == 0 &&
-                !g.hangars4099 && g.progress7206 <= 1536;
+    f->active = render_remaster_full && !g.demo;
+    f->opening = g.stage7228 == 0 && !g.hangars4099 && g.progress7206 <= 1536;
     if (!f->active) return;
     f->progress = g.progress7206;
+    f->stage = g.stage7228;
+    memcpy(f->materials, render_materials, sizeof f->materials);
     f->animation_time = g.dframe / 50.0f;
     f->camx = g.cam7204 - 0x100;
     f->shake = 0;
@@ -64,6 +70,18 @@ static void draw_opening_frame(int frame, Rectangle viewport)
 {
     const struct OpeningFrame *f = &opening_frames[frame];
     if (!f->active || !opening_ready) return;
+    UpdateTexture(terrain_material_texture, f->materials);
+    BeginShaderMode(opening_shader);
+    float material_mode=2, stage=(float)f->stage;
+    Vector2 origin={f->camx+f->shake,512-f->progress};
+    SetShaderValue(opening_shader, opening_land_mode_loc, &material_mode, SHADER_UNIFORM_FLOAT);
+    SetShaderValue(opening_shader, opening_time_loc, &f->animation_time, SHADER_UNIFORM_FLOAT);
+    SetShaderValue(opening_shader, terrain_origin_loc, &origin, SHADER_UNIFORM_VEC2);
+    SetShaderValue(opening_shader, terrain_stage_loc, &stage, SHADER_UNIFORM_FLOAT);
+    SetShaderValueTexture(opening_shader, terrain_rock_loc, opening_land);
+    DrawTexturePro(terrain_material_texture,(Rectangle){0,0,BS_VIEW_W,BS_VIEW_H},viewport,(Vector2){0,0},0,WHITE);
+    EndShaderMode();
+    if (!f->opening) return;
     uint32_t ids[32 * 24];
     for (int row = 0; row < 32; row++) for (int col = 0; col < 24; col++)
         ids[row * 24 + col] = 0xFF000000u | (uint32_t)(opening_tile_index(f->cells[row][col]) + 1);
@@ -173,6 +191,7 @@ static void options_apply(void)
     render_hiscore = (int)opt.hiscore;
     render_enhanced = opt.graphics == 1;
     render_remaster = opt.graphics == 2 && opening_ready;
+    render_remaster_full = render_remaster && terrain_material_texture.id && terrain_origin_loc >= 0 && terrain_stage_loc >= 0 && terrain_rock_loc >= 0 && opening_land.id;
 #ifndef __ANDROID__
     if (opt.fullscreen != IsWindowFullscreen()) {
         if (opt.fullscreen) {
@@ -324,8 +343,8 @@ static int nav_ok(void)
 static void hook(void)               /* eng_display_hook: one display frame rendered */
 {
     if (hook_n < 2) {
-        capture_opening_frame(hook_n);
         render_frame(cbuf[hook_n], view_layers);
+        capture_opening_frame(hook_n);
     }
     hook_n++;
 }
@@ -382,8 +401,11 @@ static void start_game(void)
     bs_chip = data.chip;
     bs_load_module(&data, "LODGAM");     /* back over LODSPE */
     data.stage = -1;                     /* always reload: the title left LODMUS over LODS0S */
-    bs_load_stage(&data, 0);
-    eng_init(0, players_sel, opt.weapon, opt.lives, opt.difficulty);
+    int stage = 0;
+    if (smoke && getenv("BS_SMOKE_STAGE")) stage = atoi(getenv("BS_SMOKE_STAGE"));
+    if (stage < 0 || stage > 3) stage = 0;
+    bs_load_stage(&data, stage);
+    eng_init(stage, players_sel, opt.weapon, opt.lives, opt.difficulty);
     g.continues_left[0] = g.continues_left[1] = CONTINUE_LIMITS[opt.continues];
     render_stage(&data);
     audio_start_game();
@@ -412,6 +434,7 @@ static void end_game(void)
     render_hiscore = (int)opt.hiscore;
     render_enhanced = opt.graphics == 1;
     render_remaster = opt.graphics == 2 && opening_ready;
+    render_remaster_full = render_remaster && terrain_material_texture.id && terrain_origin_loc >= 0 && terrain_stage_loc >= 0 && terrain_rock_loc >= 0 && opening_land.id;
     options_save();
     { char nm[8];
       for (int i = 0; i < 2; i++) {
@@ -1418,6 +1441,9 @@ int main(int argc, char **argv)
     opening_time_loc = GetShaderLocation(opening_shader, "animationTime");
     opening_reference_loc = GetShaderLocation(opening_shader, "originalAtlas");
     opening_land_mode_loc = GetShaderLocation(opening_shader, "landMode");
+    terrain_origin_loc = GetShaderLocation(opening_shader, "worldOrigin");
+    terrain_stage_loc = GetShaderLocation(opening_shader, "terrainStage");
+    terrain_rock_loc = GetShaderLocation(opening_shader, "rockAtlas");
     opening_ready = opening_reference.id && opening_indices.id &&
                     opening_time_loc >= 0 && opening_reference_loc >= 0;
     if (!opening_ready) TraceLog(LOG_WARNING, "AI opening preview unavailable; using original terrain");
@@ -1425,6 +1451,9 @@ int main(int argc, char **argv)
     opening_land_reference = LoadTexture("assets/remaster/opening-land-reference.png");
     if (opening_land.id) SetTextureFilter(opening_land, TEXTURE_FILTER_BILINEAR);
     render_remaster_land = opening_land.id && opening_land_reference.id && opening_land_mode_loc >= 0;
+    Image material_image=GenImageColor(BS_VIEW_W,BS_VIEW_H,BLACK);
+    terrain_material_texture=LoadTextureFromImage(material_image);
+    UnloadImage(material_image);
     if (getenv("BS_AI_PREVIEW")) opt.graphics = 2;
     options_apply();
 
@@ -1672,7 +1701,7 @@ int main(int argc, char **argv)
                     case 5: snprintf(val, sizeof val, "%d", opt.lives); break;
                     case 6: snprintf(val, sizeof val, "%s", opt.fullscreen ? "ON" : "OFF"); break;
                     case 7: snprintf(val, sizeof val, "%s", CONTINUE_NAMES[opt.continues]); break;
-                    case 8: snprintf(val, sizeof val, "%s", opt.graphics == 2 ? "AI PREVIEW" : opt.graphics ? "ENHANCED" : "ORIGINAL"); break;
+                    case 8: snprintf(val, sizeof val, "%s", opt.graphics == 2 ? "REMASTERED" : opt.graphics ? "ENHANCED" : "ORIGINAL"); break;
                     }
                     snprintf(row, sizeof row, "%s%s%s", LBL[i], val[0] ? "   " : "", val);
                     menu_row(103 + i * 9, row, opt_sel == i, fs - 6, (Color){ 185, 195, 215, 255 });
@@ -1733,6 +1762,7 @@ int main(int argc, char **argv)
     audio_close();
     if (opening_land.id) UnloadTexture(opening_land);
     if (opening_land_reference.id) UnloadTexture(opening_land_reference);
+    if (terrain_material_texture.id) UnloadTexture(terrain_material_texture);
     if (opening_reference.id) UnloadTexture(opening_reference);
     if (opening_indices.id) UnloadTexture(opening_indices);
     if (opening_shader.id) UnloadShader(opening_shader);

@@ -1,6 +1,6 @@
-# Level 1 animated artwork preview
+# Remastered terrain and animation
 
-Select **Options → Graphics → AI PREVIEW** in native or Android.
+Select **Options → Graphics → REMASTERED** in native or Android.
 Original and Enhanced remain available. `BS_AI_PREVIEW=1 ./build/bsview`
 selects the preview on desktop.
 
@@ -11,9 +11,7 @@ through world pixel 640 replaces all original surf colours, including white,
 and blends clouds into the ground using neighbouring reference samples.
 
 The land extension covers world pixels 513–1280 (map rows 432–479), including
-the first two volcanic craters and rocky ridge. The final 32 pixels fade back
-to original terrain. Later scenery, other stages, sublevels and demos use
-original art.
+the first two volcanic craters and rocky ridge. The final 32 pixels blend into the shared material renderer.
 
 `opening-land-ai-v1.png` is a full map-strip edit made with the built-in image
 generation tool; see [its prompt](LAND-PROMPT.md). The source is unmodified.
@@ -32,3 +30,28 @@ clouds and lava, so pausing freezes all three.
 GLSL ES 100 shaders. `tools/export_opening_tiles.py` exports the original
 opening tile reference. Regression checks cover renderer state preservation,
 original/demo behaviour, terrain alpha and removal of original bright surf.
+
+## All-stage material pass
+
+Remastered now applies across all four complete maps and surface returns.
+The GPU receives a separate terrain/material snapshot for each displayed frame;
+original objects and sprites render over it. Original and Enhanced are unchanged,
+and recorded demos keep their original rendering.
+
+The shared pass adds material detail to rock using a clean patch of the approved
+AI artwork, smooths metal interiors, animates cloud floor materials and existing
+molten surfaces, and adds restrained fissure glow in volcanic environments.
+It retains original shading to keep ridges and structures in place. Material
+classes use the original tile identity and palette index, with tile histograms
+protecting machinery from cloud replacement. The green environment does not
+receive volcanic fissure effects. Colour comes from the live stage palette,
+including surface returns and in-game palette changes.
+
+The opening still has its dedicated AI-redrawn land strip. Elsewhere this is a
+material/shader treatment of the original terrain, not a newly AI-redrawn map.
+`src/materials.h` defines classifications; `tools/build_opening_shader.py`
+produces both desktop and Android shaders from the same source.
+
+For visual regression checks, `BS_SMOKE_STAGE=0..3` selects a stage only when
+`--smoke` is active. Headless regression traverses all maps, checking original
+RGB, foreground rendering, map/game immutability, and unchanged demo output.

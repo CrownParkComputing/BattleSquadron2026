@@ -16,6 +16,7 @@
 #include "engine/engine.h"
 #include "render.h"
 #include "remaster.h"
+#include "materials.h"
 #include <stdlib.h>
 
 /* empirical sprite-position calibration vs the oracle shots (framecmp); env
@@ -41,6 +42,37 @@ static void calib(void)
 int render_hiscore = 1000000;
 int render_enhanced;
 int render_remaster;
+int render_remaster_full;
+uint32_t render_materials[BS_VIEW_W * BS_VIEW_H];
+static uint8_t material_tile_flags[65536];
+static int material_cache_stage = -1;
+static int material_mechanical(uint16_t word) {
+    if (material_cache_stage != g.stage7228) {
+        memset(material_tile_flags,0,sizeof material_tile_flags);
+        material_cache_stage=g.stage7228;
+    }
+    if (!material_tile_flags[word]) {
+        int count[32]={0};
+        for(int y=0;y<16;y++) {
+            uint16_t planes[5];
+            for(int p=0;p<5;p++) planes[p]=cw(0x4A000+(uint32_t)word*2+y*2+p*32);
+            for(int x=0;x<16;x++) {
+                int c=0;
+                for(int p=0;p<5;p++) c|=((planes[p]>>(15-x))&1)<<p;
+                count[c]++;
+            }
+        }
+        int mechanical=count[0]==256 || count[8]+count[9]>48 || count[2]>24;
+        if (g.stage7228 == 2)
+            mechanical=count[0]==256 || (count[8]+count[9]>100 && count[2]>4) || count[2]>24;
+        material_tile_flags[word]=mechanical?2:1;
+        if(g.stage7228==2 && count[2]==0 && count[3]+count[4]+count[5]<40 &&
+           count[1]+count[6]+count[15]+count[16]+count[20]+count[28]<8 &&
+           count[8]+count[9]+count[10]+count[11]+count[12]>128)
+            material_tile_flags[word]=3;
+    }
+    return material_tile_flags[word]==3 ? 2 : material_tile_flags[word]==2;
+}
 int render_remaster_land;
 
 static uint32_t pal_rgba[32];            /* current frame palette */
@@ -187,6 +219,7 @@ static void draw_terrain(uint32_t *rgba)
             int col = cx >> 4;
             if (col < 0 || col >= 24) { out[sx++] = pal_rgba[0]; cx++; continue; }
             uint16_t word = cw(maprow + (uint32_t)col * 2);
+            int mechanical = render_remaster_full && !g.demo ? material_mechanical(word) : 1;
             uint32_t tb = 0x4A000 + (uint32_t)word * 2 + (uint32_t)tile_row * 2;
             uint16_t pl[5];
             for (int p = 0; p < 5; p++) pl[p] = cw(tb + (uint32_t)p * 0x20);
@@ -195,6 +228,10 @@ static void draw_terrain(uint32_t *rgba)
                 int c = 0;
                 for (int p = 0; p < 5; p++) c |= ((pl[p] >> bit) & 1) << p;
                 uint32_t colour = pal_rgba[c];
+                if (render_remaster_full && !g.demo) {
+                    render_materials[(size_t)sy * BS_VIEW_W + sx] =
+                        (colour & 0xFFFFFFu) | ((uint32_t)terrain_material(g.stage7228, word, c, mechanical) << 24);
+                }
                 if (render_remaster && !g.demo && g.stage7228 == 0 && !g.hangars4099 &&
                     sy >= g.progress7206) colour &= 0x00FFFFFFu;
                 if (render_remaster && !g.demo && g.stage7228 == 0 && !g.hangars4099 &&
@@ -218,6 +255,7 @@ static void draw_terrain(uint32_t *rgba)
                      * as purple. Let the shader blend this whole empty strip. */
                     if (q <= 640) colour &= 0x00FFFFFFu;
                 }
+                if (render_remaster_full && !g.demo) colour &= 0xFFFFFFu;
                 out[sx++] = colour;
                 cx++; bit--;
             }
@@ -733,6 +771,7 @@ void render_frame(uint32_t *rgba, int layers)
     calib();
     latch_palette();
     if (layers & BS_L_TERRAIN) {
+        if (render_remaster_full) memset(render_materials,0,sizeof render_materials);
         draw_terrain(rgba);
         if (render_enhanced && !g.demo) enhance_terrain(rgba);
     }

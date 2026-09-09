@@ -1,6 +1,7 @@
 #include "engine.h"
 #include "bsdata.h"
 #include "render.h"
+#include "materials.h"
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>
@@ -119,6 +120,38 @@ int main(void) {
     render_remaster=1; render_frame(enhanced,BS_L_TERRAIN);
     assert(!memcmp(original,enhanced,sizeof original));
     render_remaster=0; render_remaster_land=0;
+    /* Exercise every environment away from the opening, plus returning surface
+     * palettes. Material capture must never mutate map/game state or RGB. */
+    static uint8_t chip_before[BS_CHIP_SIZE];
+    for(int stage=0;stage<4;stage++) {
+        assert(bs_load_stage(&data,stage)==0);
+        eng_init(stage,1,0,3,1);
+        int seen[6]={0};
+        for(int progress=300;progress<8100;progress+=173) {
+            g.progress7206=progress;
+            if(stage==0) g.hangars4099=3;
+            render_remaster=0; render_remaster_full=0;
+            render_frame(original,BS_L_ALL);
+            before=g; memcpy(chip_before,data.chip,sizeof chip_before);
+            render_remaster=1; render_remaster_full=1;
+            render_frame(enhanced,BS_L_ALL);
+            assert(!memcmp(&before,&g,sizeof g));
+            assert(!memcmp(chip_before,data.chip,sizeof chip_before));
+            for(int i=0;i<BS_VIEW_W*BS_VIEW_H;i++) {
+                assert((original[i]&0xFFFFFFu)==(enhanced[i]&0xFFFFFFu));
+                int material=render_materials[i]>>24;
+                assert(material>=0 && material<=MAT_METAL);
+                seen[material]++;
+            }
+        }
+        assert(seen[MAT_ROCK]>0 && seen[MAT_CLOUD]>0 && seen[MAT_METAL]>0);
+        g.demo=1;
+        render_remaster_full=0; render_frame(original,BS_L_ALL);
+        render_remaster_full=1; render_frame(enhanced,BS_L_ALL);
+        assert(!memcmp(original,enhanced,sizeof original));
+    }
+    render_remaster=0; render_remaster_full=0;
+    puts("PASS: materials across all four complete maps, surface returns, foreground RGB, chip/game state and demos preserved");
     puts("PASS: land preview changes only olive/black terrain alpha, preserves coloured structures and state, stops after opening strip");
     puts("PASS: opening preview preserves RGB/game state, fades out, excludes later terrain/demo/other stages/sublevels");
     puts("PASS: 2x autofire, all weapons/upgrades/players; graphics reversible, deterministic, state unchanged, demo unchanged");
