@@ -1271,6 +1271,11 @@ int main(int argc, char **argv)
     if (getenv("BS_START_MODE")) start_mode = atoi(getenv("BS_START_MODE"));
     SetConfigFlags(FLAG_VSYNC_HINT);
     InitWindow(WIN_W, WIN_H, "Battle Squadron");
+#if defined(__linux__) && !defined(__ANDROID__)
+    /* Xbox Series USB firmware 5.17: older linked GLFW mapping databases
+     * detect this GUID but return an empty gamepad state without this row. */
+    SetGamepadMappings("030000005e040000120b000017050000,Microsoft Xbox Series Controller,a:b0,b:b1,back:b6,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,guide:b8,leftshoulder:b4,leftstick:b9,lefttrigger:a2,leftx:a0,lefty:a1,rightshoulder:b5,rightstick:b10,righttrigger:a5,rightx:a3,righty:a4,start:b7,x:b2,y:b3,platform:Linux,");
+#endif
 #ifdef __ANDROID__
     /* FileExists() uses stat() and cannot see inside an APK.  raylib's asset
      * loader can, so load directly and validate the returned texture ids. */
