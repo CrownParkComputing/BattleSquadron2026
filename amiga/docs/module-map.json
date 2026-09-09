@@ -1,0 +1,230 @@
+[
+  {
+    "name": "LODDAT",
+    "load_address": 65536,
+    "packed_size": 44152,
+    "staging_address": 3145728,
+    "mode": -2,
+    "runtime_size": 83696,
+    "status": "depacked",
+    "output": "LODDAT.bin"
+  },
+  {
+    "name": "LODSTO",
+    "load_address": 401408,
+    "packed_size": 56836,
+    "staging_address": 3190784,
+    "mode": -2,
+    "runtime_size": 115200,
+    "status": "depacked",
+    "output": "LODSTO.bin"
+  },
+  {
+    "name": "LODINT",
+    "load_address": 401408,
+    "packed_size": 12384,
+    "staging_address": 3248128,
+    "mode": -2,
+    "runtime_size": 40000,
+    "status": "depacked",
+    "output": "LODINT.bin"
+  },
+  {
+    "name": "LODJOY",
+    "load_address": 491520,
+    "packed_size": 4312,
+    "staging_address": 3268608,
+    "mode": -2,
+    "runtime_size": 18240,
+    "status": "depacked",
+    "output": "LODJOY.bin"
+  },
+  {
+    "name": "LODS0F",
+    "load_address": 189704,
+    "packed_size": 38076,
+    "staging_address": 3276800,
+    "mode": -2,
+    "runtime_size": 62200,
+    "status": "depacked",
+    "output": "LODS0F.bin"
+  },
+  {
+    "name": "LODS0S",
+    "load_address": 251904,
+    "packed_size": 11340,
+    "staging_address": 3317760,
+    "mode": -2,
+    "runtime_size": 26624,
+    "status": "depacked",
+    "output": "LODS0S.bin"
+  },
+  {
+    "name": "LODS0T",
+    "load_address": 278528,
+    "packed_size": 67928,
+    "staging_address": 3330048,
+    "mode": -2,
+    "runtime_size": 106496,
+    "status": "depacked",
+    "output": "LODS0T.bin"
+  },
+  {
+    "name": "LODST1",
+    "load_address": 190618,
+    "packed_size": 108580,
+    "staging_address": 3399680,
+    "mode": -2,
+    "runtime_size": 194406,
+    "status": "depacked",
+    "output": "LODST1.bin"
+  },
+  {
+    "name": "LODST2",
+    "load_address": 189632,
+    "packed_size": 119872,
+    "staging_address": 3510272,
+    "mode": -2,
+    "runtime_size": 195392,
+    "status": "depacked",
+    "output": "LODST2.bin"
+  },
+  {
+    "name": "LODST3",
+    "load_address": 190528,
+    "packed_size": 153780,
+    "staging_address": 3633152,
+    "mode": -2,
+    "runtime_size": 194496,
+    "status": "depacked",
+    "output": "LODST3.bin"
+  },
+  {
+    "name": "LODSPE",
+    "load_address": 149232,
+    "packed_size": 12186,
+    "staging_address": 3801088,
+    "mode": 2,
+    "runtime_size": 12186,
+    "status": "raw",
+    "output": "LODSPE.bin"
+  },
+  {
+    "name": "LODMUS",
+    "load_address": 251904,
+    "packed_size": 22470,
+    "staging_address": 3833856,
+    "mode": 2,
+    "runtime_size": 22470,
+    "status": "raw",
+    "output": "LODMUS.bin"
+  },
+  {
+    "name": "LODGAM",
+    "load_address": 149232,
+    "packed_size": 29200,
+    "staging_address": 3866624,
+    "mode": -2,
+    "runtime_size": 38108,
+    "status": "depacked",
+    "output": "LODGAM.bin"
+  },
+  {
+    "name": "LODHIS",
+    "load_address": 149232,
+    "packed_size": 21916,
+    "staging_address": 3907584,
+    "mode": 2,
+    "runtime_size": 21916,
+    "status": "raw",
+    "output": "LODHIS.bin"
+  },
+  {
+    "name": "LODCOM",
+    "load_address": 251904,
+    "packed_size": 20218,
+    "staging_address": 3932160,
+    "mode": 2,
+    "runtime_size": 20218,
+    "status": "raw",
+    "output": "LODCOM.bin"
+  },
+  {
+    "name": "LODTAK",
+    "load_address": 149232,
+    "packed_size": 9742,
+    "staging_address": 3952640,
+    "mode": 2,
+    "status": "missing"
+  },
+  {
+    "name": "LODEND",
+    "load_address": 401408,
+    "packed_size": 35328,
+    "staging_address": 3964928,
+    "mode": -2,
+    "runtime_size": 76800,
+    "status": "depacked",
+    "output": "LODEND.bin"
+  },
+  {
+    "name": "LODFIN",
+    "load_address": 278528,
+    "packed_size": 64844,
+    "staging_address": 4005888,
+    "mode": -2,
+    "runtime_size": 98208,
+    "status": "depacked",
+    "output": "LODFIN.bin"
+  },
+  {
+    "name": "LODTEM",
+    "load_address": 401408,
+    "packed_size": 24480,
+    "staging_address": 4071424,
+    "mode": -2,
+    "runtime_size": 64000,
+    "status": "depacked",
+    "output": "LODTEM.bin"
+  },
+  {
+    "name": "LODLOD",
+    "load_address": 196608,
+    "packed_size": 29080,
+    "staging_address": 4096000,
+    "mode": -2,
+    "runtime_size": 41600,
+    "status": "depacked",
+    "output": "LODLOD.bin"
+  },
+  {
+    "name": "LODSCO",
+    "load_address": 64782,
+    "packed_size": 240,
+    "staging_address": 4128768,
+    "mode": 2,
+    "runtime_size": 240,
+    "status": "raw",
+    "output": "LODSCO.bin"
+  },
+  {
+    "name": "LODTXT",
+    "load_address": 520192,
+    "packed_size": 3584,
+    "staging_address": 4132864,
+    "mode": 2,
+    "runtime_size": 3584,
+    "status": "raw",
+    "output": "LODTXT.bin"
+  },
+  {
+    "name": "LODSAV",
+    "load_address": 401408,
+    "packed_size": 8192,
+    "staging_address": 4136960,
+    "mode": 2,
+    "runtime_size": 8192,
+    "status": "raw",
+    "output": "LODSAV.bin"
+  }
+]

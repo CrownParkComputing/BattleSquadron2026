@@ -1,0 +1,131 @@
+
+				---------------
+				Battle Squadron
+				---------------
+
+
+;--- Battle Squadron HD install V1.8
+
+This installer requires the original Battle Squadron disk. It supports both
+PAL and NTSC version.
+
+You have to install WHDLoad first.
+
+V1.8 by Psygore (11.02.2026)
+	- Needs whdload v19+ (use resload_ReadJoyPort() function)
+	- RawDIC imager improved (latest can corrupt some files)
+	- Unregistered users resctriction removed (hiscores saving)
+	- Spacebar for nova missile works again
+	- Some blitters waits added (pal/ntsc)
+	- Restore corectly screen display (pal/ntsc) when using QuitKey
+	- Unpause can be done by pressing firebutton too
+	- Set CUSTOM5=1 to remove ship gfx flicketing on WinUAE
+	- Manual updated
+	- Drawer icon by Hexaae added
+
+V1.7 by Psygore (23.02.2019)
+	- Joystick 3rd button supported, it will pause the game
+	- Set CUSTOM2 = 1 for doing the nova missile only with the 2nd button
+	  (the 2nd button must be pressed first before) 
+	- Set CUSTOM3=1 to detect automatically if a joystick/pad or mouse is
+	  connected on port 0 or 1 (no need to set your control type in menu)
+	- Set CUSTOM4 = 1 to skip the blitter wait patch
+	- Install script updated
+
+V1.6.1 by Psygore (03.08.2011)
+	- unused data in ws_config removed
+
+V1.6 by Psygore (24.07.2011)
+	- Slave requires whdload 17+
+	- GFX flickering fixed (ship/ennemies) - issue #1912
+	- CD32 joypad supported (player 1 & 2)
+	- BoxIcons added
+	- Manual included
+
+CD32 joypad keys:
+in menu: - F1 = GREEN,   F2 = YELLOW, F3 = REVERSE,
+         - F4 = FORWARD, F5 = BLUE, spacebar = PLAY
+
+in game: - BLUE : nova missile
+	 - PLAY : pause (then):
+		   - GREEN to toggle on/off autofire
+		   - YELLOW to switch 50/60hz
+		   - REVERSE+FORWARD to enable cheat mode
+                   - keep REVERSE down and press PLAY to return to the menu
+         - REVERSE+FORWARD+PLAY : quit the game (must be pressed at least 1 s.)
+
+
+V1.5 by Psygore (13.05.2004)
+	- New install script
+	- Nice icons (created by Frank) and Exoticon included
+	- Slave reworked
+	- Stack moved in fastram
+	- Uses RawDIC to create files (with track checksum)
+	- Snoop bug removed
+	- Decruncher (BOND) relocated in fastmem (quit with a message error if
+	  checksum is wrong)
+	- Joystick 2nd button used to do the nova missile
+	- Unpacked files can be packed as data with Propack or FImp
+	- In tooltypes, CUSTOM1=1 to convert pal version to ntsc
+	- You can reset hiscores by deleting 'LODSCO'
+	- Quit with '*' (PrtSc)
+
+Use the following keys:
+
+TAB  : to swith between 50/60hz
+CTRL : to toggle on/off autofire (if autofire is on, just move your joystick in
+       a circle to release the nova missile)
+
+Re-install the game or copy all files "LO*" into the data dir.
+
+
+V1.4    - Slave now fully pc-relative
+	- Exit key changed to Numl
+
+V1.3	- Bugfix in NTSC Highscore saving
+
+V1.2	- NTSC version support
+	- Uses 'The Patcher' for file creation
+	- Highscore saving added [registered users only]
+
+I set the number of players to default one. No big deal, I just wanted to
+mention it.  ;)
+
+Cheat: Typing CASTOR while playing will cause the screen to flash green. Now
+you are immortal and can use F1-F10 for weapon selection.
+
+Thanks to Sophocles Metsis for sending me the NTSC version & bug report.
+
+Turn your stereo to maximum volume while playing and get the real arcade
+feeling with this great game from 1989!
+
+Battle Squadron is copyright by Innerprise Sorftware, Inc., distributed by
+European Electronic Zoo.
+
+
+;--- Features
+
+- Gfx errors fixed
+- Highscore saving [registered users only]
+- Return to OS (Numl)
+
+
+;--- WHDLoad
+
+Download the latest version and more game or demo installers at
+http://www.whdload.de/
+
+
+;--- GORE DESIGN - RIDE HARD, DIE FREE!
+
+Greetings to all members of the whdload family...wepl, harry, mr. larmer and
+all the others. Special hello to my pal Flynn!  =)
+
+                                                                    ____
+                                                                   /   /
+_____________________ STAY CLEAR CIVILIAN... ____________________ / / /_
+                                                                 / / /
+   Dark Angel of Gore Design                              ____  / / /
+e-mail:  wir96fme@studserv.uni-leipzig.de                 \   \/ / /
+________________________________________ powered by AMIGA  \ \ \/ /_____
+                                                            \_\_\/

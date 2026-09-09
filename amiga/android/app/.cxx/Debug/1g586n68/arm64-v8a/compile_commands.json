@@ -1,0 +1,80 @@
+[
+{
+  "directory": "/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/1g586n68/arm64-v8a",
+  "command": "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android29 --sysroot=/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DGRAPHICS_API_OPENGL_ES2 -DM68K_INSTRUCTION_HOOK=M68K_OPT_SPECIFY_HANDLER -DPLATFORM_ANDROID -Dmain_EXPORTS -I/home/jon/BattleSquadron-Amiga/src/host -I/home/jon/BattleSquadron-Amiga/../SWIV/src/musashi -I/home/jon/raylib-src/src -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -std=gnu11 -fPIC -O2 -Wall -Wextra -include /home/jon/BattleSquadron-Amiga/src/host/amiga.h -o CMakeFiles/main.dir/home/jon/BattleSquadron-Amiga/src/host/frontend.c.o -c /home/jon/BattleSquadron-Amiga/src/host/frontend.c",
+  "file": "/home/jon/BattleSquadron-Amiga/src/host/frontend.c",
+  "output": "/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/1g586n68/arm64-v8a/CMakeFiles/main.dir/home/jon/BattleSquadron-Amiga/src/host/frontend.c.o"
+},
+{
+  "directory": "/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/1g586n68/arm64-v8a",
+  "command": "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android29 --sysroot=/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DGRAPHICS_API_OPENGL_ES2 -DM68K_INSTRUCTION_HOOK=M68K_OPT_SPECIFY_HANDLER -DPLATFORM_ANDROID -Dmain_EXPORTS -I/home/jon/BattleSquadron-Amiga/src/host -I/home/jon/BattleSquadron-Amiga/../SWIV/src/musashi -I/home/jon/raylib-src/src -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -std=gnu11 -fPIC -O2 -Wall -Wextra -include /home/jon/BattleSquadron-Amiga/src/host/amiga.h -o CMakeFiles/main.dir/home/jon/BattleSquadron-Amiga/src/host/amiga.c.o -c /home/jon/BattleSquadron-Amiga/src/host/amiga.c",
+  "file": "/home/jon/BattleSquadron-Amiga/src/host/amiga.c",
+  "output": "/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/1g586n68/arm64-v8a/CMakeFiles/main.dir/home/jon/BattleSquadron-Amiga/src/host/amiga.c.o"
+},
+{
+  "directory": "/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/1g586n68/arm64-v8a",
+  "command": "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android29 --sysroot=/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DGRAPHICS_API_OPENGL_ES2 -DM68K_INSTRUCTION_HOOK=M68K_OPT_SPECIFY_HANDLER -DPLATFORM_ANDROID -Dmain_EXPORTS -I/home/jon/BattleSquadron-Amiga/src/host -I/home/jon/BattleSquadron-Amiga/../SWIV/src/musashi -I/home/jon/raylib-src/src -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -std=gnu11 -fPIC -O2 -Wall -Wextra -include /home/jon/BattleSquadron-Amiga/src/host/amiga.h -o CMakeFiles/main.dir/home/jon/SWIV/src/musashi/m68kcpu.c.o -c /home/jon/SWIV/src/musashi/m68kcpu.c",
+  "file": "/home/jon/SWIV/src/musashi/m68kcpu.c",
+  "output": "/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/1g586n68/arm64-v8a/CMakeFiles/main.dir/home/jon/SWIV/src/musashi/m68kcpu.c.o"
+},
+{
+  "directory": "/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/1g586n68/arm64-v8a",
+  "command": "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android29 --sysroot=/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DGRAPHICS_API_OPENGL_ES2 -DM68K_INSTRUCTION_HOOK=M68K_OPT_SPECIFY_HANDLER -DPLATFORM_ANDROID -Dmain_EXPORTS -I/home/jon/BattleSquadron-Amiga/src/host -I/home/jon/BattleSquadron-Amiga/../SWIV/src/musashi -I/home/jon/raylib-src/src -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -std=gnu11 -fPIC -O2 -Wall -Wextra -include /home/jon/BattleSquadron-Amiga/src/host/amiga.h -o CMakeFiles/main.dir/home/jon/SWIV/src/musashi/m68kops.c.o -c /home/jon/SWIV/src/musashi/m68kops.c",
+  "file": "/home/jon/SWIV/src/musashi/m68kops.c",
+  "output": "/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/1g586n68/arm64-v8a/CMakeFiles/main.dir/home/jon/SWIV/src/musashi/m68kops.c.o"
+},
+{
+  "directory": "/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/1g586n68/arm64-v8a",
+  "command": "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android29 --sysroot=/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DGRAPHICS_API_OPENGL_ES2 -DM68K_INSTRUCTION_HOOK=M68K_OPT_SPECIFY_HANDLER -DPLATFORM_ANDROID -Dmain_EXPORTS -I/home/jon/BattleSquadron-Amiga/src/host -I/home/jon/BattleSquadron-Amiga/../SWIV/src/musashi -I/home/jon/raylib-src/src -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -std=gnu11 -fPIC -O2 -Wall -Wextra -include /home/jon/BattleSquadron-Amiga/src/host/amiga.h -o CMakeFiles/main.dir/home/jon/SWIV/src/musashi/m68kdasm.c.o -c /home/jon/SWIV/src/musashi/m68kdasm.c",
+  "file": "/home/jon/SWIV/src/musashi/m68kdasm.c",
+  "output": "/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/1g586n68/arm64-v8a/CMakeFiles/main.dir/home/jon/SWIV/src/musashi/m68kdasm.c.o"
+},
+{
+  "directory": "/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/1g586n68/arm64-v8a",
+  "command": "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android29 --sysroot=/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DGRAPHICS_API_OPENGL_ES2 -DM68K_INSTRUCTION_HOOK=M68K_OPT_SPECIFY_HANDLER -DPLATFORM_ANDROID -Dmain_EXPORTS -I/home/jon/BattleSquadron-Amiga/src/host -I/home/jon/BattleSquadron-Amiga/../SWIV/src/musashi -I/home/jon/raylib-src/src -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -std=gnu11 -fPIC -O2 -Wall -Wextra -include /home/jon/BattleSquadron-Amiga/src/host/amiga.h -o CMakeFiles/main.dir/home/jon/SWIV/src/musashi/softfloat/softfloat.c.o -c /home/jon/SWIV/src/musashi/softfloat/softfloat.c",
+  "file": "/home/jon/SWIV/src/musashi/softfloat/softfloat.c",
+  "output": "/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/1g586n68/arm64-v8a/CMakeFiles/main.dir/home/jon/SWIV/src/musashi/softfloat/softfloat.c.o"
+},
+{
+  "directory": "/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/1g586n68/arm64-v8a",
+  "command": "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android29 --sysroot=/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DGRAPHICS_API_OPENGL_ES2 -DPLATFORM_ANDROID -I/home/jon/Android/Sdk/ndk/26.1.10909125/sources/android/native_app_glue -I/home/jon/raylib-src/src -no-canonical-prefixes -Wa,--noexecstack -fstack-protector-strong -funwind-tables -ffunction-sections -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -std=gnu99 -fPIC -o raylib/raylib/CMakeFiles/raylib.dir/raudio.c.o -c /home/jon/raylib-src/src/raudio.c",
+  "file": "/home/jon/raylib-src/src/raudio.c",
+  "output": "/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/1g586n68/arm64-v8a/raylib/raylib/CMakeFiles/raylib.dir/raudio.c.o"
+},
+{
+  "directory": "/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/1g586n68/arm64-v8a",
+  "command": "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android29 --sysroot=/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DGRAPHICS_API_OPENGL_ES2 -DPLATFORM_ANDROID -I/home/jon/Android/Sdk/ndk/26.1.10909125/sources/android/native_app_glue -I/home/jon/raylib-src/src -no-canonical-prefixes -Wa,--noexecstack -fstack-protector-strong -funwind-tables -ffunction-sections -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -std=gnu99 -fPIC -o raylib/raylib/CMakeFiles/raylib.dir/rcore.c.o -c /home/jon/raylib-src/src/rcore.c",
+  "file": "/home/jon/raylib-src/src/rcore.c",
+  "output": "/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/1g586n68/arm64-v8a/raylib/raylib/CMakeFiles/raylib.dir/rcore.c.o"
+},
+{
+  "directory": "/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/1g586n68/arm64-v8a",
+  "command": "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android29 --sysroot=/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DGRAPHICS_API_OPENGL_ES2 -DPLATFORM_ANDROID -I/home/jon/Android/Sdk/ndk/26.1.10909125/sources/android/native_app_glue -I/home/jon/raylib-src/src -no-canonical-prefixes -Wa,--noexecstack -fstack-protector-strong -funwind-tables -ffunction-sections -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -std=gnu99 -fPIC -o raylib/raylib/CMakeFiles/raylib.dir/rmodels.c.o -c /home/jon/raylib-src/src/rmodels.c",
+  "file": "/home/jon/raylib-src/src/rmodels.c",
+  "output": "/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/1g586n68/arm64-v8a/raylib/raylib/CMakeFiles/raylib.dir/rmodels.c.o"
+},
+{
+  "directory": "/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/1g586n68/arm64-v8a",
+  "command": "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android29 --sysroot=/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DGRAPHICS_API_OPENGL_ES2 -DPLATFORM_ANDROID -I/home/jon/Android/Sdk/ndk/26.1.10909125/sources/android/native_app_glue -I/home/jon/raylib-src/src -no-canonical-prefixes -Wa,--noexecstack -fstack-protector-strong -funwind-tables -ffunction-sections -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -std=gnu99 -fPIC -o raylib/raylib/CMakeFiles/raylib.dir/rshapes.c.o -c /home/jon/raylib-src/src/rshapes.c",
+  "file": "/home/jon/raylib-src/src/rshapes.c",
+  "output": "/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/1g586n68/arm64-v8a/raylib/raylib/CMakeFiles/raylib.dir/rshapes.c.o"
+},
+{
+  "directory": "/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/1g586n68/arm64-v8a",
+  "command": "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android29 --sysroot=/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DGRAPHICS_API_OPENGL_ES2 -DPLATFORM_ANDROID -I/home/jon/Android/Sdk/ndk/26.1.10909125/sources/android/native_app_glue -I/home/jon/raylib-src/src -no-canonical-prefixes -Wa,--noexecstack -fstack-protector-strong -funwind-tables -ffunction-sections -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -std=gnu99 -fPIC -o raylib/raylib/CMakeFiles/raylib.dir/rtext.c.o -c /home/jon/raylib-src/src/rtext.c",
+  "file": "/home/jon/raylib-src/src/rtext.c",
+  "output": "/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/1g586n68/arm64-v8a/raylib/raylib/CMakeFiles/raylib.dir/rtext.c.o"
+},
+{
+  "directory": "/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/1g586n68/arm64-v8a",
+  "command": "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android29 --sysroot=/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DGRAPHICS_API_OPENGL_ES2 -DPLATFORM_ANDROID -I/home/jon/Android/Sdk/ndk/26.1.10909125/sources/android/native_app_glue -I/home/jon/raylib-src/src -no-canonical-prefixes -Wa,--noexecstack -fstack-protector-strong -funwind-tables -ffunction-sections -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -std=gnu99 -fPIC -o raylib/raylib/CMakeFiles/raylib.dir/rtextures.c.o -c /home/jon/raylib-src/src/rtextures.c",
+  "file": "/home/jon/raylib-src/src/rtextures.c",
+  "output": "/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/1g586n68/arm64-v8a/raylib/raylib/CMakeFiles/raylib.dir/rtextures.c.o"
+},
+{
+  "directory": "/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/1g586n68/arm64-v8a",
+  "command": "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android29 --sysroot=/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DGRAPHICS_API_OPENGL_ES2 -DPLATFORM_ANDROID -I/home/jon/Android/Sdk/ndk/26.1.10909125/sources/android/native_app_glue -I/home/jon/raylib-src/src -no-canonical-prefixes -Wa,--noexecstack -fstack-protector-strong -funwind-tables -ffunction-sections -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -std=gnu99 -fPIC -o raylib/raylib/CMakeFiles/raylib.dir/home/jon/Android/Sdk/ndk/26.1.10909125/sources/android/native_app_glue/android_native_app_glue.c.o -c /home/jon/Android/Sdk/ndk/26.1.10909125/sources/android/native_app_glue/android_native_app_glue.c",
+  "file": "/home/jon/Android/Sdk/ndk/26.1.10909125/sources/android/native_app_glue/android_native_app_glue.c",
+  "output": "/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/1g586n68/arm64-v8a/raylib/raylib/CMakeFiles/raylib.dir/home/jon/Android/Sdk/ndk/26.1.10909125/sources/android/native_app_glue/android_native_app_glue.c.o"
+}
+]

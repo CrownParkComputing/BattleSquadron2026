@@ -1,0 +1,35 @@
+{
+  "buildFiles": [
+    "/home/jon/BattleSquadron-Amiga/android/app/src/main/cpp/CMakeLists.txt",
+    "/home/jon/raylib-src/CMakeLists.txt",
+    "/home/jon/raylib-src/src/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/usr/bin/ninja",
+      "-C",
+      "/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/371f144a/arm64-v8a",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/usr/bin/ninja",
+    "-C",
+    "/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/371f144a/arm64-v8a",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "main::@6890427a1f51a3e7e1df": {
+      "artifactName": "main",
+      "abi": "arm64-v8a",
+      "output": "/home/jon/BattleSquadron-Amiga/android/app/build/intermediates/cxx/Debug/371f144a/obj/arm64-v8a/libmain.so",
+      "runtimeFiles": []
+    },
+    "raylib::@7d429ebd5d102775094d": {
+      "artifactName": "raylib",
+      "abi": "arm64-v8a",
+      "output": "/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/371f144a/arm64-v8a/raylib/raylib/libraylib.a",
+      "runtimeFiles": []
+    }
+  }
+}

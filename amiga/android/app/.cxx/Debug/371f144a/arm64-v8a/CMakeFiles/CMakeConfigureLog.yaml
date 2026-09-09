@@ -1,0 +1,2365 @@
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineSystem.cmake:12 (find_program)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_UNAME"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "uname"
+    candidate_directories:
+      - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/"
+      - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/"
+      - "/home/jon/.local/bin/"
+      - "/home/jon/.nvm/versions/node/v22.23.1/bin/"
+      - "/home/jon/.cargo/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/opt/android-sdk/platform-tools/"
+      - "/usr/lib/jvm/default/bin/"
+      - "/usr/bin/site_perl/"
+      - "/usr/bin/vendor_perl/"
+      - "/usr/bin/core_perl/"
+      - "/home/jon/.lmstudio/bin/"
+      - "/bin/"
+    searched_directories:
+      - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/uname"
+      - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/uname"
+      - "/home/jon/.local/bin/uname"
+      - "/home/jon/.nvm/versions/node/v22.23.1/bin/uname"
+      - "/home/jon/.cargo/bin/uname"
+      - "/usr/local/sbin/uname"
+      - "/usr/local/bin/uname"
+    found: "/usr/bin/uname"
+    search_context:
+      ENV{PATH}:
+        - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path"
+        - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z"
+        - "/home/jon/.local/bin"
+        - "/home/jon/.nvm/versions/node/v22.23.1/bin"
+        - "/home/jon/.cargo/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/opt/android-sdk/platform-tools"
+        - "/usr/lib/jvm/default/bin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+        - "/home/jon/.lmstudio/bin"
+        - "/home/jon/.lmstudio/bin"
+        - "/opt/android-sdk/platform-tools"
+        - "/home/jon/.lmstudio/bin"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineSystem.cmake:213 (message)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      The target system is: Android - 1 - aarch64
+      The host system is: Linux - 7.1.5-1-cachyos - x86_64
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:501 (find_file)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:538 (CMAKE_DETERMINE_COMPILER_ID_WRITE)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCCompiler.cmake:122 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "file"
+    variable: "src_in"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "CMakeCCompilerId.c.in"
+    candidate_directories:
+      - "/usr/share/cmake/Modules/"
+    found: "/usr/share/cmake/Modules/CMakeCCompilerId.c.in"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64"
+      ENV{PATH}:
+        - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path"
+        - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z"
+        - "/home/jon/.local/bin"
+        - "/home/jon/.nvm/versions/node/v22.23.1/bin"
+        - "/home/jon/.cargo/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/opt/android-sdk/platform-tools"
+        - "/usr/lib/jvm/default/bin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+        - "/home/jon/.lmstudio/bin"
+        - "/home/jon/.lmstudio/bin"
+        - "/opt/android-sdk/platform-tools"
+        - "/home/jon/.lmstudio/bin"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/lib/aarch64-linux-android/30"
+      CMAKE_SYSROOT: "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+      CMAKE_FIND_ROOT_PATH: "/home/jon/Android/Sdk/ndk/26.1.10909125"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCCompiler.cmake:122 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler: /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/clang 
+      Build flags: -g;-DANDROID;-fdata-sections;-ffunction-sections;-funwind-tables;-fstack-protector-strong;-no-canonical-prefixes;-D_FORTIFY_SOURCE=2;-Wformat;-Werror=format-security
+      Id flags: -c;--target=aarch64-none-linux-android30 
+      
+      The output was:
+      0
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.o"
+      
+      The C compiler identification is Clang, found in:
+        /home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/371f144a/arm64-v8a/CMakeFiles/4.4.2/CompilerIdC/CMakeCCompilerId.o
+      
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_LINKER"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "ld.lld"
+      - "ld"
+    candidate_directories:
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/"
+      - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/"
+      - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/"
+      - "/home/jon/.local/bin/"
+      - "/home/jon/.nvm/versions/node/v22.23.1/bin/"
+      - "/home/jon/.cargo/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/opt/android-sdk/platform-tools/"
+      - "/usr/lib/jvm/default/bin/"
+      - "/usr/bin/site_perl/"
+      - "/usr/bin/vendor_perl/"
+      - "/usr/bin/core_perl/"
+      - "/home/jon/.lmstudio/bin/"
+      - "/usr/lib/aarch64-linux-android/30/bin/"
+      - "/usr/lib/aarch64-linux-android/30/sbin/"
+      - "/usr/lib/aarch64-linux-android/30/"
+    found: "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64"
+      ENV{PATH}:
+        - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path"
+        - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z"
+        - "/home/jon/.local/bin"
+        - "/home/jon/.nvm/versions/node/v22.23.1/bin"
+        - "/home/jon/.cargo/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/opt/android-sdk/platform-tools"
+        - "/usr/lib/jvm/default/bin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+        - "/home/jon/.lmstudio/bin"
+        - "/home/jon/.lmstudio/bin"
+        - "/opt/android-sdk/platform-tools"
+        - "/home/jon/.lmstudio/bin"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/lib/aarch64-linux-android/30"
+      CMAKE_SYSROOT: "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+      CMAKE_FIND_ROOT_PATH: "/home/jon/Android/Sdk/ndk/26.1.10909125"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_NM"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "llvm-nm"
+      - "nm"
+    candidate_directories:
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/"
+      - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/"
+      - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/"
+      - "/home/jon/.local/bin/"
+      - "/home/jon/.nvm/versions/node/v22.23.1/bin/"
+      - "/home/jon/.cargo/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/opt/android-sdk/platform-tools/"
+      - "/usr/lib/jvm/default/bin/"
+      - "/usr/bin/site_perl/"
+      - "/usr/bin/vendor_perl/"
+      - "/usr/bin/core_perl/"
+      - "/home/jon/.lmstudio/bin/"
+      - "/usr/lib/aarch64-linux-android/30/bin/"
+      - "/usr/lib/aarch64-linux-android/30/sbin/"
+      - "/usr/lib/aarch64-linux-android/30/"
+    found: "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-nm"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64"
+      ENV{PATH}:
+        - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path"
+        - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z"
+        - "/home/jon/.local/bin"
+        - "/home/jon/.nvm/versions/node/v22.23.1/bin"
+        - "/home/jon/.cargo/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/opt/android-sdk/platform-tools"
+        - "/usr/lib/jvm/default/bin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+        - "/home/jon/.lmstudio/bin"
+        - "/home/jon/.lmstudio/bin"
+        - "/opt/android-sdk/platform-tools"
+        - "/home/jon/.lmstudio/bin"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/lib/aarch64-linux-android/30"
+      CMAKE_SYSROOT: "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+      CMAKE_FIND_ROOT_PATH: "/home/jon/Android/Sdk/ndk/26.1.10909125"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_OBJDUMP"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "llvm-objdump"
+      - "objdump"
+    candidate_directories:
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/"
+      - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/"
+      - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/"
+      - "/home/jon/.local/bin/"
+      - "/home/jon/.nvm/versions/node/v22.23.1/bin/"
+      - "/home/jon/.cargo/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/opt/android-sdk/platform-tools/"
+      - "/usr/lib/jvm/default/bin/"
+      - "/usr/bin/site_perl/"
+      - "/usr/bin/vendor_perl/"
+      - "/usr/bin/core_perl/"
+      - "/home/jon/.lmstudio/bin/"
+      - "/usr/lib/aarch64-linux-android/30/bin/"
+      - "/usr/lib/aarch64-linux-android/30/sbin/"
+      - "/usr/lib/aarch64-linux-android/30/"
+    found: "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-objdump"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64"
+      ENV{PATH}:
+        - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path"
+        - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z"
+        - "/home/jon/.local/bin"
+        - "/home/jon/.nvm/versions/node/v22.23.1/bin"
+        - "/home/jon/.cargo/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/opt/android-sdk/platform-tools"
+        - "/usr/lib/jvm/default/bin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+        - "/home/jon/.lmstudio/bin"
+        - "/home/jon/.lmstudio/bin"
+        - "/opt/android-sdk/platform-tools"
+        - "/home/jon/.lmstudio/bin"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/lib/aarch64-linux-android/30"
+      CMAKE_SYSROOT: "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+      CMAKE_FIND_ROOT_PATH: "/home/jon/Android/Sdk/ndk/26.1.10909125"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_OBJCOPY"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "llvm-objcopy"
+      - "objcopy"
+    candidate_directories:
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/"
+      - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/"
+      - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/"
+      - "/home/jon/.local/bin/"
+      - "/home/jon/.nvm/versions/node/v22.23.1/bin/"
+      - "/home/jon/.cargo/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/opt/android-sdk/platform-tools/"
+      - "/usr/lib/jvm/default/bin/"
+      - "/usr/bin/site_perl/"
+      - "/usr/bin/vendor_perl/"
+      - "/usr/bin/core_perl/"
+      - "/home/jon/.lmstudio/bin/"
+      - "/usr/lib/aarch64-linux-android/30/bin/"
+      - "/usr/lib/aarch64-linux-android/30/sbin/"
+      - "/usr/lib/aarch64-linux-android/30/"
+    found: "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-objcopy"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64"
+      ENV{PATH}:
+        - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path"
+        - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z"
+        - "/home/jon/.local/bin"
+        - "/home/jon/.nvm/versions/node/v22.23.1/bin"
+        - "/home/jon/.cargo/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/opt/android-sdk/platform-tools"
+        - "/usr/lib/jvm/default/bin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+        - "/home/jon/.lmstudio/bin"
+        - "/home/jon/.lmstudio/bin"
+        - "/opt/android-sdk/platform-tools"
+        - "/home/jon/.lmstudio/bin"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/lib/aarch64-linux-android/30"
+      CMAKE_SYSROOT: "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+      CMAKE_FIND_ROOT_PATH: "/home/jon/Android/Sdk/ndk/26.1.10909125"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_READELF"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "llvm-readelf"
+      - "readelf"
+    candidate_directories:
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/"
+      - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/"
+      - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/"
+      - "/home/jon/.local/bin/"
+      - "/home/jon/.nvm/versions/node/v22.23.1/bin/"
+      - "/home/jon/.cargo/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/opt/android-sdk/platform-tools/"
+      - "/usr/lib/jvm/default/bin/"
+      - "/usr/bin/site_perl/"
+      - "/usr/bin/vendor_perl/"
+      - "/usr/bin/core_perl/"
+      - "/home/jon/.lmstudio/bin/"
+      - "/usr/lib/aarch64-linux-android/30/bin/"
+      - "/usr/lib/aarch64-linux-android/30/sbin/"
+      - "/usr/lib/aarch64-linux-android/30/"
+    found: "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-readelf"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64"
+      ENV{PATH}:
+        - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path"
+        - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z"
+        - "/home/jon/.local/bin"
+        - "/home/jon/.nvm/versions/node/v22.23.1/bin"
+        - "/home/jon/.cargo/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/opt/android-sdk/platform-tools"
+        - "/usr/lib/jvm/default/bin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+        - "/home/jon/.lmstudio/bin"
+        - "/home/jon/.lmstudio/bin"
+        - "/opt/android-sdk/platform-tools"
+        - "/home/jon/.lmstudio/bin"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/lib/aarch64-linux-android/30"
+      CMAKE_SYSROOT: "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+      CMAKE_FIND_ROOT_PATH: "/home/jon/Android/Sdk/ndk/26.1.10909125"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_DLLTOOL"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "llvm-dlltool"
+      - "dlltool"
+    candidate_directories:
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/"
+      - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/"
+      - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/"
+      - "/home/jon/.local/bin/"
+      - "/home/jon/.nvm/versions/node/v22.23.1/bin/"
+      - "/home/jon/.cargo/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/opt/android-sdk/platform-tools/"
+      - "/usr/lib/jvm/default/bin/"
+      - "/usr/bin/site_perl/"
+      - "/usr/bin/vendor_perl/"
+      - "/usr/bin/core_perl/"
+      - "/home/jon/.lmstudio/bin/"
+      - "/usr/lib/aarch64-linux-android/30/bin/"
+      - "/usr/lib/aarch64-linux-android/30/sbin/"
+      - "/usr/lib/aarch64-linux-android/30/"
+    searched_directories:
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-dlltool"
+      - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/llvm-dlltool"
+      - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/llvm-dlltool"
+      - "/home/jon/.local/bin/llvm-dlltool"
+      - "/home/jon/.nvm/versions/node/v22.23.1/bin/llvm-dlltool"
+      - "/home/jon/.cargo/bin/llvm-dlltool"
+      - "/usr/local/sbin/llvm-dlltool"
+      - "/usr/local/bin/llvm-dlltool"
+    found: "/usr/bin/llvm-dlltool"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64"
+      ENV{PATH}:
+        - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path"
+        - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z"
+        - "/home/jon/.local/bin"
+        - "/home/jon/.nvm/versions/node/v22.23.1/bin"
+        - "/home/jon/.cargo/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/opt/android-sdk/platform-tools"
+        - "/usr/lib/jvm/default/bin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+        - "/home/jon/.lmstudio/bin"
+        - "/home/jon/.lmstudio/bin"
+        - "/opt/android-sdk/platform-tools"
+        - "/home/jon/.lmstudio/bin"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/lib/aarch64-linux-android/30"
+      CMAKE_SYSROOT: "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+      CMAKE_FIND_ROOT_PATH: "/home/jon/Android/Sdk/ndk/26.1.10909125"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_ADDR2LINE"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "llvm-addr2line"
+      - "addr2line"
+    candidate_directories:
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/"
+      - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/"
+      - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/"
+      - "/home/jon/.local/bin/"
+      - "/home/jon/.nvm/versions/node/v22.23.1/bin/"
+      - "/home/jon/.cargo/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/opt/android-sdk/platform-tools/"
+      - "/usr/lib/jvm/default/bin/"
+      - "/usr/bin/site_perl/"
+      - "/usr/bin/vendor_perl/"
+      - "/usr/bin/core_perl/"
+      - "/home/jon/.lmstudio/bin/"
+      - "/usr/lib/aarch64-linux-android/30/bin/"
+      - "/usr/lib/aarch64-linux-android/30/sbin/"
+      - "/usr/lib/aarch64-linux-android/30/"
+    found: "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-addr2line"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64"
+      ENV{PATH}:
+        - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path"
+        - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z"
+        - "/home/jon/.local/bin"
+        - "/home/jon/.nvm/versions/node/v22.23.1/bin"
+        - "/home/jon/.cargo/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/opt/android-sdk/platform-tools"
+        - "/usr/lib/jvm/default/bin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+        - "/home/jon/.lmstudio/bin"
+        - "/home/jon/.lmstudio/bin"
+        - "/opt/android-sdk/platform-tools"
+        - "/home/jon/.lmstudio/bin"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/lib/aarch64-linux-android/30"
+      CMAKE_SYSROOT: "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+      CMAKE_FIND_ROOT_PATH: "/home/jon/Android/Sdk/ndk/26.1.10909125"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_TAPI"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "tapi"
+    candidate_directories:
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/"
+      - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/"
+      - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/"
+      - "/home/jon/.local/bin/"
+      - "/home/jon/.nvm/versions/node/v22.23.1/bin/"
+      - "/home/jon/.cargo/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/opt/android-sdk/platform-tools/"
+      - "/usr/lib/jvm/default/bin/"
+      - "/usr/bin/site_perl/"
+      - "/usr/bin/vendor_perl/"
+      - "/usr/bin/core_perl/"
+      - "/home/jon/.lmstudio/bin/"
+      - "/usr/lib/aarch64-linux-android/30/bin/"
+      - "/usr/lib/aarch64-linux-android/30/sbin/"
+      - "/usr/lib/aarch64-linux-android/30/"
+    searched_directories:
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/tapi"
+      - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/tapi"
+      - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/tapi"
+      - "/home/jon/.local/bin/tapi"
+      - "/home/jon/.nvm/versions/node/v22.23.1/bin/tapi"
+      - "/home/jon/.cargo/bin/tapi"
+      - "/usr/local/sbin/tapi"
+      - "/usr/local/bin/tapi"
+      - "/usr/bin/tapi"
+      - "/opt/android-sdk/platform-tools/tapi"
+      - "/usr/lib/jvm/default/bin/tapi"
+      - "/usr/bin/site_perl/tapi"
+      - "/usr/bin/vendor_perl/tapi"
+      - "/usr/bin/core_perl/tapi"
+      - "/home/jon/.lmstudio/bin/tapi"
+      - "/usr/lib/aarch64-linux-android/30/bin/tapi"
+      - "/usr/lib/aarch64-linux-android/30/sbin/tapi"
+      - "/usr/lib/aarch64-linux-android/30/tapi"
+    found: false
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64"
+      ENV{PATH}:
+        - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path"
+        - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z"
+        - "/home/jon/.local/bin"
+        - "/home/jon/.nvm/versions/node/v22.23.1/bin"
+        - "/home/jon/.cargo/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/opt/android-sdk/platform-tools"
+        - "/usr/lib/jvm/default/bin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+        - "/home/jon/.lmstudio/bin"
+        - "/home/jon/.lmstudio/bin"
+        - "/opt/android-sdk/platform-tools"
+        - "/home/jon/.lmstudio/bin"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/lib/aarch64-linux-android/30"
+      CMAKE_SYSROOT: "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+      CMAKE_FIND_ROOT_PATH: "/home/jon/Android/Sdk/ndk/26.1.10909125"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/Compiler/Clang-FindBinUtils.cmake:26 (find_program)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCCompiler.cmake:201 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_C_COMPILER_AR"
+    description: "LLVM archiver"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "llvm-ar-17.0"
+      - "llvm-ar-17"
+      - "llvm-ar17"
+      - "llvm-ar"
+    candidate_directories:
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/"
+      - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/"
+      - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/"
+      - "/home/jon/.local/bin/"
+      - "/home/jon/.nvm/versions/node/v22.23.1/bin/"
+      - "/home/jon/.cargo/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/opt/android-sdk/platform-tools/"
+      - "/usr/lib/jvm/default/bin/"
+      - "/usr/bin/site_perl/"
+      - "/usr/bin/vendor_perl/"
+      - "/usr/bin/core_perl/"
+      - "/home/jon/.lmstudio/bin/"
+      - "/usr/lib/aarch64-linux-android/30/bin/"
+      - "/usr/lib/aarch64-linux-android/30/sbin/"
+      - "/usr/lib/aarch64-linux-android/30/"
+    searched_directories:
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ar-17.0"
+      - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/llvm-ar-17.0"
+      - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/llvm-ar-17.0"
+      - "/home/jon/.local/bin/llvm-ar-17.0"
+      - "/home/jon/.nvm/versions/node/v22.23.1/bin/llvm-ar-17.0"
+      - "/home/jon/.cargo/bin/llvm-ar-17.0"
+      - "/usr/local/sbin/llvm-ar-17.0"
+      - "/usr/local/bin/llvm-ar-17.0"
+      - "/usr/bin/llvm-ar-17.0"
+      - "/opt/android-sdk/platform-tools/llvm-ar-17.0"
+      - "/usr/lib/jvm/default/bin/llvm-ar-17.0"
+      - "/usr/bin/site_perl/llvm-ar-17.0"
+      - "/usr/bin/vendor_perl/llvm-ar-17.0"
+      - "/usr/bin/core_perl/llvm-ar-17.0"
+      - "/home/jon/.lmstudio/bin/llvm-ar-17.0"
+      - "/usr/lib/aarch64-linux-android/30/bin/llvm-ar-17.0"
+      - "/usr/lib/aarch64-linux-android/30/sbin/llvm-ar-17.0"
+      - "/usr/lib/aarch64-linux-android/30/llvm-ar-17.0"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ar-17"
+      - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/llvm-ar-17"
+      - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/llvm-ar-17"
+      - "/home/jon/.local/bin/llvm-ar-17"
+      - "/home/jon/.nvm/versions/node/v22.23.1/bin/llvm-ar-17"
+      - "/home/jon/.cargo/bin/llvm-ar-17"
+      - "/usr/local/sbin/llvm-ar-17"
+      - "/usr/local/bin/llvm-ar-17"
+      - "/usr/bin/llvm-ar-17"
+      - "/opt/android-sdk/platform-tools/llvm-ar-17"
+      - "/usr/lib/jvm/default/bin/llvm-ar-17"
+      - "/usr/bin/site_perl/llvm-ar-17"
+      - "/usr/bin/vendor_perl/llvm-ar-17"
+      - "/usr/bin/core_perl/llvm-ar-17"
+      - "/home/jon/.lmstudio/bin/llvm-ar-17"
+      - "/usr/lib/aarch64-linux-android/30/bin/llvm-ar-17"
+      - "/usr/lib/aarch64-linux-android/30/sbin/llvm-ar-17"
+      - "/usr/lib/aarch64-linux-android/30/llvm-ar-17"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ar17"
+      - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/llvm-ar17"
+      - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/llvm-ar17"
+      - "/home/jon/.local/bin/llvm-ar17"
+      - "/home/jon/.nvm/versions/node/v22.23.1/bin/llvm-ar17"
+      - "/home/jon/.cargo/bin/llvm-ar17"
+      - "/usr/local/sbin/llvm-ar17"
+      - "/usr/local/bin/llvm-ar17"
+      - "/usr/bin/llvm-ar17"
+      - "/opt/android-sdk/platform-tools/llvm-ar17"
+      - "/usr/lib/jvm/default/bin/llvm-ar17"
+      - "/usr/bin/site_perl/llvm-ar17"
+      - "/usr/bin/vendor_perl/llvm-ar17"
+      - "/usr/bin/core_perl/llvm-ar17"
+      - "/home/jon/.lmstudio/bin/llvm-ar17"
+      - "/usr/lib/aarch64-linux-android/30/bin/llvm-ar17"
+      - "/usr/lib/aarch64-linux-android/30/sbin/llvm-ar17"
+      - "/usr/lib/aarch64-linux-android/30/llvm-ar17"
+    found: "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ar"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64"
+      ENV{PATH}:
+        - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path"
+        - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z"
+        - "/home/jon/.local/bin"
+        - "/home/jon/.nvm/versions/node/v22.23.1/bin"
+        - "/home/jon/.cargo/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/opt/android-sdk/platform-tools"
+        - "/usr/lib/jvm/default/bin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+        - "/home/jon/.lmstudio/bin"
+        - "/home/jon/.lmstudio/bin"
+        - "/opt/android-sdk/platform-tools"
+        - "/home/jon/.lmstudio/bin"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/lib/aarch64-linux-android/30"
+      CMAKE_SYSROOT: "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+      CMAKE_FIND_ROOT_PATH: "/home/jon/Android/Sdk/ndk/26.1.10909125"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/Compiler/Clang-FindBinUtils.cmake:38 (find_program)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCCompiler.cmake:201 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_C_COMPILER_RANLIB"
+    description: "Generate index for LLVM archive"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "llvm-ranlib-17.0"
+      - "llvm-ranlib-17"
+      - "llvm-ranlib17"
+      - "llvm-ranlib"
+    candidate_directories:
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/"
+      - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/"
+      - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/"
+      - "/home/jon/.local/bin/"
+      - "/home/jon/.nvm/versions/node/v22.23.1/bin/"
+      - "/home/jon/.cargo/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/opt/android-sdk/platform-tools/"
+      - "/usr/lib/jvm/default/bin/"
+      - "/usr/bin/site_perl/"
+      - "/usr/bin/vendor_perl/"
+      - "/usr/bin/core_perl/"
+      - "/home/jon/.lmstudio/bin/"
+      - "/usr/lib/aarch64-linux-android/30/bin/"
+      - "/usr/lib/aarch64-linux-android/30/sbin/"
+      - "/usr/lib/aarch64-linux-android/30/"
+    searched_directories:
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ranlib-17.0"
+      - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/llvm-ranlib-17.0"
+      - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/llvm-ranlib-17.0"
+      - "/home/jon/.local/bin/llvm-ranlib-17.0"
+      - "/home/jon/.nvm/versions/node/v22.23.1/bin/llvm-ranlib-17.0"
+      - "/home/jon/.cargo/bin/llvm-ranlib-17.0"
+      - "/usr/local/sbin/llvm-ranlib-17.0"
+      - "/usr/local/bin/llvm-ranlib-17.0"
+      - "/usr/bin/llvm-ranlib-17.0"
+      - "/opt/android-sdk/platform-tools/llvm-ranlib-17.0"
+      - "/usr/lib/jvm/default/bin/llvm-ranlib-17.0"
+      - "/usr/bin/site_perl/llvm-ranlib-17.0"
+      - "/usr/bin/vendor_perl/llvm-ranlib-17.0"
+      - "/usr/bin/core_perl/llvm-ranlib-17.0"
+      - "/home/jon/.lmstudio/bin/llvm-ranlib-17.0"
+      - "/usr/lib/aarch64-linux-android/30/bin/llvm-ranlib-17.0"
+      - "/usr/lib/aarch64-linux-android/30/sbin/llvm-ranlib-17.0"
+      - "/usr/lib/aarch64-linux-android/30/llvm-ranlib-17.0"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ranlib-17"
+      - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/llvm-ranlib-17"
+      - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/llvm-ranlib-17"
+      - "/home/jon/.local/bin/llvm-ranlib-17"
+      - "/home/jon/.nvm/versions/node/v22.23.1/bin/llvm-ranlib-17"
+      - "/home/jon/.cargo/bin/llvm-ranlib-17"
+      - "/usr/local/sbin/llvm-ranlib-17"
+      - "/usr/local/bin/llvm-ranlib-17"
+      - "/usr/bin/llvm-ranlib-17"
+      - "/opt/android-sdk/platform-tools/llvm-ranlib-17"
+      - "/usr/lib/jvm/default/bin/llvm-ranlib-17"
+      - "/usr/bin/site_perl/llvm-ranlib-17"
+      - "/usr/bin/vendor_perl/llvm-ranlib-17"
+      - "/usr/bin/core_perl/llvm-ranlib-17"
+      - "/home/jon/.lmstudio/bin/llvm-ranlib-17"
+      - "/usr/lib/aarch64-linux-android/30/bin/llvm-ranlib-17"
+      - "/usr/lib/aarch64-linux-android/30/sbin/llvm-ranlib-17"
+      - "/usr/lib/aarch64-linux-android/30/llvm-ranlib-17"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ranlib17"
+      - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/llvm-ranlib17"
+      - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/llvm-ranlib17"
+      - "/home/jon/.local/bin/llvm-ranlib17"
+      - "/home/jon/.nvm/versions/node/v22.23.1/bin/llvm-ranlib17"
+      - "/home/jon/.cargo/bin/llvm-ranlib17"
+      - "/usr/local/sbin/llvm-ranlib17"
+      - "/usr/local/bin/llvm-ranlib17"
+      - "/usr/bin/llvm-ranlib17"
+      - "/opt/android-sdk/platform-tools/llvm-ranlib17"
+      - "/usr/lib/jvm/default/bin/llvm-ranlib17"
+      - "/usr/bin/site_perl/llvm-ranlib17"
+      - "/usr/bin/vendor_perl/llvm-ranlib17"
+      - "/usr/bin/core_perl/llvm-ranlib17"
+      - "/home/jon/.lmstudio/bin/llvm-ranlib17"
+      - "/usr/lib/aarch64-linux-android/30/bin/llvm-ranlib17"
+      - "/usr/lib/aarch64-linux-android/30/sbin/llvm-ranlib17"
+      - "/usr/lib/aarch64-linux-android/30/llvm-ranlib17"
+    found: "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ranlib"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64"
+      ENV{PATH}:
+        - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path"
+        - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z"
+        - "/home/jon/.local/bin"
+        - "/home/jon/.nvm/versions/node/v22.23.1/bin"
+        - "/home/jon/.cargo/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/opt/android-sdk/platform-tools"
+        - "/usr/lib/jvm/default/bin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+        - "/home/jon/.lmstudio/bin"
+        - "/home/jon/.lmstudio/bin"
+        - "/opt/android-sdk/platform-tools"
+        - "/home/jon/.lmstudio/bin"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/lib/aarch64-linux-android/30"
+      CMAKE_SYSROOT: "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+      CMAKE_FIND_ROOT_PATH: "/home/jon/Android/Sdk/ndk/26.1.10909125"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/Compiler/Clang-FindBinUtils.cmake:50 (find_program)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCCompiler.cmake:201 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_C_COMPILER_CLANG_SCAN_DEPS"
+    description: "`clang-scan-deps` dependency scanner"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "clang-scan-deps-17.0"
+      - "clang-scan-deps-17"
+      - "clang-scan-deps17"
+      - "clang-scan-deps"
+      - "clang-scan-deps-17.0"
+      - "clang-scan-deps-17"
+      - "clang-scan-deps17"
+      - "clang-scan-deps"
+    candidate_directories:
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/"
+      - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/"
+      - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/"
+      - "/home/jon/.local/bin/"
+      - "/home/jon/.nvm/versions/node/v22.23.1/bin/"
+      - "/home/jon/.cargo/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/opt/android-sdk/platform-tools/"
+      - "/usr/lib/jvm/default/bin/"
+      - "/usr/bin/site_perl/"
+      - "/usr/bin/vendor_perl/"
+      - "/usr/bin/core_perl/"
+      - "/home/jon/.lmstudio/bin/"
+      - "/usr/lib/aarch64-linux-android/30/bin/"
+      - "/usr/lib/aarch64-linux-android/30/sbin/"
+      - "/usr/lib/aarch64-linux-android/30/"
+    searched_directories:
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/clang-scan-deps-17.0"
+      - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/clang-scan-deps-17.0"
+      - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/clang-scan-deps-17.0"
+      - "/home/jon/.local/bin/clang-scan-deps-17.0"
+      - "/home/jon/.nvm/versions/node/v22.23.1/bin/clang-scan-deps-17.0"
+      - "/home/jon/.cargo/bin/clang-scan-deps-17.0"
+      - "/usr/local/sbin/clang-scan-deps-17.0"
+      - "/usr/local/bin/clang-scan-deps-17.0"
+      - "/usr/bin/clang-scan-deps-17.0"
+      - "/opt/android-sdk/platform-tools/clang-scan-deps-17.0"
+      - "/usr/lib/jvm/default/bin/clang-scan-deps-17.0"
+      - "/usr/bin/site_perl/clang-scan-deps-17.0"
+      - "/usr/bin/vendor_perl/clang-scan-deps-17.0"
+      - "/usr/bin/core_perl/clang-scan-deps-17.0"
+      - "/home/jon/.lmstudio/bin/clang-scan-deps-17.0"
+      - "/usr/lib/aarch64-linux-android/30/bin/clang-scan-deps-17.0"
+      - "/usr/lib/aarch64-linux-android/30/sbin/clang-scan-deps-17.0"
+      - "/usr/lib/aarch64-linux-android/30/clang-scan-deps-17.0"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/clang-scan-deps-17"
+      - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/clang-scan-deps-17"
+      - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/clang-scan-deps-17"
+      - "/home/jon/.local/bin/clang-scan-deps-17"
+      - "/home/jon/.nvm/versions/node/v22.23.1/bin/clang-scan-deps-17"
+      - "/home/jon/.cargo/bin/clang-scan-deps-17"
+      - "/usr/local/sbin/clang-scan-deps-17"
+      - "/usr/local/bin/clang-scan-deps-17"
+      - "/usr/bin/clang-scan-deps-17"
+      - "/opt/android-sdk/platform-tools/clang-scan-deps-17"
+      - "/usr/lib/jvm/default/bin/clang-scan-deps-17"
+      - "/usr/bin/site_perl/clang-scan-deps-17"
+      - "/usr/bin/vendor_perl/clang-scan-deps-17"
+      - "/usr/bin/core_perl/clang-scan-deps-17"
+      - "/home/jon/.lmstudio/bin/clang-scan-deps-17"
+      - "/usr/lib/aarch64-linux-android/30/bin/clang-scan-deps-17"
+      - "/usr/lib/aarch64-linux-android/30/sbin/clang-scan-deps-17"
+      - "/usr/lib/aarch64-linux-android/30/clang-scan-deps-17"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/clang-scan-deps17"
+      - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/clang-scan-deps17"
+      - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/clang-scan-deps17"
+      - "/home/jon/.local/bin/clang-scan-deps17"
+      - "/home/jon/.nvm/versions/node/v22.23.1/bin/clang-scan-deps17"
+      - "/home/jon/.cargo/bin/clang-scan-deps17"
+      - "/usr/local/sbin/clang-scan-deps17"
+      - "/usr/local/bin/clang-scan-deps17"
+      - "/usr/bin/clang-scan-deps17"
+      - "/opt/android-sdk/platform-tools/clang-scan-deps17"
+      - "/usr/lib/jvm/default/bin/clang-scan-deps17"
+      - "/usr/bin/site_perl/clang-scan-deps17"
+      - "/usr/bin/vendor_perl/clang-scan-deps17"
+      - "/usr/bin/core_perl/clang-scan-deps17"
+      - "/home/jon/.lmstudio/bin/clang-scan-deps17"
+      - "/usr/lib/aarch64-linux-android/30/bin/clang-scan-deps17"
+      - "/usr/lib/aarch64-linux-android/30/sbin/clang-scan-deps17"
+      - "/usr/lib/aarch64-linux-android/30/clang-scan-deps17"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/clang-scan-deps"
+      - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/clang-scan-deps"
+      - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/clang-scan-deps"
+      - "/home/jon/.local/bin/clang-scan-deps"
+      - "/home/jon/.nvm/versions/node/v22.23.1/bin/clang-scan-deps"
+      - "/home/jon/.cargo/bin/clang-scan-deps"
+      - "/usr/local/sbin/clang-scan-deps"
+      - "/usr/local/bin/clang-scan-deps"
+    found: "/usr/bin/clang-scan-deps"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64"
+      ENV{PATH}:
+        - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path"
+        - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z"
+        - "/home/jon/.local/bin"
+        - "/home/jon/.nvm/versions/node/v22.23.1/bin"
+        - "/home/jon/.cargo/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/opt/android-sdk/platform-tools"
+        - "/usr/lib/jvm/default/bin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+        - "/home/jon/.lmstudio/bin"
+        - "/home/jon/.lmstudio/bin"
+        - "/opt/android-sdk/platform-tools"
+        - "/home/jon/.lmstudio/bin"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/lib/aarch64-linux-android/30"
+      CMAKE_SYSROOT: "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+      CMAKE_FIND_ROOT_PATH: "/home/jon/Android/Sdk/ndk/26.1.10909125"
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:123 (try_compile)"
+      - "/usr/share/cmake/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/371f144a/arm64-v8a/CMakeFiles/CMakeScratch/TryCompile-UCVH7y"
+      binary: "/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/371f144a/arm64-v8a/CMakeFiles/CMakeScratch/TryCompile-UCVH7y"
+    cmakeVariables:
+      ANDROID_ABI: "arm64-v8a"
+      ANDROID_ARM_MODE: "thumb"
+      ANDROID_PIE: "TRUE"
+      ANDROID_PLATFORM: "android-30"
+      ANDROID_STL: "c++_static"
+      ANDROID_TOOLCHAIN: "clang"
+      CMAKE_CXX_COMPILER_TARGET: "aarch64-none-linux-android30"
+      CMAKE_C_COMPILER_TARGET: "aarch64-none-linux-android30"
+      CMAKE_C_FLAGS: "-g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat "
+      CMAKE_C_FLAGS_DEBUG: "-fno-limit-debug-info "
+      CMAKE_EXE_LINKER_FLAGS: "-static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments  "
+      CMAKE_POSITION_INDEPENDENT_CODE: "TRUE"
+      CMAKE_SYSROOT: "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: false
+      stdout: |
+        Change Dir: '/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/371f144a/arm64-v8a/CMakeFiles/CMakeScratch/TryCompile-UCVH7y'
+        
+        Run Build Command(s): /usr/bin/ninja -v cmTC_47dd6
+        [1/2] /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat   -fPIE   -v -MD -MT CMakeFiles/cmTC_47dd6.dir/CMakeCCompilerABI.c.o -MF CMakeFiles/cmTC_47dd6.dir/CMakeCCompilerABI.c.o.d -o CMakeFiles/cmTC_47dd6.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake/Modules/CMakeCCompilerABI.c
+        Android (10552028, +pgo, +bolt, +lto, -mlgo, based on r487747d) clang version 17.0.2 (https://android.googlesource.com/toolchain/llvm-project d9f89f4d16663d5012e5c09495f3b30ece3d2362)
+        Target: aarch64-none-linux-android30
+        Thread model: posix
+        InstalledDir: /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin
+         (in-process)
+         "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/clang" -cc1 -triple aarch64-none-linux-android30 -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=non-leaf -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu generic -target-feature +neon -target-feature +v8a -target-feature +fix-cortex-a53-835769 -target-abi aapcs -mllvm -treat-scalable-fixed-error-as-warning -debug-info-kind=constructor -dwarf-version=4 -debugger-tuning=gdb -v -ffunction-sections -fdata-sections -fcoverage-compilation-dir=/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/371f144a/arm64-v8a/CMakeFiles/CMakeScratch/TryCompile-UCVH7y -resource-dir /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17 -dependency-file CMakeFiles/cmTC_47dd6.dir/CMakeCCompilerABI.c.o.d -MT CMakeFiles/cmTC_47dd6.dir/CMakeCCompilerABI.c.o -sys-header-deps -D ANDROID -D _FORTIFY_SOURCE=2 -isysroot /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot -internal-isystem /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/include -internal-isystem /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include -internal-externc-isystem /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android -internal-externc-isystem /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include -internal-externc-isystem /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include -Wformat -fdebug-compilation-dir=/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/371f144a/arm64-v8a/CMakeFiles/CMakeScratch/TryCompile-UCVH7y -ferror-limit 19 -stack-protector 2 -fno-signed-char -fgnuc-version=4.2.1 -target-feature +outline-atomics -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_47dd6.dir/CMakeCCompilerABI.c.o -x c /usr/share/cmake/Modules/CMakeCCompilerABI.c
+        clang -cc1 version 17.0.2 based upon LLVM 17.0.2 default target x86_64-unknown-linux-gnu
+        ignoring nonexistent directory "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include"
+        ignoring nonexistent directory "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/include
+         /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android
+         /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include
+        End of search list.
+        [2/2] : && /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments   -v CMakeFiles/cmTC_47dd6.dir/CMakeCCompilerABI.c.o -o cmTC_47dd6   && :
+        Android (10552028, +pgo, +bolt, +lto, -mlgo, based on r487747d) clang version 17.0.2 (https://android.googlesource.com/toolchain/llvm-project d9f89f4d16663d5012e5c09495f3b30ece3d2362)
+        Target: aarch64-none-linux-android30
+        Thread model: posix
+        InstalledDir: /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin
+         "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld" --sysroot=/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot -pie -EL --fix-cortex-a53-843419 -z now -z relro -z max-page-size=4096 --hash-style=gnu --eh-frame-hdr -m aarch64linux -dynamic-linker /system/bin/linker64 -o cmTC_47dd6 /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtbegin_dynamic.o -L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/aarch64 -L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30 -L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android -L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib --build-id=sha1 --no-undefined-version --fatal-warnings --no-undefined CMakeFiles/cmTC_47dd6.dir/CMakeCCompilerABI.c.o /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl -lc /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtend_android.o
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:255 (message)"
+      - "/usr/share/cmake/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed C implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/include]
+          add: [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android]
+          add: [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include]
+        end of search list found
+        collapse include dir [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/include] ==> [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/include]
+        collapse include dir [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android] ==> [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android]
+        collapse include dir [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include] ==> [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include]
+        implicit include dirs: [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/include;/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android;/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:291 (message)"
+      - "/usr/share/cmake/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed C implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|wild|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|"|[0-9]+>[ 	-]*Build:[ 	0-9]+ ms[ 	]*)?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|wild))("|,| |$)]
+        ignore line: [Change Dir: '/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/371f144a/arm64-v8a/CMakeFiles/CMakeScratch/TryCompile-UCVH7y']
+        ignore line: []
+        ignore line: [Run Build Command(s): /usr/bin/ninja -v cmTC_47dd6]
+        ignore line: [[1/2] /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat   -fPIE   -v -MD -MT CMakeFiles/cmTC_47dd6.dir/CMakeCCompilerABI.c.o -MF CMakeFiles/cmTC_47dd6.dir/CMakeCCompilerABI.c.o.d -o CMakeFiles/cmTC_47dd6.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake/Modules/CMakeCCompilerABI.c]
+        ignore line: [Android (10552028  +pgo  +bolt  +lto  -mlgo  based on r487747d) clang version 17.0.2 (https://android.googlesource.com/toolchain/llvm-project d9f89f4d16663d5012e5c09495f3b30ece3d2362)]
+        ignore line: [Target: aarch64-none-linux-android30]
+        ignore line: [Thread model: posix]
+        ignore line: [InstalledDir: /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin]
+        ignore line: [ (in-process)]
+        ignore line: [ "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/clang" -cc1 -triple aarch64-none-linux-android30 -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=non-leaf -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu generic -target-feature +neon -target-feature +v8a -target-feature +fix-cortex-a53-835769 -target-abi aapcs -mllvm -treat-scalable-fixed-error-as-warning -debug-info-kind=constructor -dwarf-version=4 -debugger-tuning=gdb -v -ffunction-sections -fdata-sections -fcoverage-compilation-dir=/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/371f144a/arm64-v8a/CMakeFiles/CMakeScratch/TryCompile-UCVH7y -resource-dir /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17 -dependency-file CMakeFiles/cmTC_47dd6.dir/CMakeCCompilerABI.c.o.d -MT CMakeFiles/cmTC_47dd6.dir/CMakeCCompilerABI.c.o -sys-header-deps -D ANDROID -D _FORTIFY_SOURCE=2 -isysroot /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot -internal-isystem /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/include -internal-isystem /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include -internal-externc-isystem /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android -internal-externc-isystem /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include -internal-externc-isystem /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include -Wformat -fdebug-compilation-dir=/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/371f144a/arm64-v8a/CMakeFiles/CMakeScratch/TryCompile-UCVH7y -ferror-limit 19 -stack-protector 2 -fno-signed-char -fgnuc-version=4.2.1 -target-feature +outline-atomics -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_47dd6.dir/CMakeCCompilerABI.c.o -x c /usr/share/cmake/Modules/CMakeCCompilerABI.c]
+        ignore line: [clang -cc1 version 17.0.2 based upon LLVM 17.0.2 default target x86_64-unknown-linux-gnu]
+        ignore line: [ignoring nonexistent directory "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include"]
+        ignore line: [ignoring nonexistent directory "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/include]
+        ignore line: [ /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android]
+        ignore line: [ /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include]
+        ignore line: [End of search list.]
+        ignore line: [[2/2] : && /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -static-libstdc++ -Wl --build-id=sha1 -Wl --no-undefined-version -Wl --fatal-warnings -Wl --no-undefined -Qunused-arguments   -v CMakeFiles/cmTC_47dd6.dir/CMakeCCompilerABI.c.o -o cmTC_47dd6   && :]
+        ignore line: [Android (10552028  +pgo  +bolt  +lto  -mlgo  based on r487747d) clang version 17.0.2 (https://android.googlesource.com/toolchain/llvm-project d9f89f4d16663d5012e5c09495f3b30ece3d2362)]
+        ignore line: [Target: aarch64-none-linux-android30]
+        ignore line: [Thread model: posix]
+        ignore line: [InstalledDir: /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin]
+        link line: [ "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld" --sysroot=/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot -pie -EL --fix-cortex-a53-843419 -z now -z relro -z max-page-size=4096 --hash-style=gnu --eh-frame-hdr -m aarch64linux -dynamic-linker /system/bin/linker64 -o cmTC_47dd6 /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtbegin_dynamic.o -L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/aarch64 -L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30 -L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android -L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib --build-id=sha1 --no-undefined-version --fatal-warnings --no-undefined CMakeFiles/cmTC_47dd6.dir/CMakeCCompilerABI.c.o /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl -lc /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtend_android.o] ==> linker [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld]
+        link line: [ "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld" --sysroot=/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot -pie -EL --fix-cortex-a53-843419 -z now -z relro -z max-page-size=4096 --hash-style=gnu --eh-frame-hdr -m aarch64linux -dynamic-linker /system/bin/linker64 -o cmTC_47dd6 /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtbegin_dynamic.o -L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/aarch64 -L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30 -L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android -L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib --build-id=sha1 --no-undefined-version --fatal-warnings --no-undefined CMakeFiles/cmTC_47dd6.dir/CMakeCCompilerABI.c.o /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl -lc /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtend_android.o] ==> linker architecture flags [-m;aarch64linux]
+        link line: [ "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld" --sysroot=/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot -pie -EL --fix-cortex-a53-843419 -z now -z relro -z max-page-size=4096 --hash-style=gnu --eh-frame-hdr -m aarch64linux -dynamic-linker /system/bin/linker64 -o cmTC_47dd6 /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtbegin_dynamic.o -L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/aarch64 -L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30 -L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android -L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib --build-id=sha1 --no-undefined-version --fatal-warnings --no-undefined CMakeFiles/cmTC_47dd6.dir/CMakeCCompilerABI.c.o /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl -lc /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtend_android.o]
+          arg [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld] ==> ignore
+          arg [--sysroot=/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot] ==> ignore
+          arg [-pie] ==> ignore
+          arg [-EL] ==> ignore
+          arg [--fix-cortex-a53-843419] ==> ignore
+          arg [-znow] ==> ignore
+          arg [-zrelro] ==> ignore
+          arg [-zmax-page-size=4096] ==> ignore
+          arg [--hash-style=gnu] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [-m] ==> ignore
+          arg [aarch64linux] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/system/bin/linker64] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_47dd6] ==> ignore
+          arg [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtbegin_dynamic.o] ==> obj [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtbegin_dynamic.o]
+          arg [-L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/aarch64] ==> dir [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/aarch64]
+          arg [-L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30] ==> dir [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30]
+          arg [-L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android] ==> dir [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android]
+          arg [-L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib] ==> dir [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib]
+          arg [--build-id=sha1] ==> ignore
+          arg [--no-undefined-version] ==> ignore
+          arg [--fatal-warnings] ==> ignore
+          arg [--no-undefined] ==> ignore
+          arg [CMakeFiles/cmTC_47dd6.dir/CMakeCCompilerABI.c.o] ==> ignore
+          arg [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/libclang_rt.builtins-aarch64-android.a] ==> lib [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/libclang_rt.builtins-aarch64-android.a]
+          arg [-l:libunwind.a] ==> lib [-l:libunwind.a]
+          arg [-ldl] ==> lib [dl]
+          arg [-lc] ==> lib [c]
+          arg [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/libclang_rt.builtins-aarch64-android.a] ==> lib [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/libclang_rt.builtins-aarch64-android.a]
+          arg [-l:libunwind.a] ==> lib [-l:libunwind.a]
+          arg [-ldl] ==> lib [dl]
+          arg [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtend_android.o] ==> obj [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtend_android.o]
+        linker tool for 'C': /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld -m;aarch64linux
+        remove lib [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/libclang_rt.builtins-aarch64-android.a]
+        remove lib [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/libclang_rt.builtins-aarch64-android.a]
+        collapse library dir [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/aarch64] ==> [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/aarch64]
+        collapse library dir [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30] ==> [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30]
+        collapse library dir [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android] ==> [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android]
+        collapse library dir [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib] ==> [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib]
+        implicit libs: [-l:libunwind.a;dl;c;-l:libunwind.a;dl]
+        implicit objs: [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtbegin_dynamic.o;/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtend_android.o]
+        implicit dirs: [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/aarch64;/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30;/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android;/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/Internal/CMakeDetermineLinkerId.cmake:41 (message)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:337 (cmake_determine_linker_id)"
+      - "/usr/share/cmake/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Running the C compiler's linker: "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld" "-v"
+      LLD 17.0.2 (compatible with GNU linkers)
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:501 (find_file)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:538 (CMAKE_DETERMINE_COMPILER_ID_WRITE)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "/home/jon/raylib-src/CMakeLists.txt:3 (project)"
+    mode: "file"
+    variable: "src_in"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "CMakeCXXCompilerId.cpp.in"
+    candidate_directories:
+      - "/usr/share/cmake/Modules/"
+    found: "/usr/share/cmake/Modules/CMakeCXXCompilerId.cpp.in"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64"
+      ENV{PATH}:
+        - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path"
+        - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z"
+        - "/home/jon/.local/bin"
+        - "/home/jon/.nvm/versions/node/v22.23.1/bin"
+        - "/home/jon/.cargo/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/opt/android-sdk/platform-tools"
+        - "/usr/lib/jvm/default/bin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+        - "/home/jon/.lmstudio/bin"
+        - "/home/jon/.lmstudio/bin"
+        - "/opt/android-sdk/platform-tools"
+        - "/home/jon/.lmstudio/bin"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/lib/aarch64-linux-android/30"
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/usr"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+      CMAKE_SYSTEM_INCLUDE_PATH:
+        - "/usr/include/X11"
+      CMAKE_SYSROOT: "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+      CMAKE_FIND_ROOT_PATH: "/home/jon/Android/Sdk/ndk/26.1.10909125"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "/home/jon/raylib-src/CMakeLists.txt:3 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler: /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ 
+      Build flags: -g;-DANDROID;-fdata-sections;-ffunction-sections;-funwind-tables;-fstack-protector-strong;-no-canonical-prefixes;-D_FORTIFY_SOURCE=2;-Wformat;-Werror=format-security
+      Id flags: -c;--target=aarch64-none-linux-android30 
+      
+      The output was:
+      0
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.o"
+      
+      The CXX compiler identification is Clang, found in:
+        /home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/371f144a/arm64-v8a/CMakeFiles/4.4.2/CompilerIdCXX/CMakeCXXCompilerId.o
+      
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/Compiler/Clang-FindBinUtils.cmake:26 (find_program)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:207 (include)"
+      - "/home/jon/raylib-src/CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "CMAKE_CXX_COMPILER_AR"
+    description: "LLVM archiver"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "llvm-ar-17.0"
+      - "llvm-ar-17"
+      - "llvm-ar17"
+      - "llvm-ar"
+    candidate_directories:
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/"
+      - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/"
+      - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/"
+      - "/home/jon/.local/bin/"
+      - "/home/jon/.nvm/versions/node/v22.23.1/bin/"
+      - "/home/jon/.cargo/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/opt/android-sdk/platform-tools/"
+      - "/usr/lib/jvm/default/bin/"
+      - "/usr/bin/site_perl/"
+      - "/usr/bin/vendor_perl/"
+      - "/usr/bin/core_perl/"
+      - "/home/jon/.lmstudio/bin/"
+      - "/usr/lib/aarch64-linux-android/30/bin/"
+      - "/usr/lib/aarch64-linux-android/30/sbin/"
+      - "/usr/lib/aarch64-linux-android/30/"
+      - "/usr/local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/"
+      - "/usr/bin/"
+      - "/usr/sbin/"
+      - "/usr/"
+      - "/bin/"
+      - "/sbin/"
+      - "/usr/X11R6/bin/"
+      - "/usr/X11R6/sbin/"
+      - "/usr/X11R6/"
+      - "/usr/pkg/bin/"
+      - "/usr/pkg/sbin/"
+      - "/usr/pkg/"
+      - "/opt/bin/"
+      - "/opt/sbin/"
+      - "/opt/"
+    searched_directories:
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ar-17.0"
+      - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/llvm-ar-17.0"
+      - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/llvm-ar-17.0"
+      - "/home/jon/.local/bin/llvm-ar-17.0"
+      - "/home/jon/.nvm/versions/node/v22.23.1/bin/llvm-ar-17.0"
+      - "/home/jon/.cargo/bin/llvm-ar-17.0"
+      - "/usr/local/sbin/llvm-ar-17.0"
+      - "/usr/local/bin/llvm-ar-17.0"
+      - "/usr/bin/llvm-ar-17.0"
+      - "/opt/android-sdk/platform-tools/llvm-ar-17.0"
+      - "/usr/lib/jvm/default/bin/llvm-ar-17.0"
+      - "/usr/bin/site_perl/llvm-ar-17.0"
+      - "/usr/bin/vendor_perl/llvm-ar-17.0"
+      - "/usr/bin/core_perl/llvm-ar-17.0"
+      - "/home/jon/.lmstudio/bin/llvm-ar-17.0"
+      - "/usr/lib/aarch64-linux-android/30/bin/llvm-ar-17.0"
+      - "/usr/lib/aarch64-linux-android/30/sbin/llvm-ar-17.0"
+      - "/usr/lib/aarch64-linux-android/30/llvm-ar-17.0"
+      - "/usr/local/bin/llvm-ar-17.0"
+      - "/usr/local/sbin/llvm-ar-17.0"
+      - "/usr/local/llvm-ar-17.0"
+      - "/usr/bin/llvm-ar-17.0"
+      - "/usr/sbin/llvm-ar-17.0"
+      - "/usr/llvm-ar-17.0"
+      - "/bin/llvm-ar-17.0"
+      - "/sbin/llvm-ar-17.0"
+      - "/usr/X11R6/bin/llvm-ar-17.0"
+      - "/usr/X11R6/sbin/llvm-ar-17.0"
+      - "/usr/X11R6/llvm-ar-17.0"
+      - "/usr/pkg/bin/llvm-ar-17.0"
+      - "/usr/pkg/sbin/llvm-ar-17.0"
+      - "/usr/pkg/llvm-ar-17.0"
+      - "/opt/bin/llvm-ar-17.0"
+      - "/opt/sbin/llvm-ar-17.0"
+      - "/opt/llvm-ar-17.0"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ar-17"
+      - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/llvm-ar-17"
+      - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/llvm-ar-17"
+      - "/home/jon/.local/bin/llvm-ar-17"
+      - "/home/jon/.nvm/versions/node/v22.23.1/bin/llvm-ar-17"
+      - "/home/jon/.cargo/bin/llvm-ar-17"
+      - "/usr/local/sbin/llvm-ar-17"
+      - "/usr/local/bin/llvm-ar-17"
+      - "/usr/bin/llvm-ar-17"
+      - "/opt/android-sdk/platform-tools/llvm-ar-17"
+      - "/usr/lib/jvm/default/bin/llvm-ar-17"
+      - "/usr/bin/site_perl/llvm-ar-17"
+      - "/usr/bin/vendor_perl/llvm-ar-17"
+      - "/usr/bin/core_perl/llvm-ar-17"
+      - "/home/jon/.lmstudio/bin/llvm-ar-17"
+      - "/usr/lib/aarch64-linux-android/30/bin/llvm-ar-17"
+      - "/usr/lib/aarch64-linux-android/30/sbin/llvm-ar-17"
+      - "/usr/lib/aarch64-linux-android/30/llvm-ar-17"
+      - "/usr/local/bin/llvm-ar-17"
+      - "/usr/local/sbin/llvm-ar-17"
+      - "/usr/local/llvm-ar-17"
+      - "/usr/bin/llvm-ar-17"
+      - "/usr/sbin/llvm-ar-17"
+      - "/usr/llvm-ar-17"
+      - "/bin/llvm-ar-17"
+      - "/sbin/llvm-ar-17"
+      - "/usr/X11R6/bin/llvm-ar-17"
+      - "/usr/X11R6/sbin/llvm-ar-17"
+      - "/usr/X11R6/llvm-ar-17"
+      - "/usr/pkg/bin/llvm-ar-17"
+      - "/usr/pkg/sbin/llvm-ar-17"
+      - "/usr/pkg/llvm-ar-17"
+      - "/opt/bin/llvm-ar-17"
+      - "/opt/sbin/llvm-ar-17"
+      - "/opt/llvm-ar-17"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ar17"
+      - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/llvm-ar17"
+      - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/llvm-ar17"
+      - "/home/jon/.local/bin/llvm-ar17"
+      - "/home/jon/.nvm/versions/node/v22.23.1/bin/llvm-ar17"
+      - "/home/jon/.cargo/bin/llvm-ar17"
+      - "/usr/local/sbin/llvm-ar17"
+      - "/usr/local/bin/llvm-ar17"
+      - "/usr/bin/llvm-ar17"
+      - "/opt/android-sdk/platform-tools/llvm-ar17"
+      - "/usr/lib/jvm/default/bin/llvm-ar17"
+      - "/usr/bin/site_perl/llvm-ar17"
+      - "/usr/bin/vendor_perl/llvm-ar17"
+      - "/usr/bin/core_perl/llvm-ar17"
+      - "/home/jon/.lmstudio/bin/llvm-ar17"
+      - "/usr/lib/aarch64-linux-android/30/bin/llvm-ar17"
+      - "/usr/lib/aarch64-linux-android/30/sbin/llvm-ar17"
+      - "/usr/lib/aarch64-linux-android/30/llvm-ar17"
+      - "/usr/local/bin/llvm-ar17"
+      - "/usr/local/sbin/llvm-ar17"
+      - "/usr/local/llvm-ar17"
+      - "/usr/bin/llvm-ar17"
+      - "/usr/sbin/llvm-ar17"
+      - "/usr/llvm-ar17"
+      - "/bin/llvm-ar17"
+      - "/sbin/llvm-ar17"
+      - "/usr/X11R6/bin/llvm-ar17"
+      - "/usr/X11R6/sbin/llvm-ar17"
+      - "/usr/X11R6/llvm-ar17"
+      - "/usr/pkg/bin/llvm-ar17"
+      - "/usr/pkg/sbin/llvm-ar17"
+      - "/usr/pkg/llvm-ar17"
+      - "/opt/bin/llvm-ar17"
+      - "/opt/sbin/llvm-ar17"
+      - "/opt/llvm-ar17"
+    found: "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ar"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64"
+      ENV{PATH}:
+        - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path"
+        - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z"
+        - "/home/jon/.local/bin"
+        - "/home/jon/.nvm/versions/node/v22.23.1/bin"
+        - "/home/jon/.cargo/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/opt/android-sdk/platform-tools"
+        - "/usr/lib/jvm/default/bin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+        - "/home/jon/.lmstudio/bin"
+        - "/home/jon/.lmstudio/bin"
+        - "/opt/android-sdk/platform-tools"
+        - "/home/jon/.lmstudio/bin"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/lib/aarch64-linux-android/30"
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/usr"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+      CMAKE_SYSROOT: "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+      CMAKE_FIND_ROOT_PATH: "/home/jon/Android/Sdk/ndk/26.1.10909125"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/Compiler/Clang-FindBinUtils.cmake:38 (find_program)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:207 (include)"
+      - "/home/jon/raylib-src/CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "CMAKE_CXX_COMPILER_RANLIB"
+    description: "Generate index for LLVM archive"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "llvm-ranlib-17.0"
+      - "llvm-ranlib-17"
+      - "llvm-ranlib17"
+      - "llvm-ranlib"
+    candidate_directories:
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/"
+      - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/"
+      - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/"
+      - "/home/jon/.local/bin/"
+      - "/home/jon/.nvm/versions/node/v22.23.1/bin/"
+      - "/home/jon/.cargo/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/opt/android-sdk/platform-tools/"
+      - "/usr/lib/jvm/default/bin/"
+      - "/usr/bin/site_perl/"
+      - "/usr/bin/vendor_perl/"
+      - "/usr/bin/core_perl/"
+      - "/home/jon/.lmstudio/bin/"
+      - "/usr/lib/aarch64-linux-android/30/bin/"
+      - "/usr/lib/aarch64-linux-android/30/sbin/"
+      - "/usr/lib/aarch64-linux-android/30/"
+      - "/usr/local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/"
+      - "/usr/bin/"
+      - "/usr/sbin/"
+      - "/usr/"
+      - "/bin/"
+      - "/sbin/"
+      - "/usr/X11R6/bin/"
+      - "/usr/X11R6/sbin/"
+      - "/usr/X11R6/"
+      - "/usr/pkg/bin/"
+      - "/usr/pkg/sbin/"
+      - "/usr/pkg/"
+      - "/opt/bin/"
+      - "/opt/sbin/"
+      - "/opt/"
+    searched_directories:
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ranlib-17.0"
+      - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/llvm-ranlib-17.0"
+      - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/llvm-ranlib-17.0"
+      - "/home/jon/.local/bin/llvm-ranlib-17.0"
+      - "/home/jon/.nvm/versions/node/v22.23.1/bin/llvm-ranlib-17.0"
+      - "/home/jon/.cargo/bin/llvm-ranlib-17.0"
+      - "/usr/local/sbin/llvm-ranlib-17.0"
+      - "/usr/local/bin/llvm-ranlib-17.0"
+      - "/usr/bin/llvm-ranlib-17.0"
+      - "/opt/android-sdk/platform-tools/llvm-ranlib-17.0"
+      - "/usr/lib/jvm/default/bin/llvm-ranlib-17.0"
+      - "/usr/bin/site_perl/llvm-ranlib-17.0"
+      - "/usr/bin/vendor_perl/llvm-ranlib-17.0"
+      - "/usr/bin/core_perl/llvm-ranlib-17.0"
+      - "/home/jon/.lmstudio/bin/llvm-ranlib-17.0"
+      - "/usr/lib/aarch64-linux-android/30/bin/llvm-ranlib-17.0"
+      - "/usr/lib/aarch64-linux-android/30/sbin/llvm-ranlib-17.0"
+      - "/usr/lib/aarch64-linux-android/30/llvm-ranlib-17.0"
+      - "/usr/local/bin/llvm-ranlib-17.0"
+      - "/usr/local/sbin/llvm-ranlib-17.0"
+      - "/usr/local/llvm-ranlib-17.0"
+      - "/usr/bin/llvm-ranlib-17.0"
+      - "/usr/sbin/llvm-ranlib-17.0"
+      - "/usr/llvm-ranlib-17.0"
+      - "/bin/llvm-ranlib-17.0"
+      - "/sbin/llvm-ranlib-17.0"
+      - "/usr/X11R6/bin/llvm-ranlib-17.0"
+      - "/usr/X11R6/sbin/llvm-ranlib-17.0"
+      - "/usr/X11R6/llvm-ranlib-17.0"
+      - "/usr/pkg/bin/llvm-ranlib-17.0"
+      - "/usr/pkg/sbin/llvm-ranlib-17.0"
+      - "/usr/pkg/llvm-ranlib-17.0"
+      - "/opt/bin/llvm-ranlib-17.0"
+      - "/opt/sbin/llvm-ranlib-17.0"
+      - "/opt/llvm-ranlib-17.0"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ranlib-17"
+      - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/llvm-ranlib-17"
+      - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/llvm-ranlib-17"
+      - "/home/jon/.local/bin/llvm-ranlib-17"
+      - "/home/jon/.nvm/versions/node/v22.23.1/bin/llvm-ranlib-17"
+      - "/home/jon/.cargo/bin/llvm-ranlib-17"
+      - "/usr/local/sbin/llvm-ranlib-17"
+      - "/usr/local/bin/llvm-ranlib-17"
+      - "/usr/bin/llvm-ranlib-17"
+      - "/opt/android-sdk/platform-tools/llvm-ranlib-17"
+      - "/usr/lib/jvm/default/bin/llvm-ranlib-17"
+      - "/usr/bin/site_perl/llvm-ranlib-17"
+      - "/usr/bin/vendor_perl/llvm-ranlib-17"
+      - "/usr/bin/core_perl/llvm-ranlib-17"
+      - "/home/jon/.lmstudio/bin/llvm-ranlib-17"
+      - "/usr/lib/aarch64-linux-android/30/bin/llvm-ranlib-17"
+      - "/usr/lib/aarch64-linux-android/30/sbin/llvm-ranlib-17"
+      - "/usr/lib/aarch64-linux-android/30/llvm-ranlib-17"
+      - "/usr/local/bin/llvm-ranlib-17"
+      - "/usr/local/sbin/llvm-ranlib-17"
+      - "/usr/local/llvm-ranlib-17"
+      - "/usr/bin/llvm-ranlib-17"
+      - "/usr/sbin/llvm-ranlib-17"
+      - "/usr/llvm-ranlib-17"
+      - "/bin/llvm-ranlib-17"
+      - "/sbin/llvm-ranlib-17"
+      - "/usr/X11R6/bin/llvm-ranlib-17"
+      - "/usr/X11R6/sbin/llvm-ranlib-17"
+      - "/usr/X11R6/llvm-ranlib-17"
+      - "/usr/pkg/bin/llvm-ranlib-17"
+      - "/usr/pkg/sbin/llvm-ranlib-17"
+      - "/usr/pkg/llvm-ranlib-17"
+      - "/opt/bin/llvm-ranlib-17"
+      - "/opt/sbin/llvm-ranlib-17"
+      - "/opt/llvm-ranlib-17"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ranlib17"
+      - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/llvm-ranlib17"
+      - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/llvm-ranlib17"
+      - "/home/jon/.local/bin/llvm-ranlib17"
+      - "/home/jon/.nvm/versions/node/v22.23.1/bin/llvm-ranlib17"
+      - "/home/jon/.cargo/bin/llvm-ranlib17"
+      - "/usr/local/sbin/llvm-ranlib17"
+      - "/usr/local/bin/llvm-ranlib17"
+      - "/usr/bin/llvm-ranlib17"
+      - "/opt/android-sdk/platform-tools/llvm-ranlib17"
+      - "/usr/lib/jvm/default/bin/llvm-ranlib17"
+      - "/usr/bin/site_perl/llvm-ranlib17"
+      - "/usr/bin/vendor_perl/llvm-ranlib17"
+      - "/usr/bin/core_perl/llvm-ranlib17"
+      - "/home/jon/.lmstudio/bin/llvm-ranlib17"
+      - "/usr/lib/aarch64-linux-android/30/bin/llvm-ranlib17"
+      - "/usr/lib/aarch64-linux-android/30/sbin/llvm-ranlib17"
+      - "/usr/lib/aarch64-linux-android/30/llvm-ranlib17"
+      - "/usr/local/bin/llvm-ranlib17"
+      - "/usr/local/sbin/llvm-ranlib17"
+      - "/usr/local/llvm-ranlib17"
+      - "/usr/bin/llvm-ranlib17"
+      - "/usr/sbin/llvm-ranlib17"
+      - "/usr/llvm-ranlib17"
+      - "/bin/llvm-ranlib17"
+      - "/sbin/llvm-ranlib17"
+      - "/usr/X11R6/bin/llvm-ranlib17"
+      - "/usr/X11R6/sbin/llvm-ranlib17"
+      - "/usr/X11R6/llvm-ranlib17"
+      - "/usr/pkg/bin/llvm-ranlib17"
+      - "/usr/pkg/sbin/llvm-ranlib17"
+      - "/usr/pkg/llvm-ranlib17"
+      - "/opt/bin/llvm-ranlib17"
+      - "/opt/sbin/llvm-ranlib17"
+      - "/opt/llvm-ranlib17"
+    found: "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ranlib"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64"
+      ENV{PATH}:
+        - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path"
+        - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z"
+        - "/home/jon/.local/bin"
+        - "/home/jon/.nvm/versions/node/v22.23.1/bin"
+        - "/home/jon/.cargo/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/opt/android-sdk/platform-tools"
+        - "/usr/lib/jvm/default/bin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+        - "/home/jon/.lmstudio/bin"
+        - "/home/jon/.lmstudio/bin"
+        - "/opt/android-sdk/platform-tools"
+        - "/home/jon/.lmstudio/bin"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/lib/aarch64-linux-android/30"
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/usr"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+      CMAKE_SYSROOT: "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+      CMAKE_FIND_ROOT_PATH: "/home/jon/Android/Sdk/ndk/26.1.10909125"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/Compiler/Clang-FindBinUtils.cmake:50 (find_program)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:207 (include)"
+      - "/home/jon/raylib-src/CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS"
+    description: "`clang-scan-deps` dependency scanner"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "clang-scan-deps-17.0"
+      - "clang-scan-deps-17"
+      - "clang-scan-deps17"
+      - "clang-scan-deps"
+      - "clang-scan-deps-17.0"
+      - "clang-scan-deps-17"
+      - "clang-scan-deps17"
+      - "clang-scan-deps"
+    candidate_directories:
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/"
+      - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/"
+      - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/"
+      - "/home/jon/.local/bin/"
+      - "/home/jon/.nvm/versions/node/v22.23.1/bin/"
+      - "/home/jon/.cargo/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/opt/android-sdk/platform-tools/"
+      - "/usr/lib/jvm/default/bin/"
+      - "/usr/bin/site_perl/"
+      - "/usr/bin/vendor_perl/"
+      - "/usr/bin/core_perl/"
+      - "/home/jon/.lmstudio/bin/"
+      - "/usr/lib/aarch64-linux-android/30/bin/"
+      - "/usr/lib/aarch64-linux-android/30/sbin/"
+      - "/usr/lib/aarch64-linux-android/30/"
+      - "/usr/local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/"
+      - "/usr/bin/"
+      - "/usr/sbin/"
+      - "/usr/"
+      - "/bin/"
+      - "/sbin/"
+      - "/usr/X11R6/bin/"
+      - "/usr/X11R6/sbin/"
+      - "/usr/X11R6/"
+      - "/usr/pkg/bin/"
+      - "/usr/pkg/sbin/"
+      - "/usr/pkg/"
+      - "/opt/bin/"
+      - "/opt/sbin/"
+      - "/opt/"
+    searched_directories:
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/clang-scan-deps-17.0"
+      - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/clang-scan-deps-17.0"
+      - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/clang-scan-deps-17.0"
+      - "/home/jon/.local/bin/clang-scan-deps-17.0"
+      - "/home/jon/.nvm/versions/node/v22.23.1/bin/clang-scan-deps-17.0"
+      - "/home/jon/.cargo/bin/clang-scan-deps-17.0"
+      - "/usr/local/sbin/clang-scan-deps-17.0"
+      - "/usr/local/bin/clang-scan-deps-17.0"
+      - "/usr/bin/clang-scan-deps-17.0"
+      - "/opt/android-sdk/platform-tools/clang-scan-deps-17.0"
+      - "/usr/lib/jvm/default/bin/clang-scan-deps-17.0"
+      - "/usr/bin/site_perl/clang-scan-deps-17.0"
+      - "/usr/bin/vendor_perl/clang-scan-deps-17.0"
+      - "/usr/bin/core_perl/clang-scan-deps-17.0"
+      - "/home/jon/.lmstudio/bin/clang-scan-deps-17.0"
+      - "/usr/lib/aarch64-linux-android/30/bin/clang-scan-deps-17.0"
+      - "/usr/lib/aarch64-linux-android/30/sbin/clang-scan-deps-17.0"
+      - "/usr/lib/aarch64-linux-android/30/clang-scan-deps-17.0"
+      - "/usr/local/bin/clang-scan-deps-17.0"
+      - "/usr/local/sbin/clang-scan-deps-17.0"
+      - "/usr/local/clang-scan-deps-17.0"
+      - "/usr/bin/clang-scan-deps-17.0"
+      - "/usr/sbin/clang-scan-deps-17.0"
+      - "/usr/clang-scan-deps-17.0"
+      - "/bin/clang-scan-deps-17.0"
+      - "/sbin/clang-scan-deps-17.0"
+      - "/usr/X11R6/bin/clang-scan-deps-17.0"
+      - "/usr/X11R6/sbin/clang-scan-deps-17.0"
+      - "/usr/X11R6/clang-scan-deps-17.0"
+      - "/usr/pkg/bin/clang-scan-deps-17.0"
+      - "/usr/pkg/sbin/clang-scan-deps-17.0"
+      - "/usr/pkg/clang-scan-deps-17.0"
+      - "/opt/bin/clang-scan-deps-17.0"
+      - "/opt/sbin/clang-scan-deps-17.0"
+      - "/opt/clang-scan-deps-17.0"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/clang-scan-deps-17"
+      - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/clang-scan-deps-17"
+      - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/clang-scan-deps-17"
+      - "/home/jon/.local/bin/clang-scan-deps-17"
+      - "/home/jon/.nvm/versions/node/v22.23.1/bin/clang-scan-deps-17"
+      - "/home/jon/.cargo/bin/clang-scan-deps-17"
+      - "/usr/local/sbin/clang-scan-deps-17"
+      - "/usr/local/bin/clang-scan-deps-17"
+      - "/usr/bin/clang-scan-deps-17"
+      - "/opt/android-sdk/platform-tools/clang-scan-deps-17"
+      - "/usr/lib/jvm/default/bin/clang-scan-deps-17"
+      - "/usr/bin/site_perl/clang-scan-deps-17"
+      - "/usr/bin/vendor_perl/clang-scan-deps-17"
+      - "/usr/bin/core_perl/clang-scan-deps-17"
+      - "/home/jon/.lmstudio/bin/clang-scan-deps-17"
+      - "/usr/lib/aarch64-linux-android/30/bin/clang-scan-deps-17"
+      - "/usr/lib/aarch64-linux-android/30/sbin/clang-scan-deps-17"
+      - "/usr/lib/aarch64-linux-android/30/clang-scan-deps-17"
+      - "/usr/local/bin/clang-scan-deps-17"
+      - "/usr/local/sbin/clang-scan-deps-17"
+      - "/usr/local/clang-scan-deps-17"
+      - "/usr/bin/clang-scan-deps-17"
+      - "/usr/sbin/clang-scan-deps-17"
+      - "/usr/clang-scan-deps-17"
+      - "/bin/clang-scan-deps-17"
+      - "/sbin/clang-scan-deps-17"
+      - "/usr/X11R6/bin/clang-scan-deps-17"
+      - "/usr/X11R6/sbin/clang-scan-deps-17"
+      - "/usr/X11R6/clang-scan-deps-17"
+      - "/usr/pkg/bin/clang-scan-deps-17"
+      - "/usr/pkg/sbin/clang-scan-deps-17"
+      - "/usr/pkg/clang-scan-deps-17"
+      - "/opt/bin/clang-scan-deps-17"
+      - "/opt/sbin/clang-scan-deps-17"
+      - "/opt/clang-scan-deps-17"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/clang-scan-deps17"
+      - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/clang-scan-deps17"
+      - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/clang-scan-deps17"
+      - "/home/jon/.local/bin/clang-scan-deps17"
+      - "/home/jon/.nvm/versions/node/v22.23.1/bin/clang-scan-deps17"
+      - "/home/jon/.cargo/bin/clang-scan-deps17"
+      - "/usr/local/sbin/clang-scan-deps17"
+      - "/usr/local/bin/clang-scan-deps17"
+      - "/usr/bin/clang-scan-deps17"
+      - "/opt/android-sdk/platform-tools/clang-scan-deps17"
+      - "/usr/lib/jvm/default/bin/clang-scan-deps17"
+      - "/usr/bin/site_perl/clang-scan-deps17"
+      - "/usr/bin/vendor_perl/clang-scan-deps17"
+      - "/usr/bin/core_perl/clang-scan-deps17"
+      - "/home/jon/.lmstudio/bin/clang-scan-deps17"
+      - "/usr/lib/aarch64-linux-android/30/bin/clang-scan-deps17"
+      - "/usr/lib/aarch64-linux-android/30/sbin/clang-scan-deps17"
+      - "/usr/lib/aarch64-linux-android/30/clang-scan-deps17"
+      - "/usr/local/bin/clang-scan-deps17"
+      - "/usr/local/sbin/clang-scan-deps17"
+      - "/usr/local/clang-scan-deps17"
+      - "/usr/bin/clang-scan-deps17"
+      - "/usr/sbin/clang-scan-deps17"
+      - "/usr/clang-scan-deps17"
+      - "/bin/clang-scan-deps17"
+      - "/sbin/clang-scan-deps17"
+      - "/usr/X11R6/bin/clang-scan-deps17"
+      - "/usr/X11R6/sbin/clang-scan-deps17"
+      - "/usr/X11R6/clang-scan-deps17"
+      - "/usr/pkg/bin/clang-scan-deps17"
+      - "/usr/pkg/sbin/clang-scan-deps17"
+      - "/usr/pkg/clang-scan-deps17"
+      - "/opt/bin/clang-scan-deps17"
+      - "/opt/sbin/clang-scan-deps17"
+      - "/opt/clang-scan-deps17"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/clang-scan-deps"
+      - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/clang-scan-deps"
+      - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/clang-scan-deps"
+      - "/home/jon/.local/bin/clang-scan-deps"
+      - "/home/jon/.nvm/versions/node/v22.23.1/bin/clang-scan-deps"
+      - "/home/jon/.cargo/bin/clang-scan-deps"
+      - "/usr/local/sbin/clang-scan-deps"
+      - "/usr/local/bin/clang-scan-deps"
+    found: "/usr/bin/clang-scan-deps"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64"
+      ENV{PATH}:
+        - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path"
+        - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z"
+        - "/home/jon/.local/bin"
+        - "/home/jon/.nvm/versions/node/v22.23.1/bin"
+        - "/home/jon/.cargo/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/opt/android-sdk/platform-tools"
+        - "/usr/lib/jvm/default/bin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+        - "/home/jon/.lmstudio/bin"
+        - "/home/jon/.lmstudio/bin"
+        - "/opt/android-sdk/platform-tools"
+        - "/home/jon/.lmstudio/bin"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/lib/aarch64-linux-android/30"
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/usr"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+      CMAKE_SYSROOT: "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+      CMAKE_FIND_ROOT_PATH: "/home/jon/Android/Sdk/ndk/26.1.10909125"
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:123 (try_compile)"
+      - "/usr/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "/home/jon/raylib-src/CMakeLists.txt:3 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/371f144a/arm64-v8a/CMakeFiles/CMakeScratch/TryCompile-IsE9LO"
+      binary: "/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/371f144a/arm64-v8a/CMakeFiles/CMakeScratch/TryCompile-IsE9LO"
+    cmakeVariables:
+      ANDROID_ABI: "arm64-v8a"
+      ANDROID_ARM_MODE: "thumb"
+      ANDROID_PIE: "TRUE"
+      ANDROID_PLATFORM: "android-30"
+      ANDROID_STL: "c++_static"
+      ANDROID_TOOLCHAIN: "clang"
+      CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "/usr/bin/clang-scan-deps"
+      CMAKE_CXX_COMPILER_TARGET: "aarch64-none-linux-android30"
+      CMAKE_CXX_FLAGS: "-g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat  "
+      CMAKE_CXX_FLAGS_DEBUG: "-fno-limit-debug-info "
+      CMAKE_CXX_SCAN_FOR_MODULES: "OFF"
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_C_COMPILER_TARGET: "aarch64-none-linux-android30"
+      CMAKE_EXE_LINKER_FLAGS: "-static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments  "
+      CMAKE_POSITION_INDEPENDENT_CODE: "TRUE"
+      CMAKE_SYSROOT: "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: false
+      stdout: |
+        Change Dir: '/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/371f144a/arm64-v8a/CMakeFiles/CMakeScratch/TryCompile-IsE9LO'
+        
+        Run Build Command(s): /usr/bin/ninja -v cmTC_e5e1c
+        [1/2] /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat    -fPIE   -v -MD -MT CMakeFiles/cmTC_e5e1c.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles/cmTC_e5e1c.dir/CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_e5e1c.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp
+        Android (10552028, +pgo, +bolt, +lto, -mlgo, based on r487747d) clang version 17.0.2 (https://android.googlesource.com/toolchain/llvm-project d9f89f4d16663d5012e5c09495f3b30ece3d2362)
+        Target: aarch64-none-linux-android30
+        Thread model: posix
+        InstalledDir: /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin
+         (in-process)
+         "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++" -cc1 -triple aarch64-none-linux-android30 -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=non-leaf -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu generic -target-feature +neon -target-feature +v8a -target-feature +fix-cortex-a53-835769 -target-abi aapcs -mllvm -treat-scalable-fixed-error-as-warning -debug-info-kind=constructor -dwarf-version=4 -debugger-tuning=gdb -v -ffunction-sections -fdata-sections -fcoverage-compilation-dir=/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/371f144a/arm64-v8a/CMakeFiles/CMakeScratch/TryCompile-IsE9LO -resource-dir /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17 -dependency-file CMakeFiles/cmTC_e5e1c.dir/CMakeCXXCompilerABI.cpp.o.d -MT CMakeFiles/cmTC_e5e1c.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -D ANDROID -D _FORTIFY_SOURCE=2 -isysroot /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot -internal-isystem /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1 -internal-isystem /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/include -internal-isystem /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include -internal-externc-isystem /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android -internal-externc-isystem /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include -internal-externc-isystem /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include -Wformat -fdeprecated-macro -fdebug-compilation-dir=/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/371f144a/arm64-v8a/CMakeFiles/CMakeScratch/TryCompile-IsE9LO -ferror-limit 19 -stack-protector 2 -fno-signed-char -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -target-feature +outline-atomics -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_e5e1c.dir/CMakeCXXCompilerABI.cpp.o -x c++ /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp
+        clang -cc1 version 17.0.2 based upon LLVM 17.0.2 default target x86_64-unknown-linux-gnu
+        ignoring nonexistent directory "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include"
+        ignoring nonexistent directory "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1
+         /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/include
+         /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android
+         /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include
+        End of search list.
+        [2/2] : && /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments   -v CMakeFiles/cmTC_e5e1c.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_e5e1c   && :
+        Android (10552028, +pgo, +bolt, +lto, -mlgo, based on r487747d) clang version 17.0.2 (https://android.googlesource.com/toolchain/llvm-project d9f89f4d16663d5012e5c09495f3b30ece3d2362)
+        Target: aarch64-none-linux-android30
+        Thread model: posix
+        InstalledDir: /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin
+         "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld" --sysroot=/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot -pie -EL --fix-cortex-a53-843419 -z now -z relro -z max-page-size=4096 --hash-style=gnu --eh-frame-hdr -m aarch64linux -dynamic-linker /system/bin/linker64 -o cmTC_e5e1c /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtbegin_dynamic.o -L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/aarch64 -L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30 -L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android -L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib --build-id=sha1 --no-undefined-version --fatal-warnings --no-undefined CMakeFiles/cmTC_e5e1c.dir/CMakeCXXCompilerABI.cpp.o -Bstatic -lc++ -Bdynamic -lm /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl -lc /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtend_android.o
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:255 (message)"
+      - "/usr/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "/home/jon/raylib-src/CMakeLists.txt:3 (project)"
+    message: |
+      Parsed CXX implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1]
+          add: [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/include]
+          add: [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android]
+          add: [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include]
+        end of search list found
+        collapse include dir [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1] ==> [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1]
+        collapse include dir [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/include] ==> [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/include]
+        collapse include dir [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android] ==> [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android]
+        collapse include dir [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include] ==> [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include]
+        implicit include dirs: [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1;/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/include;/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android;/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:291 (message)"
+      - "/usr/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "/home/jon/raylib-src/CMakeLists.txt:3 (project)"
+    message: |
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|wild|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|"|[0-9]+>[ 	-]*Build:[ 	0-9]+ ms[ 	]*)?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|wild))("|,| |$)]
+        ignore line: [Change Dir: '/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/371f144a/arm64-v8a/CMakeFiles/CMakeScratch/TryCompile-IsE9LO']
+        ignore line: []
+        ignore line: [Run Build Command(s): /usr/bin/ninja -v cmTC_e5e1c]
+        ignore line: [[1/2] /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat    -fPIE   -v -MD -MT CMakeFiles/cmTC_e5e1c.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles/cmTC_e5e1c.dir/CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_e5e1c.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [Android (10552028  +pgo  +bolt  +lto  -mlgo  based on r487747d) clang version 17.0.2 (https://android.googlesource.com/toolchain/llvm-project d9f89f4d16663d5012e5c09495f3b30ece3d2362)]
+        ignore line: [Target: aarch64-none-linux-android30]
+        ignore line: [Thread model: posix]
+        ignore line: [InstalledDir: /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin]
+        ignore line: [ (in-process)]
+        ignore line: [ "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++" -cc1 -triple aarch64-none-linux-android30 -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=non-leaf -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu generic -target-feature +neon -target-feature +v8a -target-feature +fix-cortex-a53-835769 -target-abi aapcs -mllvm -treat-scalable-fixed-error-as-warning -debug-info-kind=constructor -dwarf-version=4 -debugger-tuning=gdb -v -ffunction-sections -fdata-sections -fcoverage-compilation-dir=/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/371f144a/arm64-v8a/CMakeFiles/CMakeScratch/TryCompile-IsE9LO -resource-dir /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17 -dependency-file CMakeFiles/cmTC_e5e1c.dir/CMakeCXXCompilerABI.cpp.o.d -MT CMakeFiles/cmTC_e5e1c.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -D ANDROID -D _FORTIFY_SOURCE=2 -isysroot /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot -internal-isystem /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1 -internal-isystem /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/include -internal-isystem /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include -internal-externc-isystem /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android -internal-externc-isystem /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include -internal-externc-isystem /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include -Wformat -fdeprecated-macro -fdebug-compilation-dir=/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/371f144a/arm64-v8a/CMakeFiles/CMakeScratch/TryCompile-IsE9LO -ferror-limit 19 -stack-protector 2 -fno-signed-char -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -target-feature +outline-atomics -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_e5e1c.dir/CMakeCXXCompilerABI.cpp.o -x c++ /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [clang -cc1 version 17.0.2 based upon LLVM 17.0.2 default target x86_64-unknown-linux-gnu]
+        ignore line: [ignoring nonexistent directory "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include"]
+        ignore line: [ignoring nonexistent directory "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1]
+        ignore line: [ /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/include]
+        ignore line: [ /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android]
+        ignore line: [ /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include]
+        ignore line: [End of search list.]
+        ignore line: [[2/2] : && /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -static-libstdc++ -Wl --build-id=sha1 -Wl --no-undefined-version -Wl --fatal-warnings -Wl --no-undefined -Qunused-arguments   -v CMakeFiles/cmTC_e5e1c.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_e5e1c   && :]
+        ignore line: [Android (10552028  +pgo  +bolt  +lto  -mlgo  based on r487747d) clang version 17.0.2 (https://android.googlesource.com/toolchain/llvm-project d9f89f4d16663d5012e5c09495f3b30ece3d2362)]
+        ignore line: [Target: aarch64-none-linux-android30]
+        ignore line: [Thread model: posix]
+        ignore line: [InstalledDir: /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin]
+        link line: [ "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld" --sysroot=/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot -pie -EL --fix-cortex-a53-843419 -z now -z relro -z max-page-size=4096 --hash-style=gnu --eh-frame-hdr -m aarch64linux -dynamic-linker /system/bin/linker64 -o cmTC_e5e1c /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtbegin_dynamic.o -L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/aarch64 -L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30 -L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android -L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib --build-id=sha1 --no-undefined-version --fatal-warnings --no-undefined CMakeFiles/cmTC_e5e1c.dir/CMakeCXXCompilerABI.cpp.o -Bstatic -lc++ -Bdynamic -lm /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl -lc /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtend_android.o] ==> linker [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld]
+        link line: [ "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld" --sysroot=/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot -pie -EL --fix-cortex-a53-843419 -z now -z relro -z max-page-size=4096 --hash-style=gnu --eh-frame-hdr -m aarch64linux -dynamic-linker /system/bin/linker64 -o cmTC_e5e1c /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtbegin_dynamic.o -L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/aarch64 -L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30 -L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android -L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib --build-id=sha1 --no-undefined-version --fatal-warnings --no-undefined CMakeFiles/cmTC_e5e1c.dir/CMakeCXXCompilerABI.cpp.o -Bstatic -lc++ -Bdynamic -lm /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl -lc /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtend_android.o] ==> linker architecture flags [-m;aarch64linux]
+        link line: [ "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld" --sysroot=/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot -pie -EL --fix-cortex-a53-843419 -z now -z relro -z max-page-size=4096 --hash-style=gnu --eh-frame-hdr -m aarch64linux -dynamic-linker /system/bin/linker64 -o cmTC_e5e1c /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtbegin_dynamic.o -L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/aarch64 -L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30 -L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android -L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib --build-id=sha1 --no-undefined-version --fatal-warnings --no-undefined CMakeFiles/cmTC_e5e1c.dir/CMakeCXXCompilerABI.cpp.o -Bstatic -lc++ -Bdynamic -lm /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl -lc /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtend_android.o]
+          arg [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld] ==> ignore
+          arg [--sysroot=/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot] ==> ignore
+          arg [-pie] ==> ignore
+          arg [-EL] ==> ignore
+          arg [--fix-cortex-a53-843419] ==> ignore
+          arg [-znow] ==> ignore
+          arg [-zrelro] ==> ignore
+          arg [-zmax-page-size=4096] ==> ignore
+          arg [--hash-style=gnu] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [-m] ==> ignore
+          arg [aarch64linux] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/system/bin/linker64] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_e5e1c] ==> ignore
+          arg [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtbegin_dynamic.o] ==> obj [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtbegin_dynamic.o]
+          arg [-L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/aarch64] ==> dir [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/aarch64]
+          arg [-L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30] ==> dir [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30]
+          arg [-L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android] ==> dir [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android]
+          arg [-L/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib] ==> dir [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib]
+          arg [--build-id=sha1] ==> ignore
+          arg [--no-undefined-version] ==> ignore
+          arg [--fatal-warnings] ==> ignore
+          arg [--no-undefined] ==> ignore
+          arg [CMakeFiles/cmTC_e5e1c.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+          arg [-Bstatic] ==> search static
+          arg [-lc++] ==> lib [c++]
+          arg [-Bdynamic] ==> search dynamic
+          arg [-lm] ==> lib [m]
+          arg [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/libclang_rt.builtins-aarch64-android.a] ==> lib [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/libclang_rt.builtins-aarch64-android.a]
+          arg [-l:libunwind.a] ==> lib [-l:libunwind.a]
+          arg [-ldl] ==> lib [dl]
+          arg [-lc] ==> lib [c]
+          arg [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/libclang_rt.builtins-aarch64-android.a] ==> lib [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/libclang_rt.builtins-aarch64-android.a]
+          arg [-l:libunwind.a] ==> lib [-l:libunwind.a]
+          arg [-ldl] ==> lib [dl]
+          arg [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtend_android.o] ==> obj [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtend_android.o]
+        linker tool for 'CXX': /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld -m;aarch64linux
+        remove lib [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/libclang_rt.builtins-aarch64-android.a]
+        remove lib [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/libclang_rt.builtins-aarch64-android.a]
+        collapse library dir [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/aarch64] ==> [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/aarch64]
+        collapse library dir [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30] ==> [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30]
+        collapse library dir [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android] ==> [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android]
+        collapse library dir [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib] ==> [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib]
+        implicit libs: [c++;m;-l:libunwind.a;dl;c;-l:libunwind.a;dl]
+        implicit objs: [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtbegin_dynamic.o;/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtend_android.o]
+        implicit dirs: [/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/aarch64;/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30;/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android;/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/Internal/CMakeDetermineLinkerId.cmake:41 (message)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:337 (cmake_determine_linker_id)"
+      - "/usr/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "/home/jon/raylib-src/CMakeLists.txt:3 (project)"
+    message: |
+      Running the CXX compiler's linker: "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld" "-v"
+      LLD 17.0.2 (compatible with GNU linkers)
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake:81 (try_compile)"
+      - "/usr/share/cmake/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "/usr/share/cmake/Modules/CheckCCompilerFlag.cmake:105 (cmake_check_compiler_flag)"
+      - "/home/jon/raylib-src/cmake/AddIfFlagCompiles.cmake:3 (CHECK_C_COMPILER_FLAG)"
+      - "/home/jon/raylib-src/cmake/CompilerFlags.cmake:5 (add_if_flag_compiles)"
+      - "/home/jon/raylib-src/CMakeLists.txt:27 (include)"
+    checks:
+      - "Performing Test COMPILER_HAS_THOSE_TOGGLES"
+    directories:
+      source: "/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/371f144a/arm64-v8a/CMakeFiles/CMakeScratch/TryCompile-bFB3Bn"
+      binary: "/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/371f144a/arm64-v8a/CMakeFiles/CMakeScratch/TryCompile-bFB3Bn"
+    cmakeVariables:
+      ANDROID_ABI: "arm64-v8a"
+      ANDROID_ARM_MODE: "thumb"
+      ANDROID_PIE: "TRUE"
+      ANDROID_PLATFORM: "android-30"
+      ANDROID_STL: "c++_static"
+      ANDROID_TOOLCHAIN: "clang"
+      CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "/usr/bin/clang-scan-deps"
+      CMAKE_CXX_COMPILER_TARGET: "aarch64-none-linux-android30"
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_C_COMPILER_TARGET: "aarch64-none-linux-android30"
+      CMAKE_C_FLAGS: "-g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security "
+      CMAKE_C_FLAGS_DEBUG: "-fno-limit-debug-info "
+      CMAKE_EXE_LINKER_FLAGS: "-static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments  "
+      CMAKE_MODULE_PATH: "/home/jon/raylib-src/cmake"
+      CMAKE_POSITION_INDEPENDENT_CODE: "TRUE"
+      CMAKE_SYSROOT: "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+    buildResult:
+      variable: "COMPILER_HAS_THOSE_TOGGLES"
+      cached: true
+      stdout: |
+        Change Dir: '/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/371f144a/arm64-v8a/CMakeFiles/CMakeScratch/TryCompile-bFB3Bn'
+        
+        Run Build Command(s): /usr/bin/ninja -v cmTC_0eaf9
+        [1/2] /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DCOMPILER_HAS_THOSE_TOGGLES  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -std=gnu11 -fPIE   -Werror=pointer-arith -MD -MT CMakeFiles/cmTC_0eaf9.dir/src.c.o -MF CMakeFiles/cmTC_0eaf9.dir/src.c.o.d -o CMakeFiles/cmTC_0eaf9.dir/src.c.o -c /home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/371f144a/arm64-v8a/CMakeFiles/CMakeScratch/TryCompile-bFB3Bn/src.c
+        [2/2] : && /home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments CMakeFiles/cmTC_0eaf9.dir/src.c.o -o cmTC_0eaf9  -latomic -lm && :
+        
+      exitCode: 0
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/jon/raylib-src/cmake/LibraryConfigurations.cmake:93 (find_library)"
+      - "/home/jon/raylib-src/src/CMakeLists.txt:49 (include)"
+    mode: "library"
+    variable: "OPENGL_LIBRARY"
+    description: "Path to a library."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "OpenGL"
+    candidate_directories:
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/aarch64-linux-android/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/home/jon/.local/bin/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/home/jon/.nvm/versions/node/v22.23.1/bin/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/home/jon/.cargo/bin/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/local/sbin/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/local/bin/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/bin/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/opt/android-sdk/platform-tools/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/lib/jvm/default/bin/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/bin/site_perl/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/bin/vendor_perl/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/bin/core_perl/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/home/jon/.lmstudio/bin/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/lib/aarch64-linux-android/30/lib/aarch64-linux-android/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/lib/aarch64-linux-android/30/lib/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/lib/aarch64-linux-android/30/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/local/lib/aarch64-linux-android/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/local/lib/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/local/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/lib/aarch64-linux-android/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/lib/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/lib/aarch64-linux-android/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/lib/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/X11R6/lib/aarch64-linux-android/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/X11R6/lib/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/X11R6/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/pkg/lib/aarch64-linux-android/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/pkg/lib/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/pkg/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/opt/lib/aarch64-linux-android/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/opt/lib/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/opt/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/lib/X11/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/aarch64-linux-android/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/home/jon/.local/bin/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/home/jon/.nvm/versions/node/v22.23.1/bin/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/home/jon/.cargo/bin/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/sbin/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/bin/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/bin/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/opt/android-sdk/platform-tools/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/jvm/default/bin/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/bin/site_perl/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/bin/vendor_perl/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/bin/core_perl/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/home/jon/.lmstudio/bin/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/lib/aarch64-linux-android/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/lib/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/lib/aarch64-linux-android/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/lib/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/lib/aarch64-linux-android/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/lib/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/X11R6/lib/aarch64-linux-android/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/X11R6/lib/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/X11R6/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/pkg/lib/aarch64-linux-android/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/pkg/lib/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/pkg/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/opt/lib/aarch64-linux-android/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/opt/lib/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/opt/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/X11/"
+    searched_directories:
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/aarch64-linux-android/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/home/jon/.local/bin/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/home/jon/.nvm/versions/node/v22.23.1/bin/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/home/jon/.cargo/bin/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/local/sbin/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/local/bin/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/bin/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/opt/android-sdk/platform-tools/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/lib/jvm/default/bin/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/bin/site_perl/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/bin/vendor_perl/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/bin/core_perl/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/home/jon/.lmstudio/bin/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/lib/aarch64-linux-android/30/lib/aarch64-linux-android/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/lib/aarch64-linux-android/30/lib/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/lib/aarch64-linux-android/30/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/local/lib/aarch64-linux-android/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/local/lib/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/local/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/lib/aarch64-linux-android/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/lib/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/lib/aarch64-linux-android/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/lib/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/X11R6/lib/aarch64-linux-android/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/X11R6/lib/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/X11R6/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/pkg/lib/aarch64-linux-android/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/pkg/lib/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/pkg/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/opt/lib/aarch64-linux-android/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/opt/lib/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/opt/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/usr/lib/X11/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/aarch64-linux-android/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/lib/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/home/jon/.local/bin/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/home/jon/.nvm/versions/node/v22.23.1/bin/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/home/jon/.cargo/bin/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/sbin/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/bin/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/bin/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/opt/android-sdk/platform-tools/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/jvm/default/bin/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/bin/site_perl/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/bin/vendor_perl/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/bin/core_perl/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/home/jon/.lmstudio/bin/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/lib/aarch64-linux-android/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/lib/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/lib/aarch64-linux-android/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/lib/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/lib/aarch64-linux-android/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/lib/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/X11R6/lib/aarch64-linux-android/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/X11R6/lib/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/X11R6/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/pkg/lib/aarch64-linux-android/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/pkg/lib/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/pkg/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/opt/lib/aarch64-linux-android/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/opt/lib/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/opt/"
+      - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/X11/"
+    found: false
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64"
+      ENV{PATH}:
+        - "/home/jon/.codex/packages/standalone/releases/0.147.0-x86_64-unknown-linux-musl/codex-path"
+        - "/home/jon/.codex/tmp/arg0/codex-arg0rtnT8z"
+        - "/home/jon/.local/bin"
+        - "/home/jon/.nvm/versions/node/v22.23.1/bin"
+        - "/home/jon/.cargo/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/opt/android-sdk/platform-tools"
+        - "/usr/lib/jvm/default/bin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+        - "/home/jon/.lmstudio/bin"
+        - "/home/jon/.lmstudio/bin"
+        - "/opt/android-sdk/platform-tools"
+        - "/home/jon/.lmstudio/bin"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/lib/aarch64-linux-android/30"
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/usr"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+      CMAKE_SYSTEM_LIBRARY_PATH:
+        - "/usr/lib/X11"
+      CMAKE_SYSROOT: "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+      CMAKE_FIND_ROOT_PATH: "/home/jon/Android/Sdk/ndk/26.1.10909125"
+...

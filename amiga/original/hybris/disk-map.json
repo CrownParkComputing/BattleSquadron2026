@@ -1,0 +1,168 @@
+{
+  "source": "/tmp/claude-1000/-home-jon/87cba110-13d9-4960-9902-2fa0ad1b1088/scratchpad/hybadf/hybris.adf",
+  "loader": "hybris.exe",
+  "files": [
+    {
+      "id": "09",
+      "offset": 11264,
+      "length": 15444,
+      "track": 2,
+      "sector": 22,
+      "track_aligned": true,
+      "oracle_match": 15444
+    },
+    {
+      "id": "11",
+      "offset": 33792,
+      "length": 23368,
+      "track": 6,
+      "sector": 66,
+      "track_aligned": true,
+      "oracle_match": 23368
+    },
+    {
+      "id": "13",
+      "offset": 67584,
+      "length": 41688,
+      "track": 12,
+      "sector": 132,
+      "track_aligned": true,
+      "oracle_match": 41688
+    },
+    {
+      "id": "08",
+      "offset": 112640,
+      "length": 108288,
+      "track": 20,
+      "sector": 220,
+      "track_aligned": true,
+      "oracle_match": 108192
+    },
+    {
+      "id": "10",
+      "offset": 225280,
+      "length": 88704,
+      "track": 40,
+      "sector": 440,
+      "track_aligned": true,
+      "oracle_match": 88588
+    },
+    {
+      "id": "12",
+      "offset": 315392,
+      "length": 86400,
+      "track": 56,
+      "sector": 616,
+      "track_aligned": true,
+      "oracle_match": 86396
+    },
+    {
+      "id": "16",
+      "offset": 405504,
+      "length": 20696,
+      "track": 72,
+      "sector": 792,
+      "track_aligned": true,
+      "oracle_match": 20696
+    },
+    {
+      "id": "04",
+      "offset": 428032,
+      "length": 16252,
+      "track": 76,
+      "sector": 836,
+      "track_aligned": true,
+      "oracle_match": 16252
+    },
+    {
+      "id": "07",
+      "offset": 461824,
+      "length": 20552,
+      "track": 82,
+      "sector": 902,
+      "track_aligned": true,
+      "oracle_match": 20552
+    },
+    {
+      "id": "06",
+      "offset": 484352,
+      "length": 58912,
+      "track": 86,
+      "sector": 946,
+      "track_aligned": true,
+      "oracle_match": 58912
+    },
+    {
+      "id": "17",
+      "offset": 551936,
+      "length": 24816,
+      "track": 98,
+      "sector": 1078,
+      "track_aligned": true,
+      "oracle_match": 24816
+    },
+    {
+      "id": "18",
+      "offset": 585728,
+      "length": 8380,
+      "track": 104,
+      "sector": 1144,
+      "track_aligned": true,
+      "oracle_match": 8380
+    },
+    {
+      "id": "03",
+      "offset": 596992,
+      "length": 31664,
+      "track": 106,
+      "sector": 1166,
+      "track_aligned": true,
+      "oracle_match": 31664
+    },
+    {
+      "id": "14",
+      "offset": 630784,
+      "length": 13292,
+      "track": 112,
+      "sector": 1232,
+      "track_aligned": true,
+      "oracle_match": 13292
+    },
+    {
+      "id": "15",
+      "offset": 653312,
+      "length": 12544,
+      "track": 116,
+      "sector": 1276,
+      "track_aligned": true,
+      "oracle_match": 12544
+    },
+    {
+      "id": "05",
+      "offset": 675840,
+      "length": 58992,
+      "track": 120,
+      "sector": 1320,
+      "track_aligned": true,
+      "oracle_match": 58992
+    }
+  ],
+  "unmapped_track_runs": [
+    [
+      80,
+      81
+    ],
+    [
+      115,
+      115
+    ],
+    [
+      119,
+      119
+    ],
+    [
+      146,
+      159
+    ]
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "buildFiles": [
+    "/home/jon/BattleSquadron-Amiga/android/app/src/main/cpp/CMakeLists.txt",
+    "/home/jon/raylib-src/CMakeLists.txt",
+    "/home/jon/raylib-src/src/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/usr/bin/ninja",
+      "-C",
+      "/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/1g586n68/arm64-v8a",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/usr/bin/ninja",
+    "-C",
+    "/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/1g586n68/arm64-v8a",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "main::@6890427a1f51a3e7e1df": {
+      "toolchain": "toolchain",
+      "abi": "arm64-v8a",
+      "artifactName": "main",
+      "output": "/home/jon/BattleSquadron-Amiga/android/app/build/intermediates/cxx/Debug/1g586n68/obj/arm64-v8a/libmain.so",
+      "runtimeFiles": []
+    },
+    "raylib::@7d429ebd5d102775094d": {
+      "toolchain": "toolchain",
+      "abi": "arm64-v8a",
+      "artifactName": "raylib",
+      "output": "/home/jon/BattleSquadron-Amiga/android/app/.cxx/Debug/1g586n68/arm64-v8a/raylib/raylib/libraylib.a"
+    }
+  },
+  "toolchains": {
+    "toolchain": {
+      "cCompilerExecutable": "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/clang.lld",
+      "cppCompilerExecutable": "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++.lld"
+    }
+  },
+  "cFileExtensions": [
+    "c"
+  ],
+  "cppFileExtensions": []
+}

@@ -1,0 +1,21 @@
+# ninja log v7
+3	107	1786739822455091379	CMakeFiles/main.dir/home/jon/BattleSquadron-Amiga/src/host/frontend.c.o	fb598e4d901b6327
+2	139	1786739822454777618	raylib/raylib/CMakeFiles/raylib.dir/home/jon/Android/Sdk/ndk/26.1.10909125/sources/android/native_app_glue/android_native_app_glue.c.o	356369bb722a3088
+2	243	1786739822454258160	raylib/raylib/CMakeFiles/raylib.dir/rshapes.c.o	8752c92a4a40a472
+2	384	1786739822454389758	raylib/raylib/CMakeFiles/raylib.dir/rtext.c.o	be53f1b9fe03e7a2
+3	408	1786739822455306564	CMakeFiles/main.dir/home/jon/BattleSquadron-Amiga/src/host/amiga.c.o	3f6da23b3ce8bca0
+3	605	1786739822455832404	CMakeFiles/main.dir/home/jon/SWIV/src/musashi/m68kdasm.c.o	4d5de7a664b8347a
+2	635	1786739822452827570	raylib/raylib/CMakeFiles/raylib.dir/rcore.c.o	5160f50165171a63
+4	818	1786739822456121819	CMakeFiles/main.dir/home/jon/SWIV/src/musashi/softfloat/softfloat.c.o	9409e8bf56f7bfaa
+2	1145	1786739822454096235	raylib/raylib/CMakeFiles/raylib.dir/rmodels.c.o	9db13abeb311495d
+2	1651	1786739822454525994	raylib/raylib/CMakeFiles/raylib.dir/rtextures.c.o	229e423c19576edc
+1	1961	1786739822451827563	raylib/raylib/CMakeFiles/raylib.dir/raudio.c.o	fb2800073191ffaf
+3	4364	1786739822455636114	CMakeFiles/main.dir/home/jon/SWIV/src/musashi/m68kops.c.o	f4716371b9a4271e
+1	164	1786739887577304890	CMakeFiles/main.dir/home/jon/BattleSquadron-Amiga/src/host/frontend.c.o	fb598e4d901b6327
+2	175	1786739887579845238	raylib/raylib/libraylib.a	cdd748a60b97ea04
+2	420	1786739887578304897	CMakeFiles/main.dir/home/jon/BattleSquadron-Amiga/src/host/amiga.c.o	3f6da23b3ce8bca0
+2	511	1786739887579177401	CMakeFiles/main.dir/home/jon/SWIV/src/musashi/m68kcpu.c.o	10b94c110225d61
+2	528	1786739887579468849	CMakeFiles/main.dir/home/jon/SWIV/src/musashi/m68kdasm.c.o	4d5de7a664b8347a
+2	786	1786739887579681169	CMakeFiles/main.dir/home/jon/SWIV/src/musashi/softfloat/softfloat.c.o	9409e8bf56f7bfaa
+2	3953	1786739887579332242	CMakeFiles/main.dir/home/jon/SWIV/src/musashi/m68kops.c.o	f4716371b9a4271e
+3953	4068	1786739891529333814	/home/jon/BattleSquadron-Amiga/android/app/build/intermediates/cxx/Debug/1g586n68/obj/arm64-v8a/libmain.so	622fe389aaf37362

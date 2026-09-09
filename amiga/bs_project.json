@@ -1,0 +1,99 @@
+{
+  "name": "Battle Squadron",
+  "root": "/home/jon/BattleSquadron-Amiga",
+  "raw_slave": "original/whdload/BattleSquadron/BattleSquadron.slave",
+  "slave_out": "original/slave.bin",
+  "data_dir": "original/whdload/BattleSquadron/data",
+  "modules_out": "original/modules",
+  "manifest": "docs/module-map.json",
+  "discovery": {
+    "binary": "original/whdload/BattleSquadron/data/LOADER",
+    "base": "0x100",
+    "entries": [
+      "0x400",
+      "0x150",
+      "0x1e0",
+      "0x298",
+      "0x1ba8",
+      "0x1c9e",
+      "0xab46",
+      "0xead0"
+    ],
+    "output": "build/loader.ira"
+  },
+  "oracle": {
+    "make_target": "build/battle_squadron_native",
+    "binary": "build/battle_squadron_native",
+    "frames": "50000",
+    "expect_files": "20",
+    "expect_blits": "2054047"
+  },
+  "parity": {
+    "native_frames": "6000",
+    "game_frames": "600"
+  },
+  "gate_binary": "build/test_recomp_boot",
+  "stages": {
+    "ingest": {
+      "status": "done",
+      "at": "2026-08-16T11:22:11"
+    },
+    "modules": {
+      "status": "done",
+      "at": "2026-08-16T11:22:12"
+    },
+    "discover": {
+      "status": "done",
+      "at": "2026-08-16T11:24:08"
+    },
+    "assemble": {
+      "status": "done",
+      "at": "2026-08-16T11:22:16"
+    },
+    "verify": {
+      "status": "done",
+      "at": "2026-08-16T11:23:54"
+    },
+    "oracle": {
+      "status": "done",
+      "at": "2026-08-16T11:22:26"
+    },
+    "unit-test": {
+      "status": "done",
+      "at": "2026-08-16T11:22:26"
+    },
+    "translate": {
+      "status": "manual",
+      "at": "2026-08-16T11:22:26"
+    },
+    "parity": {
+      "status": "failed",
+      "at": "2026-08-16T11:22:31",
+      "error": "'diff reference vs recomp' failed with exit code 1"
+    },
+    "integration-test": {
+      "status": "done",
+      "at": "2026-08-16T11:22:43"
+    },
+    "recomp-test": {
+      "status": "done",
+      "at": "2026-08-16T11:22:45"
+    },
+    "gate": {
+      "status": "done",
+      "at": "2026-08-16T11:22:45"
+    }
+  },
+  "overlay_layout": "loader-bond",
+  "scripts": {
+    "assemble": "./regen_asm.sh",
+    "verify": "./verify.sh"
+  },
+  "make_targets": {
+    "unit_test": "unit-test",
+    "integration_test": "integration-test",
+    "recomp_test": "recomp-test",
+    "recomp_dump": "build/recomp_dump"
+  },
+  "build_prefix": "build/parity"
+}

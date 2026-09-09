@@ -1,0 +1,115 @@
+{
+  "name": "Hybris (NTSC)",
+  "root": "/home/jon/BattleSquadron-Amiga",
+  "raw_slave": "/home/jon/Downloads/whdload-pipeline/HybrisNTSC/HybrisNTSC.Slave",
+  "slave_out": "original/hybris/slave.bin",
+  "data_dir": "/home/jon/Downloads/whdload-pipeline/HybrisNTSC/data",
+  "modules_out": "original/hybris/modules",
+  "manifest": "docs/hybris-module-map.json",
+  "discovery": {
+    "binary": "/home/jon/Downloads/whdload-pipeline/HybrisNTSC/data/07",
+    "base": "0x3afb8",
+    "entries": [
+      "0x3b078",
+      "0x3ea9e",
+      "0x3eb1c",
+      "0x3b210",
+      "0x3b166",
+      "0x3b1e2",
+      "0x3b172",
+      "0x3b182",
+      "0x3b1a4",
+      "0x3b1a8",
+      "0x3b1ac",
+      "0x3b1b4",
+      "0x3f69e",
+      "0x3f6cc",
+      "0x3b21a"
+    ],
+    "output": "build/hybris_07.ira"
+  },
+  "oracle": {
+    "make_target": "",
+    "binary": "",
+    "frames": "5000",
+    "expect_files": "0",
+    "expect_blits": "0"
+  },
+  "parity": {
+    "native_frames": "6000",
+    "game_frames": "600"
+  },
+  "gate_binary": "",
+  "stages": {
+    "ingest": {
+      "status": "done",
+      "at": "2026-08-16T13:19:08"
+    },
+    "modules": {
+      "status": "unsupported",
+      "at": "2026-08-16T13:19:08",
+      "error": "overlay_layout is 'none': there is no LOADER descriptor table to depack.  Write a title-specific extractor and set overlay_layout once it exists."
+    },
+    "discover": {
+      "status": "done",
+      "at": "2026-08-16T13:19:08"
+    },
+    "assemble": {
+      "status": "unsupported",
+      "at": "2026-08-16T13:19:08",
+      "error": "Hybris (NTSC) does not define 'scripts.assemble' (a script that reassembles THIS title's overlays). Add it to the project JSON; this stage will not fall back to another title's."
+    },
+    "verify": {
+      "status": "unsupported",
+      "at": "2026-08-16T13:19:08",
+      "error": "Hybris (NTSC) does not define 'scripts.verify' (a script that cmp's THIS title's rebuilt overlays). Add it to the project JSON; this stage will not fall back to another title's."
+    },
+    "oracle": {
+      "status": "unsupported",
+      "at": "2026-08-16T13:19:08",
+      "error": "Hybris (NTSC) does not define 'oracle.make_target' (a Musashi oracle for this title). Add it to the project JSON; this stage will not fall back to another title's."
+    },
+    "unit-test": {
+      "status": "unsupported",
+      "at": "2026-08-16T13:19:08",
+      "error": "Hybris (NTSC) does not define 'make_targets.unit_test' (this title's unit-test make target). Add it to the project JSON; this stage will not fall back to another title's."
+    },
+    "translate": {
+      "status": "manual",
+      "at": "2026-08-16T13:19:08"
+    },
+    "parity": {
+      "status": "unsupported",
+      "at": "2026-08-16T13:19:08",
+      "error": "Hybris (NTSC) does not define 'oracle.make_target' (a Musashi oracle for this title). Add it to the project JSON; this stage will not fall back to another title's."
+    },
+    "integration-test": {
+      "status": "unsupported",
+      "at": "2026-08-16T13:19:08",
+      "error": "Hybris (NTSC) does not define 'make_targets.integration_test' (this title's integration make target). Add it to the project JSON; this stage will not fall back to another title's."
+    },
+    "recomp-test": {
+      "status": "unsupported",
+      "at": "2026-08-16T13:19:08",
+      "error": "Hybris (NTSC) does not define 'make_targets.recomp_test' (this title's recomp-test make target). Add it to the project JSON; this stage will not fall back to another title's."
+    },
+    "gate": {
+      "status": "unsupported",
+      "at": "2026-08-16T13:19:08",
+      "error": "Hybris (NTSC) does not define 'gate_binary' (the binary that must link no emulator). Add it to the project JSON; this stage will not fall back to another title's."
+    }
+  },
+  "overlay_layout": "none",
+  "scripts": {
+    "assemble": "",
+    "verify": ""
+  },
+  "make_targets": {
+    "unit_test": "",
+    "integration_test": "",
+    "recomp_test": "",
+    "recomp_dump": ""
+  },
+  "build_prefix": "build/hybris_parity",
+  "notes": "Load addresses recovered by tools/find_load_base.py and CONFIRMED against the WHDLoad slave, which names both outright as resload_Patch destinations ($0AF8/$0B04): data/04 -> $3C084, data/07 -> $3AFB8. Both are MUSIC REPLAYERS -- data/04 shows '<P>lay <F>ade <Q>uit', data/07 shows '<G>ame Play <A>gain <H>iscores Jingle <1..4)'. The slave's file table at slave.bin $0B1A maps a game file id byte to the 2-char names 03..18; the destination address comes from the caller, not the table, so the other 14 files have no known load address yet and publish no JMP table."
+}

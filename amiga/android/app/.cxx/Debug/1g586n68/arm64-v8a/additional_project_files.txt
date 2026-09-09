@@ -1,0 +1,4 @@
+/home/jon/raylib-src/src/raylib.h
+/home/jon/raylib-src/src/rcamera.h
+/home/jon/raylib-src/src/rlgl.h
+/home/jon/raylib-src/src/raymath.h

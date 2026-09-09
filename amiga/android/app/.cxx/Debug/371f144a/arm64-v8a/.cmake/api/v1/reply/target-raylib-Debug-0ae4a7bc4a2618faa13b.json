@@ -1,0 +1,403 @@
+{
+	"archive" : {},
+	"artifacts" : 
+	[
+		{
+			"path" : "raylib/raylib/libraylib.a"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"install",
+			"include",
+			"target_link_libraries",
+			"target_compile_definitions",
+			"include_directories",
+			"target_include_directories"
+		],
+		"files" : 
+		[
+			"/home/jon/raylib-src/src/CMakeLists.txt",
+			"/home/jon/raylib-src/cmake/InstallConfigurations.cmake",
+			"/home/jon/raylib-src/cmake/CompileDefinitions.cmake",
+			"/home/jon/raylib-src/cmake/LibraryConfigurations.cmake"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 57,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 138,
+				"parent" : 0
+			},
+			{
+				"file" : 1,
+				"parent" : 2
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 1,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 99,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 100,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 105,
+				"parent" : 0
+			},
+			{
+				"file" : 2,
+				"parent" : 7
+			},
+			{
+				"command" : 4,
+				"file" : 2,
+				"line" : 3,
+				"parent" : 8
+			},
+			{
+				"command" : 4,
+				"file" : 2,
+				"line" : 2,
+				"parent" : 8
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 49,
+				"parent" : 0
+			},
+			{
+				"file" : 3,
+				"parent" : 11
+			},
+			{
+				"command" : 5,
+				"file" : 3,
+				"line" : 82,
+				"parent" : 12
+			},
+			{
+				"command" : 6,
+				"file" : 0,
+				"line" : 108,
+				"parent" : 0
+			}
+		]
+	},
+	"codemodelVersion" : 
+	{
+		"major" : 2,
+		"minor" : 11
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-no-canonical-prefixes -Wa,--noexecstack -fstack-protector-strong -funwind-tables -ffunction-sections -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -std=gnu99 -fPIC"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 9,
+					"define" : "GRAPHICS_API_OPENGL_ES2"
+				},
+				{
+					"backtrace" : 10,
+					"define" : "PLATFORM_ANDROID"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 13,
+					"path" : "/home/jon/Android/Sdk/ndk/26.1.10909125/sources/android/native_app_glue"
+				},
+				{
+					"backtrace" : 14,
+					"path" : "/home/jon/raylib-src/src"
+				}
+			],
+			"language" : "C",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					1
+				],
+				"standard" : "99"
+			},
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6
+			],
+			"sysroot" : 
+			{
+				"path" : "/home/jon/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+			}
+		}
+	],
+	"id" : "raylib::@7d429ebd5d102775094d",
+	"install" : 
+	{
+		"destinations" : 
+		[
+			{
+				"backtrace" : 4,
+				"path" : "lib"
+			}
+		],
+		"prefix" : 
+		{
+			"path" : "/usr/local"
+		}
+	},
+	"interfaceLinkLibraries" : 
+	[
+		{
+			"backtrace" : 5,
+			"fragment" : "log"
+		},
+		{
+			"backtrace" : 5,
+			"fragment" : "android"
+		},
+		{
+			"backtrace" : 5,
+			"fragment" : "EGL"
+		},
+		{
+			"backtrace" : 5,
+			"fragment" : "GLESv2"
+		},
+		{
+			"backtrace" : 5,
+			"fragment" : "OpenSLES"
+		},
+		{
+			"backtrace" : 5,
+			"fragment" : "atomic"
+		},
+		{
+			"backtrace" : 5,
+			"fragment" : "c"
+		},
+		{
+			"backtrace" : 6,
+			"fragment" : "m"
+		}
+	],
+	"linkLibraries" : 
+	[
+		{
+			"backtrace" : 5,
+			"fragment" : "log"
+		},
+		{
+			"backtrace" : 5,
+			"fragment" : "android"
+		},
+		{
+			"backtrace" : 5,
+			"fragment" : "EGL"
+		},
+		{
+			"backtrace" : 5,
+			"fragment" : "GLESv2"
+		},
+		{
+			"backtrace" : 5,
+			"fragment" : "OpenSLES"
+		},
+		{
+			"backtrace" : 5,
+			"fragment" : "atomic"
+		},
+		{
+			"backtrace" : 5,
+			"fragment" : "c"
+		},
+		{
+			"backtrace" : 6,
+			"fragment" : "m"
+		}
+	],
+	"name" : "raylib",
+	"nameOnDisk" : "libraylib.a",
+	"paths" : 
+	{
+		"build" : "raylib/raylib",
+		"source" : "/home/jon/raylib-src/src"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6
+			]
+		},
+		{
+			"name" : "Header Files",
+			"sourceIndexes" : 
+			[
+				7,
+				8,
+				9,
+				10
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"backtraces" : 
+			[
+				1
+			],
+			"compileGroupIndex" : 0,
+			"path" : "/home/jon/raylib-src/src/raudio.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"backtraces" : 
+			[
+				1
+			],
+			"compileGroupIndex" : 0,
+			"path" : "/home/jon/raylib-src/src/rcore.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"backtraces" : 
+			[
+				1
+			],
+			"compileGroupIndex" : 0,
+			"path" : "/home/jon/raylib-src/src/rmodels.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"backtraces" : 
+			[
+				1
+			],
+			"compileGroupIndex" : 0,
+			"path" : "/home/jon/raylib-src/src/rshapes.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"backtraces" : 
+			[
+				1
+			],
+			"compileGroupIndex" : 0,
+			"path" : "/home/jon/raylib-src/src/rtext.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"backtraces" : 
+			[
+				1
+			],
+			"compileGroupIndex" : 0,
+			"path" : "/home/jon/raylib-src/src/rtextures.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"backtraces" : 
+			[
+				1
+			],
+			"compileGroupIndex" : 0,
+			"path" : "/home/jon/Android/Sdk/ndk/26.1.10909125/sources/android/native_app_glue/android_native_app_glue.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"backtraces" : 
+			[
+				1
+			],
+			"path" : "/home/jon/raylib-src/src/raylib.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"backtraces" : 
+			[
+				1
+			],
+			"path" : "/home/jon/raylib-src/src/rcamera.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"backtraces" : 
+			[
+				1
+			],
+			"path" : "/home/jon/raylib-src/src/rlgl.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"backtraces" : 
+			[
+				1
+			],
+			"path" : "/home/jon/raylib-src/src/raymath.h",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "STATIC_LIBRARY"
+}
