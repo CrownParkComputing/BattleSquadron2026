@@ -28,6 +28,7 @@ void render_text(uint32_t *rgba, int x, int y, const char *s, uint32_t colour);
 struct RenderEntry;
 void render_bob(uint32_t *rgba, const struct RenderEntry *r);
 const uint32_t *render_palette(void);    /* the 32 RGBA entries render_stage() latched */
+extern int render_remaster;             /* high-resolution opening atlas behind transparent terrain */
 extern int render_enhanced;             /* native terrain smoothing and surface parallax */
 extern int render_hiscore;               /* shown in the HUD HIGH column */
 

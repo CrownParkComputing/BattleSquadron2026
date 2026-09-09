@@ -8,7 +8,7 @@ REFMODS ?= amiga/original/modules
 
 CORE    := src/bsdata.c src/overlay.c src/bond.c
 ENGINE  := src/engine/engine.c $(wildcard src/behaviours/*.c)
-HDRS    := src/engine/engine.h src/bsdata.h src/overlay.h src/bond.h
+HDRS    := src/remaster.h src/engine/engine.h src/bsdata.h src/overlay.h src/bond.h
 
 all: build/bsview build/simrun build/bsdata_test build/framecmp
 

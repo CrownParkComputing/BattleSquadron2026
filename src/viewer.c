@@ -12,6 +12,7 @@
 #include "bsdata.h"
 #include "engine/engine.h"
 #include "render.h"
+#include "remaster.h"
 #include "audio.h"
 #include "raylib.h"
 #include <stdio.h>
@@ -33,6 +34,47 @@ static uint32_t cbuf[2][BS_VIEW_W * BS_VIEW_H];   /* the two display frames of o
 static int hook_n;
 static Texture2D tex;
 static uint32_t show[BS_VIEW_W * BS_VIEW_H];
+static Texture2D opening_atlas, opening_reference, opening_indices;
+static Shader opening_shader;
+static int opening_atlas_loc, opening_reference_loc, opening_ready;
+static struct OpeningFrame {
+    int active, progress, camx, shake;
+    uint16_t cells[32][24];
+} opening_frames[2];
+
+static void capture_opening_frame(int frame)
+{
+    struct OpeningFrame *f = &opening_frames[frame];
+    f->active = render_remaster && opening_ready && !g.demo && g.stage7228 == 0 &&
+                !g.hangars4099 && g.progress7206 <= 768;
+    if (!f->active) return;
+    f->progress = g.progress7206;
+    f->camx = g.cam7204 - 0x100;
+    f->shake = 0;
+    if (g.nova25334 && !(g.dframe & 2))
+        f->shake = g.nova25334 >= 0xBA ? 3 : ((g.nova25334 - 0x8A) >> 4);
+    for (int row = 0; row < 32; row++) for (int col = 0; col < 24; col++)
+        f->cells[row][col] = cw(0x44000 + (uint32_t)(480 + row) * 48 + (uint32_t)col * 2);
+}
+
+static void draw_opening_frame(int frame, Rectangle viewport)
+{
+    const struct OpeningFrame *f = &opening_frames[frame];
+    if (!f->active || !opening_ready) return;
+    uint32_t ids[32 * 24];
+    for (int row = 0; row < 32; row++) for (int col = 0; col < 24; col++)
+        ids[row * 24 + col] = 0xFF000000u | (uint32_t)(opening_tile_index(f->cells[row][col]) + 1);
+    UpdateTexture(opening_indices, ids);
+    BeginShaderMode(opening_shader);
+    SetShaderValueTexture(opening_shader, opening_atlas_loc, opening_atlas);
+    SetShaderValueTexture(opening_shader, opening_reference_loc, opening_reference);
+    /* Native coordinates expressed in 16px map cells; no independent camera. */
+    Rectangle source = { (f->camx + f->shake) / 16.0f, 32 - f->progress / 16.0f,
+                         BS_VIEW_W / 16.0f, BS_VIEW_H / 16.0f };
+    DrawTexturePro(opening_indices, source, viewport, (Vector2){0,0}, 0, WHITE);
+    EndShaderMode();
+}
+
 static int view_layers = BS_L_ALL;      /* play hides BS_L_HUD: the panel is drawn in the grey bar */
 static Texture2D rr_logo; static Font ui_font; static int ui_font_ok;
 static uint32_t title_base[BS_TITLE_W * BS_TITLE_H];
@@ -90,7 +132,7 @@ static void options_load(void)
         else if (!strcmp(k, "difficulty")) opt.difficulty = (int)v;
         else if (!strcmp(k, "weapon")) opt.weapon = (int)v;
         else if (!strcmp(k, "lives")) opt.lives = (int)v;
-        else if (!strcmp(k, "graphics") && (v == 0 || v == 1)) opt.graphics = (int)v;
+        else if (!strcmp(k, "graphics") && (v >= 0 && v <= 2)) opt.graphics = (int)v;
         else if (!strcmp(k, "continues") && v >= 0 && v < 5) opt.continues = (int)v;
         else if (!strcmp(k, "hiscore")) opt.hiscore = v;
     }
@@ -101,7 +143,8 @@ static void options_apply(void)
 {
     audio_set(opt.master / 10.0f, opt.music_on == 1, opt.sfx_on);
     render_hiscore = (int)opt.hiscore;
-    render_enhanced = opt.graphics;
+    render_enhanced = opt.graphics == 1;
+    render_remaster = opt.graphics == 2 && opening_ready;
 #ifndef __ANDROID__
     if (opt.fullscreen != IsWindowFullscreen()) {
         if (opt.fullscreen) {
@@ -252,7 +295,10 @@ static int nav_ok(void)
 
 static void hook(void)               /* eng_display_hook: one display frame rendered */
 {
-    if (hook_n < 2) render_frame(cbuf[hook_n], view_layers);
+    if (hook_n < 2) {
+        capture_opening_frame(hook_n);
+        render_frame(cbuf[hook_n], view_layers);
+    }
     hook_n++;
 }
 
@@ -296,6 +342,8 @@ static void demo_enter(void)
     render_stage(&data);
     view_layers = BS_L_ALL;                          /* the attract pages use the game's own panel labels */
     render_frame(cbuf[0], view_layers);
+    capture_opening_frame(0);
+    opening_frames[1] = opening_frames[0];
     memcpy(cbuf[1], cbuf[0], sizeof cbuf[0]);
     hook_n = 2;
     mode = 3;
@@ -313,6 +361,8 @@ static void start_game(void)
     audio_start_game();
     view_layers = BS_L_ALL & ~BS_L_HUD;              /* the status panel is drawn in the grey bar */
     render_frame(cbuf[0], view_layers);
+    capture_opening_frame(0);
+    opening_frames[1] = opening_frames[0];
     memcpy(cbuf[1], cbuf[0], sizeof cbuf[0]);
     hook_n = 2;
     paused = 0;
@@ -332,7 +382,8 @@ static void end_game(void)
     if (s1 > opt.hiscore) opt.hiscore = s1;
     if (s2 > opt.hiscore) opt.hiscore = s2;
     render_hiscore = (int)opt.hiscore;
-    render_enhanced = opt.graphics;
+    render_enhanced = opt.graphics == 1;
+    render_remaster = opt.graphics == 2 && opening_ready;
     options_save();
     { char nm[8];
       for (int i = 0; i < 2; i++) {
@@ -718,7 +769,7 @@ static void option_adjust(int d)
     case 5: opt.lives = opt.lives + d; if (opt.lives < 1) opt.lives = 1; if (opt.lives > 4) opt.lives = 4; break;
     case 6: opt.fullscreen = !opt.fullscreen; break;
     case 7: opt.continues = (opt.continues + d + 5) % 5; break;
-    case 8: opt.graphics = !opt.graphics; break;
+    case 8: opt.graphics = (opt.graphics + d + 3) % 3; break;
     }
     options_apply();
     options_save();
@@ -1326,6 +1377,24 @@ int main(int argc, char **argv)
     SetExitKey(KEY_NULL);
     SetTargetFPS(50);
     audio_init();
+    opening_atlas = LoadTexture("assets/remaster/opening-tiles-ai-v1.png");
+    if (opening_atlas.id) SetTextureFilter(opening_atlas, TEXTURE_FILTER_BILINEAR);
+    opening_reference = LoadTexture("assets/remaster/opening-tiles-reference.png");
+    uint32_t blank_indices[32 * 24] = {0};
+    Image index_image = { .data = blank_indices, .width = 24, .height = 32, .mipmaps = 1,
+                          .format = PIXELFORMAT_UNCOMPRESSED_R8G8B8A8 };
+    opening_indices = LoadTextureFromImage(index_image);
+#ifdef __ANDROID__
+    opening_shader = LoadShader(NULL, "assets/remaster/opening-100.fs");
+#else
+    opening_shader = LoadShader(NULL, "assets/remaster/opening-330.fs");
+#endif
+    opening_atlas_loc = GetShaderLocation(opening_shader, "atlas");
+    opening_reference_loc = GetShaderLocation(opening_shader, "originalAtlas");
+    opening_ready = opening_atlas.id && opening_reference.id && opening_indices.id &&
+                    opening_atlas_loc >= 0 && opening_reference_loc >= 0;
+    if (!opening_ready) TraceLog(LOG_WARNING, "AI opening preview unavailable; using original terrain");
+    if (getenv("BS_AI_PREVIEW")) opt.graphics = 2;
     options_apply();
 
     Image img = { .data = show, .width = BS_VIEW_W, .height = BS_VIEW_H,
@@ -1507,6 +1576,8 @@ int main(int argc, char **argv)
         float fs_ = sx_ < sy_ ? sx_ : sy_;
         if (fs_ < 1) fs_ = 1;
         int dw = (int)(cw * fs_), dh = (int)(ch * fs_);                 /* aspect-correct fit */
+        Rectangle game_viewport = { (float)((sw - dw) / 2), (float)(top + (view_h - dh) / 2), (float)dw, (float)dh };
+        if (!title_pic && mode == 1) draw_opening_frame((vbl & 1) < hook_n ? (int)(vbl & 1) : 0, game_viewport);
         DrawTexturePro(title_pic ? ttex : tex, (Rectangle){ 0, 0, (float)cw, (float)ch },
                        (Rectangle){ (float)((sw - dw) / 2), (float)(top + (view_h - dh) / 2), (float)dw, (float)dh },
                        (Vector2){ 0, 0 }, 0, WHITE);
@@ -1570,7 +1641,7 @@ int main(int argc, char **argv)
                     case 5: snprintf(val, sizeof val, "%d", opt.lives); break;
                     case 6: snprintf(val, sizeof val, "%s", opt.fullscreen ? "ON" : "OFF"); break;
                     case 7: snprintf(val, sizeof val, "%s", CONTINUE_NAMES[opt.continues]); break;
-                    case 8: snprintf(val, sizeof val, "%s", opt.graphics ? "ENHANCED" : "ORIGINAL"); break;
+                    case 8: snprintf(val, sizeof val, "%s", opt.graphics == 2 ? "AI PREVIEW" : opt.graphics ? "ENHANCED" : "ORIGINAL"); break;
                     }
                     snprintf(row, sizeof row, "%s%s%s", LBL[i], val[0] ? "   " : "", val);
                     menu_row(103 + i * 9, row, opt_sel == i, fs - 6, (Color){ 185, 195, 215, 255 });
@@ -1629,6 +1700,10 @@ int main(int argc, char **argv)
     options_save();
     video_close();
     audio_close();
+    if (opening_atlas.id) UnloadTexture(opening_atlas);
+    if (opening_reference.id) UnloadTexture(opening_reference);
+    if (opening_indices.id) UnloadTexture(opening_indices);
+    if (opening_shader.id) UnloadShader(opening_shader);
     CloseWindow();
     return 0;
 }

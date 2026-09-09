@@ -64,5 +64,29 @@ int main(void) {
     g.demo=1;
     render_frame(original,BS_L_ALL); render_enhanced=1; render_frame(enhanced,BS_L_ALL);
     assert(!memcmp(original,enhanced,sizeof original));
+    /* Opening redraw only opens terrain alpha; RGB and gameplay stay intact. */
+    g.demo=0; g.stage7228=0; g.hangars4099=0; g.progress7206=500;
+    render_enhanced=0; render_remaster=0;
+    before=g;
+    render_frame(original,BS_L_ALL);
+    render_remaster=1; render_frame(enhanced,BS_L_ALL);
+    int transparent=0, fading=0;
+    for(int i=0;i<BS_VIEW_W*BS_VIEW_H;i++) {
+        assert((original[i]&0xFFFFFFu)==(enhanced[i]&0xFFFFFFu));
+        unsigned alpha=enhanced[i]>>24;
+        transparent += alpha==0;
+        fading += alpha>0 && alpha<255;
+    }
+    assert(transparent>0 && fading>0);
+    assert(!memcmp(&before,&g,sizeof g));
+    for(int scenario=0;scenario<4;scenario++) {
+        g.progress7206=scenario==0?800:500;
+        g.demo=scenario==1; g.stage7228=scenario==2; g.hangars4099=scenario==3;
+        render_remaster=0; render_frame(original,BS_L_ALL);
+        render_remaster=1; render_frame(enhanced,BS_L_ALL);
+        assert(!memcmp(original,enhanced,sizeof original));
+    }
+    render_remaster=0;
+    puts("PASS: opening preview preserves RGB/game state, fades out, excludes later terrain/demo/other stages/sublevels");
     puts("PASS: 2x autofire, all weapons/upgrades/players; graphics reversible, deterministic, state unchanged, demo unchanged");
 }

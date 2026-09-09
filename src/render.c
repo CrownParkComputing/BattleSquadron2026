@@ -15,6 +15,7 @@
 #include <string.h>
 #include "engine/engine.h"
 #include "render.h"
+#include "remaster.h"
 #include <stdlib.h>
 
 /* empirical sprite-position calibration vs the oracle shots (framecmp); env
@@ -39,6 +40,7 @@ static void calib(void)
 
 int render_hiscore = 1000000;
 int render_enhanced;
+int render_remaster;
 
 static uint32_t pal_rgba[32];            /* current frame palette */
 static int cur_stage = -1;
@@ -191,7 +193,15 @@ static void draw_terrain(uint32_t *rgba)
             while (bit >= 0 && sx < BS_VIEW_W) {
                 int c = 0;
                 for (int p = 0; p < 5; p++) c |= ((pl[p] >> bit) & 1) << p;
-                out[sx++] = pal_rgba[c];
+                uint32_t colour = pal_rgba[c];
+                if (render_remaster && !g.demo && g.stage7228 == 0 && !g.hangars4099 &&
+                    q >= 1 && q <= 512 && opening_tile_index(word) >= 0) {
+                    /* Leave a window onto the HD terrain drawn by the frontend.
+                     * Fade out over the final two tile rows of this prototype. */
+                    unsigned alpha = q > 480 ? (unsigned)(q - 480) * 255 / 32 : 0;
+                    colour = (colour & 0x00FFFFFFu) | (alpha << 24);
+                }
+                out[sx++] = colour;
                 cx++; bit--;
             }
         }
