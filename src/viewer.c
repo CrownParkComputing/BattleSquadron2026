@@ -54,21 +54,25 @@ static int sp_auto_zoom = 1;     /* sprite page: scale the bob to fill the windo
 static int start_mode = -1;      /* BS_START_MODE: jump straight to a page (testing) */               /* --debugshots: screenshot the debug screens, exit */
 static int paused, pause_sel, opt_return, title_guard, continue_prompt;   /* opt_return: 0 = title, 1 = back into the paused game */
 static int opt_sel;
+#define OPTION_COUNT 9
+static const int CONTINUE_LIMITS[] = { 0, 3, 5, 7, -1 };
+static const char *CONTINUE_NAMES[] = { "OFF", "3", "5", "7", "UNLIMITED" };
 static int players_sel = 1;
 static long vbl;
 
 static struct {
     int master, music_on, sfx_on, fullscreen, difficulty, weapon, lives;
     long hiscore;
-} opt = { 10, 1, 1, 0, 1, 3, 3, 1000000 };   /* volume 10 = the machine's own output level */
+    int continues;
+} opt = { 10, 1, 1, 0, 1, 3, 3, 1000000, 4 };   /* volume 10 = the machine's own output level */
 
 static void options_save(void)
 {
     FILE *f = fopen("options.txt", "w");
     if (!f) return;
-    fprintf(f, "master %d\nmusic %d\nsfx %d\nfullscreen %d\ndifficulty %d\nweapon %d\nlives %d\nhiscore %ld\n",
+    fprintf(f, "master %d\nmusic %d\nsfx %d\nfullscreen %d\ndifficulty %d\nweapon %d\nlives %d\nhiscore %ld\ncontinues %d\n",
             opt.master, opt.music_on, opt.sfx_on, opt.fullscreen, opt.difficulty,
-            opt.weapon, opt.lives, opt.hiscore);
+            opt.weapon, opt.lives, opt.hiscore, opt.continues);
     fclose(f);
 }
 
@@ -86,6 +90,7 @@ static void options_load(void)
         else if (!strcmp(k, "difficulty")) opt.difficulty = (int)v;
         else if (!strcmp(k, "weapon")) opt.weapon = (int)v;
         else if (!strcmp(k, "lives")) opt.lives = (int)v;
+        else if (!strcmp(k, "continues") && v >= 0 && v < 5) opt.continues = (int)v;
         else if (!strcmp(k, "hiscore")) opt.hiscore = v;
     }
     fclose(f);
@@ -301,6 +306,7 @@ static void start_game(void)
     data.stage = -1;                     /* always reload: the title left LODMUS over LODS0S */
     bs_load_stage(&data, 0);
     eng_init(0, players_sel, opt.weapon, opt.lives, opt.difficulty);
+    g.continues_left[0] = g.continues_left[1] = CONTINUE_LIMITS[opt.continues];
     render_stage(&data);
     audio_start_game();
     view_layers = BS_L_ALL & ~BS_L_HUD;              /* the status panel is drawn in the grey bar */
@@ -419,7 +425,7 @@ static void menu_backdrop(uint32_t *c, int y0, int y1)
      * soft, low-resolution Amiga look while cutting the title's most costly
      * CPU loop by 75%--important on Android, where a slow menu starved audio. */
     for (int y = y0; y < y1; y += 2) {
-        for (int x = 8; x < BS_TITLE_W - 8; x += 2) {
+        for (int x = 0; x < BS_TITLE_W; x += 2) {
             /* two octaves scrolling at different speeds: the clouds shear as they pass */
             float n = bd_noise(x * 0.035f + t * 0.35f, y * 0.05f + t * 0.08f) * 0.65f
                     + bd_noise(x * 0.085f - t * 0.6f, y * 0.11f + t * 0.15f) * 0.35f;
@@ -428,10 +434,10 @@ static void menu_backdrop(uint32_t *c, int y0, int y1)
             uint32_t r = (uint32_t)(n * 54), g_ = (uint32_t)(n * 34), b = (uint32_t)(n * 96);
             uint32_t col = 0xFF000000u | (b << 16) | (g_ << 8) | r;
             c[y * BS_TITLE_W + x] = col;
-            if (x + 1 < BS_TITLE_W - 8) c[y * BS_TITLE_W + x + 1] = col;
+            if (x + 1 < BS_TITLE_W) c[y * BS_TITLE_W + x + 1] = col;
             if (y + 1 < y1) {
                 c[(y + 1) * BS_TITLE_W + x] = col;
-                if (x + 1 < BS_TITLE_W - 8) c[(y + 1) * BS_TITLE_W + x + 1] = col;
+                if (x + 1 < BS_TITLE_W) c[(y + 1) * BS_TITLE_W + x + 1] = col;
             }
         }
     }
@@ -460,7 +466,16 @@ static void copy_title_base(uint32_t *c)
         render_title(title_base);
         title_base_ready = 1;
     }
-    memcpy(c, title_base, sizeof title_base);
+    menu_backdrop(c, 0, BS_TITLE_H);
+    /* Colour-key the black matte; let the stars show faintly through the art. */
+    for (int i = 0; i < BS_TITLE_W * 90; i++) {
+        uint32_t fg = title_base[i];
+        if ((fg & 0x00FFFFFFu) == 0) continue;
+        uint32_t bg = c[i], mixed = 0xFF000000u;
+        for (int shift = 0; shift < 24; shift += 8)
+            mixed |= ((((fg >> shift) & 255) * 7 + ((bg >> shift) & 255)) / 8) << shift;
+        c[i] = mixed;
+    }
 }
 
 static void draw_title(uint32_t *c)
@@ -468,14 +483,14 @@ static void draw_title(uint32_t *c)
     copy_title_base(c);
     /* measured bands of the baked picture: 1UP/2UP 95..102, F1..F4 105..117,
      * FX/MUSIC text 119..130, F5 + player line 144..156, PRESS BUTTON 165..178 */
-    menu_backdrop(c, 90, 190);
+
 
 }
 
 static void draw_options(uint32_t *c)            /* same chip font / look as the title menu */
 {
     copy_title_base(c);
-    menu_backdrop(c, 90, 200);
+
 }
 
 /* the option rows themselves are drawn in the raylib layer (draw_menu_overlay) */
@@ -699,6 +714,7 @@ static void option_adjust(int d)
     case 4: opt.weapon = (opt.weapon + d + 4) % 4; break;
     case 5: opt.lives = opt.lives + d; if (opt.lives < 1) opt.lives = 1; if (opt.lives > 4) opt.lives = 4; break;
     case 6: opt.fullscreen = !opt.fullscreen; break;
+    case 7: opt.continues = (opt.continues + d + 5) % 5; break;
     }
     options_apply();
     options_save();
@@ -715,7 +731,7 @@ static void overlay_initials(uint32_t *c)
                      p->initials[0], p->initials[1], p->initials[2],
                      (vbl & 8) ? (p->cursor42 < 3 ? '_' : ']') : p->initials[3]);
             text_c(c, 150 + i * 14, buf, WHITE32);
-        } else continue_prompt |= 1 << i;            /* drawn in the bar: the board keeps its rows */
+        } else if (g.continues_left[i] != 0) continue_prompt |= 1 << i;            /* drawn in the bar: the board keeps its rows */
     }
 }
 
@@ -760,7 +776,7 @@ static void hs_submit(const char *name, long score, int shots, int hits)
 static void draw_hiscores(uint32_t *c)          /* same chip font as the title menu */
 {
     copy_title_base(c);
-    menu_backdrop(c, 90, 200);
+
 }
 
 static void draw_hiscore_rows_unused(void)
@@ -773,57 +789,48 @@ static void draw_hiscore_rows_unused(void)
  * All navigable with the controller cursor (left stick / d-pad moves, A
  * clicks) or the mouse, exactly like SWIV's viewer.c. */
 
-/* ---- controller cursor: virtual pointer on the first pad, A = click ---- */
-static Vector2 vptr = { 430, 600 }; static int vptr_on, vclick, vdown;
-static void vptr_update(int menus_active)
+/* Debug controls: ordinary focus navigation, no joypad mouse cursor. */
+static RenderTexture2D debug_target;
+static Rectangle debug_dest;
+static int debug_drawing, debug_focus, debug_count, debug_previous_count, debug_accept;
+static Rectangle debug_buttons[128], debug_previous_buttons[128];
+static Vector2 ui_mouse(void)
 {
-    vclick = vdown = 0;
-    int p = real_pad(0);
-    if (p < 0 || !menus_active) { vptr_on = 0; return; }
-    float ax = GetGamepadAxisMovement(p, GAMEPAD_AXIS_LEFT_X);
-    float ay = GetGamepadAxisMovement(p, GAMEPAD_AXIS_LEFT_Y);
-    if (IsGamepadButtonDown(p, GAMEPAD_BUTTON_LEFT_FACE_LEFT)) ax = -1;
-    if (IsGamepadButtonDown(p, GAMEPAD_BUTTON_LEFT_FACE_RIGHT)) ax = 1;
-    if (IsGamepadButtonDown(p, GAMEPAD_BUTTON_LEFT_FACE_UP)) ay = -1;
-    if (IsGamepadButtonDown(p, GAMEPAD_BUTTON_LEFT_FACE_DOWN)) ay = 1;
-    if (ax > -0.25f && ax < 0.25f) ax = 0;
-    if (ay > -0.25f && ay < 0.25f) ay = 0;
-    if (ax != 0 || ay != 0) { vptr.x += ax * 12; vptr.y += ay * 12; vptr_on = 1; }
-    int sw = GetScreenWidth(), sh = GetScreenHeight();
-    if (vptr.x < 0) vptr.x = 0;
-    if (vptr.x > sw - 1) vptr.x = (float)(sw - 1);
-    if (vptr.y < 0) vptr.y = 0;
-    if (vptr.y > sh - 1) vptr.y = (float)(sh - 1);
-    if (IsGamepadButtonPressed(p, GAMEPAD_BUTTON_RIGHT_FACE_DOWN)) { vclick = 1; vptr_on = 1; }
-    if (IsGamepadButtonDown(p, GAMEPAD_BUTTON_RIGHT_FACE_DOWN)) vdown = 1;
-    if (GetMouseDelta().x != 0 || GetMouseDelta().y != 0) vptr_on = 0;
+    Vector2 p = GetMousePosition();
+    if (debug_drawing) {
+        p.x = (p.x - debug_dest.x) * 1100 / debug_dest.width;
+        p.y = (p.y - debug_dest.y) * 760 / debug_dest.height;
+    }
+    return p;
 }
-static void vptr_draw(void)
-{
-    if (!vptr_on) return;
-    DrawCircleV(vptr, 11, (Color){ 0, 0, 0, 150 });
-    DrawCircleV(vptr, 8, (Color){ 255, 238, 136, 255 });
-}
-static int ui_pressed(void) { return IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || vclick; }
-static int ui_down(void) { return IsMouseButtonDown(MOUSE_BUTTON_LEFT) || vdown; }
-static int ui_hit(Rectangle r)
-{
-    Vector2 p = vptr_on ? vptr : GetMousePosition();
-    return CheckCollisionPointRec(p, r);
-}
+static int ui_pressed(void) { return IsMouseButtonPressed(MOUSE_BUTTON_LEFT); }
+static int ui_down(void) { return IsMouseButtonDown(MOUSE_BUTTON_LEFT); }
+static int ui_hit(Rectangle r) { return CheckCollisionPointRec(ui_mouse(), r); }
 static int button(Rectangle r, const char *label, int active)
 {
+    int id = debug_count++;
+    if (id < 128) debug_buttons[id] = r;
+    int focus = debug_drawing && id == debug_focus;
     int hot = ui_hit(r);
-    Color bg = active ? (Color){ 70, 130, 200, 255 } : hot ? (Color){ 80, 80, 90, 255 }
-                                                          : (Color){ 50, 50, 58, 255 };
+    Color bg = focus ? (Color){ 45, 82, 135, 255 } : active ? (Color){ 55, 100, 155, 255 }
+                     : hot ? (Color){ 80, 80, 90, 255 } : (Color){ 40, 42, 52, 255 };
     DrawRectangleRec(r, bg);
-    DrawRectangleLinesEx(r, 1, (Color){ 120, 120, 130, 255 });
+    DrawRectangleLinesEx(r, focus ? 3 : 1, focus ? GOLD : (Color){ 120, 120, 130, 255 });
     int fs = 18, tw = ui_measure(label, fs);
     while (tw > r.width - 6 && fs > 8) { fs -= 2; tw = ui_measure(label, fs); }
     ui_text(label, (int)(r.x + (r.width - tw) / 2), (int)(r.y + (r.height - fs) / 2), fs, RAYWHITE);
-    return hot && ui_pressed();
+    if (hot && ui_pressed()) { debug_focus = id; debug_accept = 0; return 1; }
+    if (focus && debug_accept) { debug_accept = 0; return 1; }
+    return 0;
 }
-static int held(Rectangle r) { return ui_hit(r) && ui_down(); }
+static int held(Rectangle r)
+{
+    int p = real_pad(0);
+    int focused = debug_focus < debug_previous_count && debug_focus < 128 &&
+                  debug_previous_buttons[debug_focus].x == r.x && debug_previous_buttons[debug_focus].y == r.y;
+    return (ui_hit(r) && ui_down()) || (focused &&
+        (IsKeyDown(KEY_ENTER) || (p >= 0 && IsGamepadButtonDown(p, GAMEPAD_BUTTON_RIGHT_FACE_DOWN))));
+}
 
 static int debug_ui;                     /* title DEBUG toggle */
 static int dbg_stage;                    /* stage shown in MAP/SPRITES (0..3) */
@@ -1066,9 +1073,24 @@ static void debug_leave(void)            /* back to the title: original overlay 
 /* one full display frame of any debug screen (modes 4/5/6): input + draw */
 static void debug_frame(void)
 {
-    int sw = GetScreenWidth(), sh = GetScreenHeight();
+    int sw = 1100, sh = 760;
+    float scale = fminf((GetScreenWidth() - 32) / 1100.0f, (GetScreenHeight() - 64) / 760.0f);
+    debug_dest = (Rectangle){ (GetScreenWidth() - sw * scale) / 2,
+                             (GetScreenHeight() - sh * scale) / 2, sw * scale, sh * scale };
+    if (!debug_target.id) {
+        debug_target = LoadRenderTexture(sw, sh);
+        SetTextureFilter(debug_target.texture, TEXTURE_FILTER_BILINEAR);
+    }
+    static int last_debug_mode = -1;
+    if (last_debug_mode != mode) { debug_focus = mode - 4; debug_previous_count = 0; last_debug_mode = mode; }
+    int step = nav_dy();
+    if (!step) step = nav_dx();
+    if (debug_previous_count) debug_focus = (debug_focus + step + debug_previous_count) % debug_previous_count;
+    debug_accept = nav_ok();
+    debug_count = 0;
+    debug_drawing = 1;
     int bar = 42;
-    BeginDrawing();
+    BeginTextureMode(debug_target);
     ClearBackground((Color){ 24, 24, 30, 255 });
     /* shared top bar */
     if (button((Rectangle){ 4, 4, 84, 34 }, "MAP", mode == 4)) mode = 4;
@@ -1081,28 +1103,29 @@ static void debug_frame(void)
         }
     if (button((Rectangle){ (float)(sw - 88), 4, 84, 34 }, "TITLE", 0) || nav_back()) {
         debug_leave();
-        EndDrawing();
+        debug_drawing = 0;
+        EndTextureMode();
         return;
     }
 
     if (mode == 4) {                     /* ---------- MAP ---------- */
         map_build();
+        int map_x = (sw - MAP_PXW * 2) / 2;
         int vh = sh - bar, vrows = vh / 2;
         float maxs = (float)(MAP_PXH - vrows);
         if (button((Rectangle){ 520, 4, 110, 34 }, "TRIGGERS", map_overlay)) map_overlay ^= 1;
         map_scroll -= GetMouseWheelMove() * 48;
-        if (IsKeyDown(KEY_UP)) map_scroll -= 8;
-        if (IsKeyDown(KEY_DOWN)) map_scroll += 8;
+
         if (IsKeyDown(KEY_PAGE_UP)) map_scroll -= 64;
         if (IsKeyDown(KEY_PAGE_DOWN)) map_scroll += 64;
-        { int p = real_pad(0);           /* shoulder buttons scroll (cursor owns the stick) */
+        { int p = real_pad(0);           /* shoulder buttons scroll; D-pad moves focus */
           if (p >= 0) { if (IsGamepadButtonDown(p, GAMEPAD_BUTTON_LEFT_TRIGGER_1)) map_scroll -= 10;
                         if (IsGamepadButtonDown(p, GAMEPAD_BUTTON_RIGHT_TRIGGER_1)) map_scroll += 10; } }
         static int dragging;
-        Vector2 mp = GetMousePosition();
-        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) && (dragging || (mp.y > bar && mp.x < 768))) {
+        Vector2 mp = ui_mouse();
+        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) && (dragging || (mp.y > bar && mp.x >= map_x && mp.x < map_x + 768))) {
             dragging = 1;
-            map_scroll -= GetMouseDelta().y / 2;
+            map_scroll -= GetMouseDelta().y / (2 * scale);
         } else dragging = 0;
         if (held((Rectangle){ (float)(sw - 88), (float)(bar + 4), 84, 40 })) map_scroll -= 6;
         if (held((Rectangle){ (float)(sw - 88), (float)(sh - 46), 84, 40 })) map_scroll += 6;
@@ -1110,13 +1133,13 @@ static void debug_frame(void)
         if (map_scroll > maxs) map_scroll = maxs;
         if (map_tex.id)
             DrawTexturePro(map_tex, (Rectangle){ 0, map_scroll, MAP_PXW, (float)vrows },
-                           (Rectangle){ 0, (float)bar, MAP_PXW * 2, (float)vh }, (Vector2){ 0, 0 }, 0, WHITE);
+                           (Rectangle){ (float)map_x, (float)bar, MAP_PXW * 2, (float)vh }, (Vector2){ 0, 0 }, 0, WHITE);
         if (map_overlay) {
             for (int i = 0; i < n_trig_hits; i++) {
                 const TrigHit *t = &trig_hits[i];
                 float ty = t->row * 16.0f;
                 if (ty + 16 < map_scroll || ty > map_scroll + vrows) continue;
-                float y = bar + (ty - map_scroll) * 2, x = t->col * 32.0f;
+                float y = bar + (ty - map_scroll) * 2, x = map_x + t->col * 32.0f;
                 Rectangle box = { x, y, 32, 32 };
                 DrawRectangleLinesEx(box, 2, RED);
                 if (ui_hit(box)) {       /* name on hover to keep the map readable */
@@ -1133,10 +1156,10 @@ static void debug_frame(void)
                     float ty = gate_row(GATES[gi].progress) * 16.0f;
                     if (ty < map_scroll || ty > map_scroll + vrows) continue;
                     float y = bar + (ty - map_scroll) * 2;
-                    DrawLineEx((Vector2){ 0, y }, (Vector2){ MAP_PXW * 2, y }, 2, SKYBLUE);
+                    DrawLineEx((Vector2){ map_x, y }, (Vector2){ map_x + MAP_PXW * 2, y }, 2, SKYBLUE);
                     char l[64];
                     snprintf(l, sizeof l, "GATE %d (progress $%X, col %d)", gi + 1, GATES[gi].progress, GATES[gi].col);
-                    ui_text(l, GATES[gi].col * 32, (int)y - 14, 12, SKYBLUE);
+                    ui_text(l, map_x + GATES[gi].col * 32, (int)y - 14, 12, SKYBLUE);
                 }
         }
         button((Rectangle){ (float)(sw - 88), (float)(bar + 4), 84, 40 }, "UP", 0);
@@ -1164,8 +1187,8 @@ static void debug_frame(void)
         if (button((Rectangle){ 340, (float)r1, 44, 34 }, "<", 0) || IsKeyPressed(KEY_PAGE_UP)) { sp_idx = (sp_idx + n - 1) % n; sp_frame = 0; }
         if (button((Rectangle){ 388, (float)r1, 44, 34 }, ">", 0) || IsKeyPressed(KEY_PAGE_DOWN)) { sp_idx = (sp_idx + 1) % n; sp_frame = 0; }
         sp_idx = (sp_idx + n - (int)GetMouseWheelMove()) % n;
-        if (button((Rectangle){ 448, (float)r1, 60, 34 }, "< FR", 0) || IsKeyPressed(KEY_LEFT)) sp_frame = (sp_frame + sp_nframes - 1) % (sp_nframes ? sp_nframes : 1);
-        if (button((Rectangle){ 512, (float)r1, 60, 34 }, "FR >", 0) || IsKeyPressed(KEY_RIGHT)) sp_frame = (sp_frame + 1) % (sp_nframes ? sp_nframes : 1);
+        if (button((Rectangle){ 448, (float)r1, 60, 34 }, "< FR", 0)) sp_frame = (sp_frame + sp_nframes - 1) % (sp_nframes ? sp_nframes : 1);
+        if (button((Rectangle){ 512, (float)r1, 60, 34 }, "FR >", 0)) sp_frame = (sp_frame + 1) % (sp_nframes ? sp_nframes : 1);
         if (button((Rectangle){ 588, (float)r1, 70, 34 }, "ANIM", sp_anim)) sp_anim ^= 1;
         char zl[8];
         snprintf(zl, sizeof zl, "x%d", sp_zoom);
@@ -1205,7 +1228,7 @@ static void debug_frame(void)
     } else {                             /* ---------- SFX / MUSIC ---------- */
         static float sc;
         int row_h = 40, list_y = bar + 30, list_h = sh - list_y - 30, lw = sw / 2 - 30;
-        ui_text("SFX TRIGGERS (LODGAM $2470E)", 8, bar + 6, 16, (Color){ 255, 238, 136, 255 });
+        ui_text("SOUND EFFECTS", 8, bar + 6, 16, (Color){ 255, 238, 136, 255 });
         sc -= GetMouseWheelMove() * row_h * 2;
         { int p = real_pad(0);
           if (p >= 0) { if (IsGamepadButtonDown(p, GAMEPAD_BUTTON_RIGHT_TRIGGER_1)) sc += 8;
@@ -1226,7 +1249,7 @@ static void debug_frame(void)
         }
         EndScissorMode();
         int mx = lw + 24;
-        ui_text("MUSIC (LODGAM tracks)", mx, bar + 6, 16, (Color){ 255, 238, 136, 255 });
+        ui_text("MUSIC", mx, bar + 6, 16, (Color){ 255, 238, 136, 255 });
         for (int t = 0; t < 10; t++) {
             Rectangle r = { (float)(mx + (t % 2) * ((sw - mx - 24) / 2)), (float)(list_y + (t / 2) * 44), (float)((sw - mx - 40) / 2), 38 };
             if (button(r, TRACK_NAMES[t], sfx_amode == 1 && sfx_track == t + 1)) sfx_music(t + 1);
@@ -1241,7 +1264,15 @@ static void debug_frame(void)
         DrawRectangle(0, sh - 22, sw, 22, (Color){ 0, 0, 0, 170 });
         ui_text("re/sfx_triggers.txt routed through src/audio.c (LODGAM driver); leaving restores the title audio", 6, sh - 18, 14, RAYWHITE);
     }
-    vptr_draw();
+    debug_previous_count = debug_count;
+    memcpy(debug_previous_buttons, debug_buttons, sizeof debug_buttons);
+    debug_drawing = 0;
+    EndTextureMode();
+    BeginDrawing();
+    ClearBackground((Color){ 10, 12, 20, 255 });
+    DrawTexturePro(debug_target.texture, (Rectangle){ 0, 0, 1100, -760 }, debug_dest, (Vector2){0,0}, 0, WHITE);
+    const char *hint = "D-pad: select   A: activate   B: title   LB/RB: scroll";
+    ui_text(hint, (GetScreenWidth() - ui_measure(hint, 18)) / 2, GetScreenHeight() - 25, 18, LIGHTGRAY);
     EndDrawing();
 }
 
@@ -1350,7 +1381,7 @@ int main(int argc, char **argv)
             if (vbl == 164) TakeScreenshot("build/debug_sfx.png");
             if (vbl >= 170) break;
         }
-        vptr_update(mode >= 4 && mode <= 6);
+
         if (mode >= 4 && mode <= 6) {                /* DEBUG screens own the whole frame (7 = high scores) */
             debug_frame();
             vbl++;
@@ -1359,7 +1390,7 @@ int main(int argc, char **argv)
         if (mode == 0) {                             /* title: the original's F-key menu */
             title_idle++;
             if (GetKeyPressed() || pad_joy(0) || pad_joy(1) || joy_p1() || joy_p2() ||
-                vptr_on || GetMouseDelta().x != 0 || GetMouseDelta().y != 0) title_idle = 0;
+                GetMouseDelta().x != 0 || GetMouseDelta().y != 0) title_idle = 0;
             if (IsKeyPressed(KEY_F9)) debug_ui = !debug_ui;
             { int dy = nav_dy();
               if (title_guard) title_guard--;
@@ -1410,11 +1441,11 @@ int main(int argc, char **argv)
             draw_hiscores(tshow);
         } else if (mode == 2) {                      /* options */
             int d = nav_dy();
-            opt_sel = (opt_sel + d + 8) % 8;
+            opt_sel = (opt_sel + d + OPTION_COUNT) % OPTION_COUNT;
             int dx = nav_dx();
             if (dx) option_adjust(dx);
-            if (nav_ok() && opt_sel == 7) { mode = opt_return ? 1 : 0; opt_return = 0; }
-            else if (nav_ok() && opt_sel != 7) option_adjust(1);
+            if (nav_ok() && opt_sel == OPTION_COUNT - 1) { mode = opt_return ? 1 : 0; opt_return = 0; }
+            else if (nav_ok() && opt_sel != OPTION_COUNT - 1) option_adjust(1);
             if (nav_back() || pad_start_pressed()) { mode = opt_return ? 1 : 0; opt_return = 0; }
             draw_options(tshow);
         } else {                                     /* play */
@@ -1500,9 +1531,16 @@ int main(int argc, char **argv)
         if (in_game) draw_side_stats(sw, (sw - dw) / 2, (sw - dw) / 2 + dw);
         if (in_demo) draw_side_controls(sw, (sw - dw) / 2, (sw - dw) / 2 + dw);
         if (in_game && continue_prompt && (vbl & 16)) {   /* initials entered: wait for fire */
-            const char *cp = "PRESS FIRE TO CONTINUE";
+            char cp[96];
+            int pi = (continue_prompt & 1) ? 0 : 1;
+            if (g.continues_left[pi] < 0) snprintf(cp, sizeof cp, "P%d PRESS FIRE TO CONTINUE - UNLIMITED", pi + 1);
+            else snprintf(cp, sizeof cp, "P%d PRESS FIRE TO CONTINUE - %d LEFT", pi + 1, g.continues_left[pi]);
             int cfs = 30;
             ui_text(cp, (sw - ui_measure(cp, cfs)) / 2, sh - 70, cfs, (Color){ 255, 238, 136, 255 });
+        }
+        if (in_game && g.game_over8524) {
+            const char *cp = "GAME OVER - NO CONTINUES LEFT - PRESS A FOR TITLE";
+            ui_text(cp, (sw - ui_measure(cp, 24)) / 2, sh - 70, 24, GOLD);
         }
         if (!smoke && (mode == 0 || mode == 2 || mode == 7)) {
             menu_dx = (sw - dw) / 2; menu_dy = top + (view_h - dh) / 2; menu_dw = dw; menu_dh = dh;
@@ -1514,11 +1552,11 @@ int main(int argc, char **argv)
                 }
             } else if (mode == 2) {                   /* options */
                 static const char *DIFF[3] = { "EASY", "NORMAL", "HARD" };
-                static const char *LBL[8] = { "VOLUME", "MUSIC", "SOUND FX", "DIFFICULTY", "WEAPON",
-                                              "LIVES", "FULLSCREEN", "BACK" };
-                menu_row(92, "OPTIONS", 0, fs, (Color){ 255, 214, 92, 255 });
-                for (int i = 0; i < 8; i++) {
-                    char val[24] = "";
+                static const char *LBL[OPTION_COUNT] = { "VOLUME", "MUSIC", "SOUND FX", "DIFFICULTY", "WEAPON",
+                                              "LIVES", "FULLSCREEN", "CONTINUES", "BACK" };
+                menu_row(90, "OPTIONS", 0, fs, (Color){ 255, 214, 92, 255 });
+                for (int i = 0; i < OPTION_COUNT; i++) {
+                    char val[32] = "", row[80];
                     switch (i) {
                     case 0: snprintf(val, sizeof val, "%d", opt.master); break;
                     case 1: snprintf(val, sizeof val, "%s", MUSIC_NAME()); break;
@@ -1527,23 +1565,12 @@ int main(int argc, char **argv)
                     case 4: snprintf(val, sizeof val, "%s", W_NAMES[opt.weapon & 3]); break;
                     case 5: snprintf(val, sizeof val, "%d", opt.lives); break;
                     case 6: snprintf(val, sizeof val, "%s", opt.fullscreen ? "ON" : "OFF"); break;
-                    default: break;
+                    case 7: snprintf(val, sizeof val, "%s", CONTINUE_NAMES[opt.continues]); break;
                     }
-                    /* two columns: 0..3 left, 4..7 right */
-                    int col = i / 4, y = 112 + (i % 4) * 16;
-                    int lx = col ? 170 : 26, vx = col ? 298 : 154;
-                    int selr = (opt_sel == i);
-                    if (selr) {
-                        int sy = menu_dy + (y - 3) * menu_dh / BS_TITLE_H;
-                        int sx = menu_dx + (lx - 8) * menu_dw / BS_TITLE_W;
-                        int sw2 = (vx - lx + 20) * menu_dw / BS_TITLE_W, sh2 = 14 * menu_dh / BS_TITLE_H;
-                        DrawRectangle(sx, sy, sw2, sh2, (Color){ 30, 54, 92, 210 });
-                        DrawRectangleLines(sx, sy, sw2, sh2, (Color){ 120, 175, 240, 255 });
-                    }
-                    menu_at(lx, y, LBL[i], fs - 8, selr ? RAYWHITE : (Color){ 185, 190, 205, 255 }, 0);
-                    if (i != 7) menu_at(vx, y, val, fs - 8, selr ? RAYWHITE : (Color){ 225, 228, 236, 255 }, 1);
+                    snprintf(row, sizeof row, "%s%s%s", LBL[i], val[0] ? "   " : "", val);
+                    menu_row(103 + i * 9, row, opt_sel == i, fs - 6, (Color){ 185, 195, 215, 255 });
                 }
-                menu_row(194, "LEFT-RIGHT CHANGE   FIRE SELECT   B BACK", 0, fs - 14, (Color){ 150, 155, 170, 255 });
+                menu_row(191, "UP/DOWN SELECT   LEFT/RIGHT CHANGE   A SELECT   B BACK", 0, fs - 14, (Color){ 150, 155, 170, 255 });
             } else {                                  /* high scores: the game's own table, plus our stats */
                 static const char *D_NAME[3] = { "EASY", "NORM", "HARD" };
                 menu_row(92, "HIGH SCORES", 0, fs, (Color){ 255, 214, 92, 255 });

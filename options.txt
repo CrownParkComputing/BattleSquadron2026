@@ -6,3 +6,4 @@ difficulty 1
 weapon 3
 lives 3
 hiscore 1000000
+continues 4

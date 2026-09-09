@@ -57,6 +57,14 @@ and Android build targets.
 
 Player two joins at any time by pressing fire.
 
+Menus use D-pad/stick Up/Down to select, A to activate and B to go back.
+In the centred debug viewers, LB/RB scroll the map or sound list; mouse controls
+remain available. Options use Left/Right to change a value.
+
+**Continues** in Options offers Off, 3, 5, 7 or Unlimited (the default). Each
+player receives their own allowance at the start of a new game. A continue
+spends one allowance; ordinary respawns do not. Changes apply to the next game.
+
 ## Android
 
 The Android app is built from the same fully native C engine, renderer and

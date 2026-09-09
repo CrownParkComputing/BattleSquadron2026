@@ -140,6 +140,7 @@ typedef struct {
     Player   players[2];
     Player  *sel;                 /* -18624: the selected collision/score player of this game frame */
     uint8_t  reprocess;           /* native: LAB_79F2 re-entry request (turn_into_pickup) */
+    int16_t continues_left[2];   /* native: -1 unlimited, otherwise remaining per player */
     long     frame_no;            /* native: game frames run since eng_init */
     int stat_shots[2], stat_hits[2];   /* native stats only (not part of the original state) */
 } BsGame;

@@ -1219,7 +1219,14 @@ static void initials_4232(Player *p)                 /* LAB_4232 (the on-screen 
     } else p->f40 = 0;
 edit:
     if (p->f91) {                                    /* LAB_436C: done -> fire restarts the ship */
-        if ((p->joy44 & 0x10) && p->f45 == 0) player_restart_127e(p);
+        if (g.continues_left[p->index] == 0) {
+            p->hud68 = p->hud70 = 0x3E6;
+            return;
+        }
+        if ((p->joy44 & JOY_FIRE) && p->f45 == 0) {
+            if (g.continues_left[p->index] > 0) g.continues_left[p->index]--;
+            player_restart_127e(p);
+        }
         return;
     }
     if (--p->f120 == 0) goto complete;               /* $4266 timeout */
@@ -1407,6 +1414,7 @@ void eng_join_player2(void)
 void eng_init(int stage, int players, int weapon, int lives, int difficulty)
 {
     memset(&g, 0, sizeof g);
+    g.continues_left[0] = g.continues_left[1] = -1;
     render_count = 0;
     g.start_lives10059 = (int16_t)lives;
     g.start_weapon10060 = (int16_t)weapon;
