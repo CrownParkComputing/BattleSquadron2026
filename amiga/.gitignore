@@ -1,3 +1,6 @@
 build/
 __pycache__/
 *.o
+android/.gradle/
+android/app/.cxx/
+android/local.properties
