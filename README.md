@@ -65,6 +65,12 @@ remain available. Options use Left/Right to change a value.
 player receives their own allowance at the start of a new game. A continue
 spends one allowance; ordinary respawns do not. Changes apply to the next game.
 
+Live autofire runs at twice the original cadence for both players. The recorded
+attract demo retains its original timing. Graphics in Options switches between
+Original and Enhanced: smoother terrain scrolling, subtle surface parallax,
+ship shadows, blue engine exhaust and local explosion lighting. Enhanced is
+the default; the setting only changes rendering.
+
 ## Android
 
 The Android app is built from the same fully native C engine, renderer and

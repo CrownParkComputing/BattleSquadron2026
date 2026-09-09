@@ -107,12 +107,16 @@ build/test_stage_transition: tests/test_stage_transition.c src/render.c src/rend
 build/test_title_audio: tests/test_title_audio.c src/audio.c src/audio.h $(ENGINE) $(CORE) $(HDRS) | build
 	$(CC) $(CFLAGS) $< $(ENGINE) $(CORE) -lm -o $@
 
-regression-test: build/test_stage_transition build/test_title_audio build/test_continues
+regression-test: build/test_stage_transition build/test_title_audio build/test_continues build/test_presentation
 	./build/test_stage_transition
 	./build/test_title_audio
 	./build/test_continues
+	./build/test_presentation
 
 .PHONY: regression-test
 
 build/test_continues: tests/test_continues.c $(ENGINE) $(CORE) $(HDRS) | build
 	$(CC) $(CFLAGS) $< $(ENGINE) $(CORE) -o $@
+
+build/test_presentation: tests/test_presentation.c src/render.c src/render.h $(ENGINE) $(CORE) $(HDRS) | build
+	$(CC) $(CFLAGS) $< src/render.c $(ENGINE) $(CORE) -o $@

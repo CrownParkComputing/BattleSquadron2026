@@ -763,8 +763,11 @@ void player_fire(Player *p)                          /* LAB_3F54 */
         t += 12;
         g.stat_shots[p == &g.players[1]]++;          /* native stat */
     }
-    p->cooldown46 = p->fire_period28;
-    p->repeat57 = 0x0F;
+    /* Live autofire is twice the original cadence. Timers exclude the
+     * firing frame, so halve (period + 1), then subtract that frame again.
+     * The recorded attract demo retains its original timing. */
+    p->cooldown46 = g.demo ? p->fire_period28 : (p->fire_period28 > 0 ? p->fire_period28 / 2 : 0);
+    p->repeat57 = g.demo ? 0x0F : 7;
     sfx(cb(0x3F40 + (uint32_t)p->weapon58));
 }
 

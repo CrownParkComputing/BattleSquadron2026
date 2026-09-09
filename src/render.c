@@ -38,6 +38,7 @@ static void calib(void)
 }
 
 int render_hiscore = 1000000;
+int render_enhanced;
 
 static uint32_t pal_rgba[32];            /* current frame palette */
 static int cur_stage = -1;
@@ -197,6 +198,42 @@ static void draw_terrain(uint32_t *rgba)
     }
 }
 
+/* Presentation only: terrain gets the half-step between 25 Hz game updates.
+ * Ships, bullets, object state and collision coordinates are unchanged. */
+static void enhance_terrain(uint32_t *rgba)
+{
+    if (g.scrolled7222 && (g.dframe & 1) && !g.nova25334) {
+        int camx = g.cam7204 - 0x100;
+        for (int y = 0; y < BS_VIEW_H; y++)
+            for (int x = 0; x < BS_VIEW_W; x++) {
+                uint32_t a = rgba[y * BS_VIEW_W + x];
+                uint32_t b = y + 1 < BS_VIEW_H ? rgba[(y + 1) * BS_VIEW_W + x]
+                                             : terrain_px(camx + x, y + 1);
+                rgba[y * BS_VIEW_W + x] = 0xFF000000u |
+                    (((a & 0x00FEFEFEu) >> 1) + ((b & 0x00FEFEFEu) >> 1) + (a & b & 0x00010101u));
+            }
+    }
+    if (g.stage7228 != 0) return;
+    /* Sparse, dim stars show through empty sky only; scenery masks them,
+     * and actors are drawn afterwards. Both layers track scroll, so pause
+     * and boss holds freeze the backdrop with the rest of the world. */
+    for (int layer = 0; layer < 2; layer++) {
+        uint32_t seed = 0x51A7u + (uint32_t)layer * 12345u;
+        int divisor = layer ? 4 : 8;
+        int phase = g.progress7206 * 2 - (g.scrolled7222 && (g.dframe & 1));
+        for (int i = 0; i < 55; i++) {
+            seed = seed * 1664525u + 1013904223u;
+            int x = (int)((seed >> 16) % 384) - (g.cam7204 - 0x100) / divisor;
+            seed = seed * 1664525u + 1013904223u;
+            int y = (int)(((seed >> 16) + phase / divisor) % BS_VIEW_H);
+            if (x < 0 || x >= BS_VIEW_W) continue;
+            uint32_t *pixel = &rgba[y * BS_VIEW_W + x];
+            if ((*pixel & 0x00FFFFFFu) == 0)
+                *pixel = layer ? 0xFF806B50u : 0xFF493C30u;
+        }
+    }
+}
+
 /* ---------------- bobs (render_list) ---------------- */
 void render_bob(uint32_t *rgba, const RenderEntry *r)   /* the production bob blit; tools/spritecheck.c diffs the browser decode against it */
 {
@@ -336,6 +373,84 @@ static void draw_shots(uint32_t *rgba, const Player *p)
     }
 }
 
+static void add_light(uint32_t *rgba, int cx, int cy, int radius, int red, int green, int blue)
+{
+    int rr = radius * radius;
+    for (int y = -radius; y <= radius; y++) {
+        int dy = cy + y;
+        if (dy < 0 || dy >= BS_VIEW_H) continue;
+        for (int x = -radius; x <= radius; x++) {
+            int dx = cx + x, strength = rr - x * x - y * y;
+            if (dx < 0 || dx >= BS_VIEW_W || strength <= 0) continue;
+            uint32_t *pixel = &rgba[dy * BS_VIEW_W + dx], c = *pixel;
+            int r = (c & 255) + red * strength / rr;
+            int g8 = ((c >> 8) & 255) + green * strength / rr;
+            int b = ((c >> 16) & 255) + blue * strength / rr;
+            *pixel = 0xFF000000u | (uint32_t)(r > 255 ? 255 : r) |
+                     ((uint32_t)(g8 > 255 ? 255 : g8) << 8) | ((uint32_t)(b > 255 ? 255 : b) << 16);
+        }
+    }
+}
+
+static void scene_lighting(uint32_t *rgba)
+{
+    /* Soft offset shadows anchor the players above the terrain. */
+    for (int i = 0; i < 2; i++) {
+        const Player *p = &g.players[i];
+        if (!p->joined39 || p->state38 != 0) continue;
+        int cx = p->x - 0x100 + ship_dx + 21;
+        int cy = p->y - 0x100 + ship_dy + 31;
+        for (int y = -6; y <= 6; y++) for (int x = -13; x <= 13; x++) {
+            int dx = cx + x, dy = cy + y;
+            int shade = 100 - x * x * 100 / 169 - y * y * 100 / 36;
+            if (shade <= 0 || dx < 0 || dx >= BS_VIEW_W || dy < 0 || dy >= BS_VIEW_H) continue;
+            uint32_t c = rgba[dy * BS_VIEW_W + dx], out = 0xFF000000u;
+            int gain = 256 - shade * 80 / 100;
+            for (int shift = 0; shift < 24; shift += 8) out |= (((c >> shift) & 255) * gain / 256) << shift;
+            rgba[dy * BS_VIEW_W + dx] = out;
+        }
+    }
+    /* Local warm light at explosions, behind actors so bullets stay crisp. */
+    int lights = 0;
+    for (int i = 0; i < 12 && lights < 4; i++) {
+        const Hostile *h = &g.hostiles[i];
+        if (!hxw(h) || !h->explode) continue;
+        add_light(rgba, hxw(h) - g.cam7204 + 16, hyw(h) - 0x100 + 16,
+                  16 + h->explode, 48, 22, 6);
+        lights++;
+    }
+    for (int i = 0; i < 2; i++) {
+        if (g_790A[i][2] > 0)
+            add_light(rgba, g_790A[i][0] - g.cam7204, g_790A[i][1] - 0x100, 18, 35, 15, 4);
+        const Player *p = &g.players[i];
+        if (p->joined39 && p->state38 == SHIP_EXPLODING)
+            add_light(rgba, p->x - 0x100 + 16, p->y - 0x100 + 24, 28, 55, 25, 7);
+    }
+}
+
+static void engine_exhaust(uint32_t *rgba, int sx, int sy)
+{
+    for (int jet = 0; jet < 2; jet++) {
+        int cx = sx + (jet ? 22 : 9);
+        int length = 5 + ((g.dframe + jet * 3) & 3);
+        for (int y = 0; y < length; y++) {
+            int dy = sy + 25 + y;
+            if (dy < 0 || dy >= BS_VIEW_H) continue;
+            int width = y < 3 ? 1 : 0;
+            for (int x = -width; x <= width; x++) {
+                int dx = cx + x;
+                if (dx < 0 || dx >= BS_VIEW_W) continue;
+                int fade = (length - y) * 255 / length;
+                uint32_t c = rgba[dy * BS_VIEW_W + dx], out = 0xFF000000u;
+                const int colour[3] = { 100, 190, 255 };
+                for (int k = 0; k < 3; k++)
+                    out |= (uint32_t)((((c >> (k * 8)) & 255) * (255 - fade) + colour[k] * fade) / 255) << (k * 8);
+                rgba[dy * BS_VIEW_W + dx] = out;
+            }
+        }
+    }
+}
+
 static void draw_ship(uint32_t *rgba, const Player *p)
 {
     if (!p->joined39 || p->state38 >= 0xC8) return;
@@ -349,6 +464,7 @@ static void draw_ship(uint32_t *rgba, const Player *p)
         draw_hwsprite(rgba, base + 0xF0, 60, sx + 16, sy, BANK_DEATH);
         return;
     }
+    if (render_enhanced && !g.demo && p->state38 == 0) engine_exhaust(rgba, sx, sy);
     /* banking frame 0..12 -> image pair from the $C6B6 table ($10000 + idx*$78) */
     uint16_t bank[3];
     ship_bank(p, bank);
@@ -589,8 +705,13 @@ void render_frame(uint32_t *rgba, int layers)
 {
     calib();
     latch_palette();
-    if (layers & BS_L_TERRAIN) draw_terrain(rgba);
+    if (layers & BS_L_TERRAIN) {
+        draw_terrain(rgba);
+        if (render_enhanced && !g.demo) enhance_terrain(rgba);
+    }
     else for (size_t i = 0; i < (size_t)BS_VIEW_W * BS_VIEW_H; i++) rgba[i] = 0xFF000000u;
+    if (render_enhanced && !g.demo && !g.msg8514 && (layers & BS_L_TERRAIN) && (layers & BS_L_SPRITES))
+        scene_lighting(rgba);
     if (layers & BS_L_BOBS)
         for (int i = 0; i < render_count; i++) {
             if (render_list[i].kind == 2 && render_list[i].gfx == 0x577E) {

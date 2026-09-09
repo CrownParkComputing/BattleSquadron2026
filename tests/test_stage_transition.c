@@ -33,6 +33,7 @@ int main(void) {
             for (int i = 0; i < players; i++) {
                 Player *p = &g.players[i];
                 p->state38 = 0;
+                p->explode49 = 0; /* gate fixture is a live, non-exploding ship */
                 p->sx = 200; p->sy = 350;
                 p->level60 = 3; p->nova66 = 2;
                 memcpy(p->score, "00123456", 8);

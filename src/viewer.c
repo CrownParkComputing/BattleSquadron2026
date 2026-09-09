@@ -54,7 +54,7 @@ static int sp_auto_zoom = 1;     /* sprite page: scale the bob to fill the windo
 static int start_mode = -1;      /* BS_START_MODE: jump straight to a page (testing) */               /* --debugshots: screenshot the debug screens, exit */
 static int paused, pause_sel, opt_return, title_guard, continue_prompt;   /* opt_return: 0 = title, 1 = back into the paused game */
 static int opt_sel;
-#define OPTION_COUNT 9
+#define OPTION_COUNT 10
 static const int CONTINUE_LIMITS[] = { 0, 3, 5, 7, -1 };
 static const char *CONTINUE_NAMES[] = { "OFF", "3", "5", "7", "UNLIMITED" };
 static int players_sel = 1;
@@ -63,16 +63,16 @@ static long vbl;
 static struct {
     int master, music_on, sfx_on, fullscreen, difficulty, weapon, lives;
     long hiscore;
-    int continues;
-} opt = { 10, 1, 1, 0, 1, 3, 3, 1000000, 4 };   /* volume 10 = the machine's own output level */
+    int continues, graphics;
+} opt = { 10, 1, 1, 0, 1, 3, 3, 1000000, 4, 1 };   /* volume 10 = the machine's own output level */
 
 static void options_save(void)
 {
     FILE *f = fopen("options.txt", "w");
     if (!f) return;
-    fprintf(f, "master %d\nmusic %d\nsfx %d\nfullscreen %d\ndifficulty %d\nweapon %d\nlives %d\nhiscore %ld\ncontinues %d\n",
+    fprintf(f, "master %d\nmusic %d\nsfx %d\nfullscreen %d\ndifficulty %d\nweapon %d\nlives %d\nhiscore %ld\ncontinues %d\ngraphics %d\n",
             opt.master, opt.music_on, opt.sfx_on, opt.fullscreen, opt.difficulty,
-            opt.weapon, opt.lives, opt.hiscore, opt.continues);
+            opt.weapon, opt.lives, opt.hiscore, opt.continues, opt.graphics);
     fclose(f);
 }
 
@@ -90,6 +90,7 @@ static void options_load(void)
         else if (!strcmp(k, "difficulty")) opt.difficulty = (int)v;
         else if (!strcmp(k, "weapon")) opt.weapon = (int)v;
         else if (!strcmp(k, "lives")) opt.lives = (int)v;
+        else if (!strcmp(k, "graphics") && (v == 0 || v == 1)) opt.graphics = (int)v;
         else if (!strcmp(k, "continues") && v >= 0 && v < 5) opt.continues = (int)v;
         else if (!strcmp(k, "hiscore")) opt.hiscore = v;
     }
@@ -100,6 +101,7 @@ static void options_apply(void)
 {
     audio_set(opt.master / 10.0f, opt.music_on == 1, opt.sfx_on);
     render_hiscore = (int)opt.hiscore;
+    render_enhanced = opt.graphics;
 #ifndef __ANDROID__
     if (opt.fullscreen != IsWindowFullscreen()) {
         if (opt.fullscreen) {
@@ -330,6 +332,7 @@ static void end_game(void)
     if (s1 > opt.hiscore) opt.hiscore = s1;
     if (s2 > opt.hiscore) opt.hiscore = s2;
     render_hiscore = (int)opt.hiscore;
+    render_enhanced = opt.graphics;
     options_save();
     { char nm[8];
       for (int i = 0; i < 2; i++) {
@@ -715,6 +718,7 @@ static void option_adjust(int d)
     case 5: opt.lives = opt.lives + d; if (opt.lives < 1) opt.lives = 1; if (opt.lives > 4) opt.lives = 4; break;
     case 6: opt.fullscreen = !opt.fullscreen; break;
     case 7: opt.continues = (opt.continues + d + 5) % 5; break;
+    case 8: opt.graphics = !opt.graphics; break;
     }
     options_apply();
     options_save();
@@ -1553,7 +1557,7 @@ int main(int argc, char **argv)
             } else if (mode == 2) {                   /* options */
                 static const char *DIFF[3] = { "EASY", "NORMAL", "HARD" };
                 static const char *LBL[OPTION_COUNT] = { "VOLUME", "MUSIC", "SOUND FX", "DIFFICULTY", "WEAPON",
-                                              "LIVES", "FULLSCREEN", "CONTINUES", "BACK" };
+                                              "LIVES", "FULLSCREEN", "CONTINUES", "GRAPHICS", "BACK" };
                 menu_row(90, "OPTIONS", 0, fs, (Color){ 255, 214, 92, 255 });
                 for (int i = 0; i < OPTION_COUNT; i++) {
                     char val[32] = "", row[80];
@@ -1566,6 +1570,7 @@ int main(int argc, char **argv)
                     case 5: snprintf(val, sizeof val, "%d", opt.lives); break;
                     case 6: snprintf(val, sizeof val, "%s", opt.fullscreen ? "ON" : "OFF"); break;
                     case 7: snprintf(val, sizeof val, "%s", CONTINUE_NAMES[opt.continues]); break;
+                    case 8: snprintf(val, sizeof val, "%s", opt.graphics ? "ENHANCED" : "ORIGINAL"); break;
                     }
                     snprintf(row, sizeof row, "%s%s%s", LBL[i], val[0] ? "   " : "", val);
                     menu_row(103 + i * 9, row, opt_sel == i, fs - 6, (Color){ 185, 195, 215, 255 });
