@@ -86,7 +86,27 @@ int main(void) {
         render_remaster=1; render_frame(enhanced,BS_L_ALL);
         assert(!memcmp(original,enhanced,sizeof original));
     }
-    render_remaster=0;
+    g.demo=0; g.stage7228=0; g.hangars4099=0; g.progress7206=1000;
+    render_remaster=0; render_frame(original,BS_L_TERRAIN);
+    render_remaster=1; render_remaster_land=1;
+    before=g;
+    render_frame(enhanced,BS_L_TERRAIN);
+    transparent=0;
+    for(int i=0;i<BS_VIEW_W*BS_VIEW_H;i++) {
+        uint32_t p=original[i];
+        assert((p&0xFFFFFFu)==(enhanced[i]&0xFFFFFFu));
+        if ((p&255)==((p>>8)&255) && ((p>>8)&255)>((p>>16)&255)) {
+            transparent += (enhanced[i]>>24)==0;
+        } else assert(p==enhanced[i]);
+    }
+    assert(transparent>0);
+    assert(!memcmp(&before,&g,sizeof g));
+    g.progress7206=1600;
+    render_remaster=0; render_frame(original,BS_L_TERRAIN);
+    render_remaster=1; render_frame(enhanced,BS_L_TERRAIN);
+    assert(!memcmp(original,enhanced,sizeof original));
+    render_remaster=0; render_remaster_land=0;
+    puts("PASS: land preview changes only olive terrain, preserves structures and state, stops after opening strip");
     puts("PASS: opening preview preserves RGB/game state, fades out, excludes later terrain/demo/other stages/sublevels");
     puts("PASS: 2x autofire, all weapons/upgrades/players; graphics reversible, deterministic, state unchanged, demo unchanged");
 }

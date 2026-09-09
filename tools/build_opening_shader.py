@@ -5,6 +5,7 @@ root=Path(__file__).resolve().parents[1]/'assets/remaster'
 body='''uniform sampler2D texture0; // 24x32 original map tile identities
 uniform sampler2D atlas;
 uniform sampler2D originalAtlas;
+uniform float landMode;
 
 float tileAt(vec2 world) {
     vec2 cell = clamp(floor(world / 16.0), vec2(0.0), vec2(23.0,31.0));
@@ -22,6 +23,16 @@ vec3 art(vec2 world) {
     return SAMPLE(atlas,atlasUV(world,tile)).rgb;
 }
 void main() {
+    if (landMode > 0.5) {
+        vec3 colour=SAMPLE(texture0,fragTexCoord).rgb;
+        vec3 reference=SAMPLE(originalAtlas,fragTexCoord).rgb;
+        // AI may drift slightly at a building edge. Do not introduce purple
+        // mechanics or rectangular black holes into original olive terrain.
+        if (colour.b > colour.g || max(colour.r,max(colour.g,colour.b)) < 0.015)
+            colour=reference;
+        OUTPUT=vec4(colour,1.0)*fragColor;
+        return;
+    }
     vec2 world=fragTexCoord*vec2(384.0,512.0);
     if(any(lessThan(world,vec2(0.0))) || any(greaterThanEqual(world,vec2(384.0,512.0)))) discard;
     float tile=tileAt(world);

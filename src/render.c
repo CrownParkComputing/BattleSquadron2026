@@ -41,6 +41,7 @@ static void calib(void)
 int render_hiscore = 1000000;
 int render_enhanced;
 int render_remaster;
+int render_remaster_land;
 
 static uint32_t pal_rgba[32];            /* current frame palette */
 static int cur_stage = -1;
@@ -200,6 +201,19 @@ static void draw_terrain(uint32_t *rgba)
                      * Fade out over the final two tile rows of this prototype. */
                     unsigned alpha = q > 480 ? (unsigned)(q - 480) * 255 / 32 : 0;
                     colour = (colour & 0x00FFFFFFu) | (alpha << 24);
+                }
+                if (render_remaster && render_remaster_land && !g.demo &&
+                    g.stage7228 == 0 && !g.hangars4099 && q > 512 && q <= 1280) {
+                    unsigned r = colour & 255, green = (colour >> 8) & 255;
+                    unsigned blue = (colour >> 16) & 255;
+                    /* Only the olive rock palette is replaced. Mechanical
+                     * scenery, black gaps and all foreground objects stay exact. */
+                    if (r == green && green > blue) {
+                        unsigned alpha = 0;
+                        if (q < 544) alpha = (544 - q) * 255 / 32;
+                        if (q > 1248) alpha = (q - 1248) * 255 / 32;
+                        colour = (colour & 0x00FFFFFFu) | (alpha << 24);
+                    }
                 }
                 out[sx++] = colour;
                 cx++; bit--;

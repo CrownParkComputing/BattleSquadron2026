@@ -35,8 +35,9 @@ static int hook_n;
 static Texture2D tex;
 static uint32_t show[BS_VIEW_W * BS_VIEW_H];
 static Texture2D opening_atlas, opening_reference, opening_indices;
+static Texture2D opening_land, opening_land_reference;
 static Shader opening_shader;
-static int opening_atlas_loc, opening_reference_loc, opening_ready;
+static int opening_atlas_loc, opening_reference_loc, opening_land_mode_loc, opening_ready;
 static struct OpeningFrame {
     int active, progress, camx, shake;
     uint16_t cells[32][24];
@@ -46,7 +47,7 @@ static void capture_opening_frame(int frame)
 {
     struct OpeningFrame *f = &opening_frames[frame];
     f->active = render_remaster && opening_ready && !g.demo && g.stage7228 == 0 &&
-                !g.hangars4099 && g.progress7206 <= 768;
+                !g.hangars4099 && g.progress7206 <= 1536;
     if (!f->active) return;
     f->progress = g.progress7206;
     f->camx = g.cam7204 - 0x100;
@@ -66,6 +67,8 @@ static void draw_opening_frame(int frame, Rectangle viewport)
         ids[row * 24 + col] = 0xFF000000u | (uint32_t)(opening_tile_index(f->cells[row][col]) + 1);
     UpdateTexture(opening_indices, ids);
     BeginShaderMode(opening_shader);
+    float land_mode = 0;
+    SetShaderValue(opening_shader, opening_land_mode_loc, &land_mode, SHADER_UNIFORM_FLOAT);
     SetShaderValueTexture(opening_shader, opening_atlas_loc, opening_atlas);
     SetShaderValueTexture(opening_shader, opening_reference_loc, opening_reference);
     /* Native coordinates expressed in 16px map cells; no independent camera. */
@@ -73,6 +76,29 @@ static void draw_opening_frame(int frame, Rectangle viewport)
                          BS_VIEW_W / 16.0f, BS_VIEW_H / 16.0f };
     DrawTexturePro(opening_indices, source, viewport, (Vector2){0,0}, 0, WHITE);
     EndShaderMode();
+    if (opening_land.id) {
+        /* Clip the fixed map strip to the visible world window. */
+        float y = f->progress - 1280;
+        float first = fmaxf(0, -y), last = fminf(768, BS_VIEW_H - y);
+        float x = f->camx + f->shake;
+        float left = fmaxf(0, x), right = fminf(384, x + BS_VIEW_W);
+        if (last > first && right > left) {
+            Rectangle src = { left * opening_land.width / 384.0f,
+                first * opening_land.height / 768.0f,
+                (right-left) * opening_land.width / 384.0f,
+                (last-first) * opening_land.height / 768.0f };
+            Rectangle dst = { viewport.x + (left-x) * viewport.width / BS_VIEW_W,
+                viewport.y + (y+first) * viewport.height / BS_VIEW_H,
+                (right-left) * viewport.width / BS_VIEW_W,
+                (last-first) * viewport.height / BS_VIEW_H };
+            BeginShaderMode(opening_shader);
+            land_mode = 1;
+            SetShaderValue(opening_shader, opening_land_mode_loc, &land_mode, SHADER_UNIFORM_FLOAT);
+            SetShaderValueTexture(opening_shader, opening_reference_loc, opening_land_reference);
+            DrawTexturePro(opening_land, src, dst, (Vector2){0,0}, 0, WHITE);
+            EndShaderMode();
+        }
+    }
 }
 
 static int view_layers = BS_L_ALL;      /* play hides BS_L_HUD: the panel is drawn in the grey bar */
@@ -1391,9 +1417,14 @@ int main(int argc, char **argv)
 #endif
     opening_atlas_loc = GetShaderLocation(opening_shader, "atlas");
     opening_reference_loc = GetShaderLocation(opening_shader, "originalAtlas");
+    opening_land_mode_loc = GetShaderLocation(opening_shader, "landMode");
     opening_ready = opening_atlas.id && opening_reference.id && opening_indices.id &&
                     opening_atlas_loc >= 0 && opening_reference_loc >= 0;
     if (!opening_ready) TraceLog(LOG_WARNING, "AI opening preview unavailable; using original terrain");
+    opening_land = LoadTexture("assets/remaster/opening-land-ai-v1.png");
+    opening_land_reference = LoadTexture("assets/remaster/opening-land-reference.png");
+    if (opening_land.id) SetTextureFilter(opening_land, TEXTURE_FILTER_BILINEAR);
+    render_remaster_land = opening_land.id && opening_land_reference.id && opening_land_mode_loc >= 0;
     if (getenv("BS_AI_PREVIEW")) opt.graphics = 2;
     options_apply();
 
@@ -1701,6 +1732,8 @@ int main(int argc, char **argv)
     video_close();
     audio_close();
     if (opening_atlas.id) UnloadTexture(opening_atlas);
+    if (opening_land.id) UnloadTexture(opening_land);
+    if (opening_land_reference.id) UnloadTexture(opening_land_reference);
     if (opening_reference.id) UnloadTexture(opening_reference);
     if (opening_indices.id) UnloadTexture(opening_indices);
     if (opening_shader.id) UnloadShader(opening_shader);

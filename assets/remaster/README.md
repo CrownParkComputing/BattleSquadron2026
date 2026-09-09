@@ -4,9 +4,17 @@ Select **Options → Graphics → AI PREVIEW** in native or Android. Original an
 Enhanced remain available. `BS_AI_PREVIEW=1 ./build/bsview` selects the preview
 on desktop.
 
-This covers the first 512 world pixels (map rows 480–511), the opening space
-fly-in and purple cloud sea. It fades back to original terrain over the final
-32 pixels. Later scenery, other stages, sublevels and demos use original art.
+The cloud atlas covers the first 512 world pixels (map rows 480–511). The
+land extension covers world pixels 513–1280 (rows 432–479), including the
+first craters and rocky ridge. Each strip fades over 32 pixels at its boundary.
+Later scenery, other stages, sublevels and demos use original art.
+
+`opening-land-ai-v1.png` is a full map-strip edit, avoiding repeating terrain
+tiles. See [its prompt](LAND-PROMPT.md). Only original olive terrain pixels
+reveal this texture; mechanical scenery and black gaps remain the original
+pixels, and sprites render on top. The same camera and screen shake align it
+with the native map. This preserves gameplay placement; AI-painted rock
+detail is an approximation of the reference, not pixel-identical geometry.
 
 `opening-tiles-ai-v1.png` was generated using the built-in image generation tool
 from the extracted original tile atlas and a map context image. See [the prompt](PROMPT.md).
