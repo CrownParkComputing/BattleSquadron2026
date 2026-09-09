@@ -34,12 +34,13 @@ static uint32_t cbuf[2][BS_VIEW_W * BS_VIEW_H];   /* the two display frames of o
 static int hook_n;
 static Texture2D tex;
 static uint32_t show[BS_VIEW_W * BS_VIEW_H];
-static Texture2D opening_atlas, opening_reference, opening_indices;
+static Texture2D opening_reference, opening_indices;
 static Texture2D opening_land, opening_land_reference;
 static Shader opening_shader;
-static int opening_atlas_loc, opening_reference_loc, opening_land_mode_loc, opening_ready;
+static int opening_reference_loc, opening_land_mode_loc, opening_time_loc, opening_ready;
 static struct OpeningFrame {
     int active, progress, camx, shake;
+    float animation_time;
     uint16_t cells[32][24];
 } opening_frames[2];
 
@@ -50,6 +51,7 @@ static void capture_opening_frame(int frame)
                 !g.hangars4099 && g.progress7206 <= 1536;
     if (!f->active) return;
     f->progress = g.progress7206;
+    f->animation_time = g.dframe / 50.0f;
     f->camx = g.cam7204 - 0x100;
     f->shake = 0;
     if (g.nova25334 && !(g.dframe & 2))
@@ -69,7 +71,7 @@ static void draw_opening_frame(int frame, Rectangle viewport)
     BeginShaderMode(opening_shader);
     float land_mode = 0;
     SetShaderValue(opening_shader, opening_land_mode_loc, &land_mode, SHADER_UNIFORM_FLOAT);
-    SetShaderValueTexture(opening_shader, opening_atlas_loc, opening_atlas);
+    SetShaderValue(opening_shader, opening_time_loc, &f->animation_time, SHADER_UNIFORM_FLOAT);
     SetShaderValueTexture(opening_shader, opening_reference_loc, opening_reference);
     /* Native coordinates expressed in 16px map cells; no independent camera. */
     Rectangle source = { (f->camx + f->shake) / 16.0f, 32 - f->progress / 16.0f,
@@ -1403,8 +1405,6 @@ int main(int argc, char **argv)
     SetExitKey(KEY_NULL);
     SetTargetFPS(50);
     audio_init();
-    opening_atlas = LoadTexture("assets/remaster/opening-tiles-ai-v1.png");
-    if (opening_atlas.id) SetTextureFilter(opening_atlas, TEXTURE_FILTER_BILINEAR);
     opening_reference = LoadTexture("assets/remaster/opening-tiles-reference.png");
     uint32_t blank_indices[32 * 24] = {0};
     Image index_image = { .data = blank_indices, .width = 24, .height = 32, .mipmaps = 1,
@@ -1415,11 +1415,11 @@ int main(int argc, char **argv)
 #else
     opening_shader = LoadShader(NULL, "assets/remaster/opening-330.fs");
 #endif
-    opening_atlas_loc = GetShaderLocation(opening_shader, "atlas");
+    opening_time_loc = GetShaderLocation(opening_shader, "animationTime");
     opening_reference_loc = GetShaderLocation(opening_shader, "originalAtlas");
     opening_land_mode_loc = GetShaderLocation(opening_shader, "landMode");
-    opening_ready = opening_atlas.id && opening_reference.id && opening_indices.id &&
-                    opening_atlas_loc >= 0 && opening_reference_loc >= 0;
+    opening_ready = opening_reference.id && opening_indices.id &&
+                    opening_time_loc >= 0 && opening_reference_loc >= 0;
     if (!opening_ready) TraceLog(LOG_WARNING, "AI opening preview unavailable; using original terrain");
     opening_land = LoadTexture("assets/remaster/opening-land-ai-v1.png");
     opening_land_reference = LoadTexture("assets/remaster/opening-land-reference.png");
@@ -1731,7 +1731,6 @@ int main(int argc, char **argv)
     options_save();
     video_close();
     audio_close();
-    if (opening_atlas.id) UnloadTexture(opening_atlas);
     if (opening_land.id) UnloadTexture(opening_land);
     if (opening_land_reference.id) UnloadTexture(opening_land_reference);
     if (opening_reference.id) UnloadTexture(opening_reference);

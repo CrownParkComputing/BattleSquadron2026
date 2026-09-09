@@ -77,7 +77,7 @@ int main(void) {
         transparent += alpha==0;
         fading += alpha>0 && alpha<255;
     }
-    assert(transparent>0 && fading>0);
+    assert(transparent>0 && fading==0);
     assert(!memcmp(&before,&g,sizeof g));
     for(int scenario=0;scenario<4;scenario++) {
         g.progress7206=scenario==0?800:500;
@@ -95,18 +95,31 @@ int main(void) {
     for(int i=0;i<BS_VIEW_W*BS_VIEW_H;i++) {
         uint32_t p=original[i];
         assert((p&0xFFFFFFu)==(enhanced[i]&0xFFFFFFu));
-        if ((p&255)==((p>>8)&255) && ((p>>8)&255)>((p>>16)&255)) {
+        if (((p&255)==((p>>8)&255) && ((p>>8)&255)>((p>>16)&255)) || !(p&0xFFFFFFu)) {
             transparent += (enhanced[i]>>24)==0;
         } else assert(p==enhanced[i]);
     }
     assert(transparent>0);
     assert(!memcmp(&before,&g,sizeof g));
+    g.progress7206=640;
+    render_remaster=0; render_frame(original,BS_L_TERRAIN);
+    render_remaster=1; render_frame(enhanced,BS_L_TERRAIN);
+    int surf=0;
+    for(int i=0;i<BS_VIEW_W*BS_VIEW_H;i++) {
+        uint32_t p=original[i];
+        unsigned r=p&255, green=(p>>8)&255, blue=(p>>16)&255;
+        if(blue>green || (r==green && green==blue && r>0)) {
+            assert((enhanced[i]>>24)==0);
+            surf++;
+        }
+    }
+    assert(surf>0);
     g.progress7206=1600;
     render_remaster=0; render_frame(original,BS_L_TERRAIN);
     render_remaster=1; render_frame(enhanced,BS_L_TERRAIN);
     assert(!memcmp(original,enhanced,sizeof original));
     render_remaster=0; render_remaster_land=0;
-    puts("PASS: land preview changes only olive terrain, preserves structures and state, stops after opening strip");
+    puts("PASS: land preview changes only olive/black terrain alpha, preserves coloured structures and state, stops after opening strip");
     puts("PASS: opening preview preserves RGB/game state, fades out, excludes later terrain/demo/other stages/sublevels");
     puts("PASS: 2x autofire, all weapons/upgrades/players; graphics reversible, deterministic, state unchanged, demo unchanged");
 }

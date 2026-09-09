@@ -196,24 +196,27 @@ static void draw_terrain(uint32_t *rgba)
                 for (int p = 0; p < 5; p++) c |= ((pl[p] >> bit) & 1) << p;
                 uint32_t colour = pal_rgba[c];
                 if (render_remaster && !g.demo && g.stage7228 == 0 && !g.hangars4099 &&
-                    q >= 1 && q <= 512 && opening_tile_index(word) >= 0) {
-                    /* Leave a window onto the HD terrain drawn by the frontend.
-                     * Fade out over the final two tile rows of this prototype. */
-                    unsigned alpha = q > 480 ? (unsigned)(q - 480) * 255 / 32 : 0;
-                    colour = (colour & 0x00FFFFFFu) | (alpha << 24);
+                    sy >= g.progress7206) colour &= 0x00FFFFFFu;
+                if (render_remaster && !g.demo && g.stage7228 == 0 && !g.hangars4099 &&
+                    q >= 1 && q <= 512) {
+                    /* Animated sky/clouds are clipped by the original map. */
+                    colour &= 0x00FFFFFFu;
                 }
                 if (render_remaster && render_remaster_land && !g.demo &&
                     g.stage7228 == 0 && !g.hangars4099 && q > 512 && q <= 1280) {
                     unsigned r = colour & 255, green = (colour >> 8) & 255;
                     unsigned blue = (colour >> 16) & 255;
-                    /* Only the olive rock palette is replaced. Mechanical
-                     * scenery, black gaps and all foreground objects stay exact. */
-                    if (r == green && green > blue) {
+                    /* Olive rock and black cracks reveal the terrain shader.
+                     * It keeps mechanical gaps black; foreground draws on top. */
+                    if ((r == green && green > blue) || (r == 0 && green == 0 && blue == 0)) {
                         unsigned alpha = 0;
                         if (q < 544) alpha = (544 - q) * 255 / 32;
                         if (q > 1248) alpha = (q - 1248) * 255 / 32;
                         colour = (colour & 0x00FFFFFFu) | (alpha << 24);
                     }
+                    /* The coastline contains warm white surf shades as well
+                     * as purple. Let the shader blend this whole empty strip. */
+                    if (q <= 640) colour &= 0x00FFFFFFu;
                 }
                 out[sx++] = colour;
                 cx++; bit--;
