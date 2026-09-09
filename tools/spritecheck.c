@@ -135,7 +135,7 @@ static uint32_t fnv1a(const void *p, size_t n)
 int main(int argc, char **argv)
 {
     const char *dir = getenv("BS_DATA") ? getenv("BS_DATA")
-                    : "/home/jon/BattleSquadron-Amiga/original/whdload/BattleSquadron/data";
+                    : "amiga/original/whdload/BattleSquadron/data";
     const char *sheet_path = NULL, *dump_dir = NULL;
     uint32_t expect = 0; int have_expect = 0;
     for (int i = 1; i < argc; i++) {

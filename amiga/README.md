@@ -1,3 +1,8 @@
+> This project is now maintained inside
+> [BattleSquadron2026](https://github.com/CrownParkComputing/BattleSquadron2026).
+> Run its existing commands from this `amiga/` directory. The native desktop
+> and Android game is built from the repository root.
+
 # Battle Squadron Amiga decomp/recomp (in progress)
 
 This is the Amiga version of **Battle Squadron: The Destruction of the Barrax

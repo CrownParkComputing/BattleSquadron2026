@@ -249,6 +249,16 @@ static void hook(void)               /* eng_display_hook: one display frame rend
     hook_n++;
 }
 
+static int load_game_stage(int stage)
+{
+    if (bs_load_stage(&data, stage)) {
+        TraceLog(LOG_ERROR, "Cannot load Battle Squadron stage %d", stage);
+        return -1;
+    }
+    render_stage(&data);
+    return 0;
+}
+
 /* title/attract audio residency: LODMUS ($3D800, over LODS0S) + LODSPE
  * ($246F0, over LODGAM), exactly the original's overlay swap; game start
  * swaps them back */
@@ -1243,13 +1253,14 @@ int main(int argc, char **argv)
      * read-only filesystem while keeping the copyrighted data out of Git. */
     const char *dir = "data";
 #else
-    const char *dir = "/home/jon/BattleSquadron-Amiga/original/whdload/BattleSquadron/data";
+    const char *dir = "amiga/original/whdload/BattleSquadron/data";
 #endif
     for (int i = 1; i < argc; i++) {
         if (!strcmp(argv[i], "--data") && i + 1 < argc) dir = argv[++i];
         else if (!strcmp(argv[i], "--smoke") && i + 1 < argc) smoke = atol(argv[++i]);
         else if (!strcmp(argv[i], "--debugshots")) debugshots = 1;
     }
+    eng_stage_load_hook = load_game_stage;
     if (bs_open(&data, dir)) { fprintf(stderr, "bsview: cannot open %s\n", dir); return 1; }
     if (bs_load_stage(&data, 0)) { fprintf(stderr, "bsview: stage 0 load failed\n"); return 1; }
     if (bs_load_module(&data, "LODINT")) { fprintf(stderr, "bsview: LODINT load failed\n"); return 1; }

@@ -1,5 +1,5 @@
 /* hostiles.c -- the 14 HOSTILE type handlers of Battle Squadron (LAB_79E2 CMPI chain, loader.asm $7A9A..$9752),
- * translated literally from ~/BattleSquadron-Amiga/asm/loader.asm against src/engine/engine.h.
+ * translated literally from amiga/asm/loader.asm against src/engine/engine.h.
  *
  * Conventions (re/PORTING_GUIDE.md, re/ENGINE_hostiles.md):
  *  - one function per type, called once per game frame for each live record AFTER the engine's shared prologue

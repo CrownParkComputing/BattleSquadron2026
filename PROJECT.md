@@ -1,3 +1,25 @@
+# Combined repository update — 2026-09-09
+
+The native project remains at the root. `amiga/` imports BattleSquadron-Amiga
+at ab7368b with its full history. Executable and test data paths now use this
+in-tree project instead of the removed ~/BattleSquadron-Amiga location.
+
+Native stage_clear now implements the LAB_7180..7330 overlay/state handoff:
+all three gates enter their underground stages, scroll-end returns to the
+corresponding surface row/wave, completed hangars stay closed, and player
+scores/lives/weapons survive the transition. The frontend and simrun supply
+an overlay-loading hook. The handoff is immediate; the original interstitial
+message/bonus presentation and final LODFIN boss remain outstanding.
+
+The existing welcome-speech guard (926914a) was newer than both local binaries.
+Desktop and Android binaries were rebuilt; a regression checks uninterrupted
+sample playback, music resumption, duplicate calls and title re-entry.
+
+Validation: make test (capture parity skipped when re/trace is absent),
+make amiga-verify, desktop smoke and Android assembleDebug.
+
+---
+
 # Battle Squadron (Cope-com / Innerprise 1989) — fully native port (route B), status log
 
 Reference trees: ~/BattleSquadron-Amiga (Musashi oracle host `build/battle_squadron_native`, module extraction,

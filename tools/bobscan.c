@@ -33,7 +33,7 @@ static int cmp(const void *a, const void *b)
 
 int main(int argc, char **argv)
 {
-    const char *dir = getenv("BS_DATA") ? getenv("BS_DATA") : "/home/jon/BattleSquadron-Amiga/original/whdload/BattleSquadron/data";
+    const char *dir = getenv("BS_DATA") ? getenv("BS_DATA") : "amiga/original/whdload/BattleSquadron/data";
     int stage = 0, fire = 0, autofire = 0, autopilot = 0, invuln = 0, demo = 0, rng0 = 0, pos = 0;
     long frames = 20000, fbase = 0;
     for (int i = 1; i < argc; i++) {

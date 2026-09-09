@@ -199,7 +199,8 @@ void set_weapon(Player *p, uint32_t table);  /* LAB_2B32 (table = chip address) 
 void reload_weapon(Player *p);               /* LAB_3722 = set_weapon($2024[f58*24/4 + f60*4]) */
 void extra_life_check(void);                 /* LAB_139C */
 void game_over_check(void);                  /* LAB_410A (g.no_ship16120 only; initials flow stubbed) */
-void stage_clear(void);                      /* LAB_7002 / 7180 (stubbed: sets g.done7232, stops) */
+void stage_clear(void);                      /* LAB_7180 stage handoff */
+extern int (*eng_stage_load_hook)(int stage); /* load overlays before resetting stage state */
 void sfx(int n);                             /* EXT_2470E, D0 = n (re/sfx_triggers.txt) */
 extern void (*eng_sfx_hook)(int n);          /* simrun/front end taps the trigger */
 extern void (*eng_display_hook)(void);       /* native: called once per DISPLAY frame inside eng_frame_finish */

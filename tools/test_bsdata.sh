@@ -8,13 +8,13 @@
 set -e
 cd "$(dirname "$0")/.."
 mkdir -p build/assets_check
-./build/bsdata_test /home/jon/BattleSquadron-Amiga/original/whdload/BattleSquadron/data \
-                    /home/jon/BattleSquadron-Amiga/original/modules build/assets_check
+./build/bsdata_test amiga/original/whdload/BattleSquadron/data \
+                    amiga/original/modules build/assets_check
 python3 - <<'EOF'
 import struct, sys, os
 
-mods = '/home/jon/BattleSquadron-Amiga/original/modules'
-loader = open('/home/jon/BattleSquadron-Amiga/original/whdload/BattleSquadron/data/LOADER','rb').read()
+mods = 'amiga/original/modules'
+loader = open('amiga/original/whdload/BattleSquadron/data/LOADER','rb').read()
 
 # rebuild the chip image the reference way: LOADER@$100 + reference module bins
 chip = bytearray(0x80000)

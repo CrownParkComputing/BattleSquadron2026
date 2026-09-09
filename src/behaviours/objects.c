@@ -1,6 +1,6 @@
 /* objects.c -- Battle Squadron OBJECT pool handlers (LAB_5F34 per-type branches), native C.
  *
- * Literal translations of ~/BattleSquadron-Amiga/asm/loader.asm $5F68..$6FEC against re/ENGINE_objects.md.
+ * Literal translations of amiga/asm/loader.asm $5F68..$6FEC against re/ENGINE_objects.md.
  * One function per type byte (+17), registered in object_handlers[].  The engine (object_update_all,
  * LAB_5F34/$5F44) does the per-slot prologue -- `flags31 &= ~0x20; if (x == 0) skip; flags31 ^= 0x08` --
  * then calls object_handlers[type](o).  EVERYTHING ELSE of the original branch is in here, including

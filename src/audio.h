@@ -1,6 +1,6 @@
 /* audio.h -- native Battle Squadron sound: the LODGAM sequencer (music + SFX)
  * ported from the parity-pinned translation in
- * ~/BattleSquadron-Amiga/src/recomp/runtime.c, driving a 4-channel Paula
+ * amiga/src/recomp/runtime.c, driving a 4-channel Paula
  * model (port of src/platform/paula_audio.c) that reads samples straight from
  * the chip image.  All state lives in bs_chip at the original addresses
  * ($251F8 driver, $252A4.. channels, $25504 instruments, $2539C sfx table),

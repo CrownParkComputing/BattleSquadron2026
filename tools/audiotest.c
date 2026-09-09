@@ -12,7 +12,7 @@ int main(int argc, char **argv)
     double secs = argc > 2 ? atof(argv[2]) : 8.0;
     const char *out = argc > 3 ? argv[3] : "build/audiotest.wav";
     int sfx_n = argc > 4 ? atoi(argv[4]) : -1;
-    if (bs_open(&data, "/home/jon/BattleSquadron-Amiga/original/whdload/BattleSquadron/data")) return 1;
+    if (bs_open(&data, "amiga/original/whdload/BattleSquadron/data")) return 1;
     bs_chip = data.chip;
     int menu = track >= 100;                          /* 101/102 = LODMUS menu track 1/2 */
     if (menu) {

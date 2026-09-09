@@ -101,7 +101,7 @@ static long compare(const uint32_t *rgba, const uint8_t *px, int pw, int ph,
 
 int main(int argc, char **argv)
 {
-    const char *dir = "/home/jon/BattleSquadron-Amiga/original/whdload/BattleSquadron/data";
+    const char *dir = "amiga/original/whdload/BattleSquadron/data";
     const char *shot = NULL, *outpfx = NULL;
     long shot_f = -1, fbase = 0;
     int mode_demo = 0;

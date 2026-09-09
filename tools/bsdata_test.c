@@ -1,6 +1,6 @@
 /* bsdata_test.c -- identity tests for src/bsdata.c (re/ASSETS.md §9).
  * 1. Depacks every module from the WHDLoad install and byte-compares it with
- *    the reference extractions in ~/BattleSquadron-Amiga/original/modules/.
+ *    the reference extractions in amiga/original/modules/.
  * 2. Dumps decoded assets (map indices, tiles, hostile/object frames, font,
  *    hw sprites, palette) as P5/P6 files into OUTDIR for tools/test_bsdata.sh
  *    to diff against the proven python decoders (sprite_dump.py formulas).
@@ -81,8 +81,8 @@ static void module_compare(const char *ref_dir)
 int main(int argc, char **argv)
 {
     const char *data_dir = argc > 1 ? argv[1] :
-        "/home/jon/BattleSquadron-Amiga/original/whdload/BattleSquadron/data";
-    const char *ref_dir = argc > 2 ? argv[2] : "/home/jon/BattleSquadron-Amiga/original/modules";
+        "amiga/original/whdload/BattleSquadron/data";
+    const char *ref_dir = argc > 2 ? argv[2] : "amiga/original/modules";
     const char *out_dir = argc > 3 ? argv[3] : "build/assets_check";
     if (bs_open(&d, data_dir)) return 1;
     module_compare(ref_dir);

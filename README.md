@@ -5,6 +5,11 @@ emulator, no 68000 core, no disk image. The game's logic, wave scheduler, collis
 and sound drivers were read out of the original and rewritten in C; the picture is
 drawn by a native renderer and the audio synthesised on a native Paula.
 
+This is the combined repository for the native game and the Amiga project.
+The native desktop/Android build stays at the root; the complete former
+`BattleSquadron-Amiga` repository and its Git history are retained under
+[`amiga/`](amiga/README.md).
+
 ## What is here
 
 | Path | |
@@ -16,6 +21,7 @@ drawn by a native renderer and the audio synthesised on a native Paula.
 | `src/audio.c` | the game's two sequencers on a native Paula |
 | `src/viewer.c` | front end: title, options, pause, high scores, and the debug viewers |
 | `tools/` | parity harness, decoders, the reference dumps used while building |
+| `amiga/` | original Amiga assembly, build verification, reference runner and recovered data |
 | `re/` | the write-up: engine notes, porting guide, asset formats |
 
 ## Building
@@ -25,8 +31,20 @@ make            # needs raylib and a C compiler
 ./build/bsview
 ```
 
-The original game files (`LOADER`, `LODGAM`, `LODST1`, …) are **not** included and
-are not distributed here. Point the loader at your own copy.
+Run from the repository root. The default data path is now
+`amiga/original/whdload/BattleSquadron/data`, retained from the imported Amiga
+repository. Use `./build/bsview --data /path/to/data` to choose another install.
+
+The Amiga assembly can still be rebuilt and compared against the original:
+
+```sh
+make amiga-verify  # requires vasmm68k_mot
+make test          # native data checks and audio/sublevel regressions
+```
+
+The old capture-based parity checks additionally need the untracked `re/trace/`
+reference files. See [the Amiga README](amiga/README.md) for its reference-runner
+and Android build targets.
 
 ## Controls
 
@@ -47,16 +65,15 @@ emulator or a 68000 core.
 
 Install Android SDK 36, NDK 26.1.10909125 and CMake 3.25 or newer, and keep a
 raylib source checkout beside this repository (or set `ANDROID_RAYLIB`).  Then
-point `ANDROID_DATA` at the `data` directory in your own Battle Squadron
-WHDLoad installation:
+point `ANDROID_DATA` at a Battle Squadron WHDLoad data directory:
 
 ```sh
-ANDROID_DATA=/path/to/BattleSquadron/data make android-debug
+ANDROID_DATA="$PWD/amiga/original/whdload/BattleSquadron/data" make android-debug
 adb install -r android/app/build/outputs/apk/debug/app-debug.apk
 ```
 
 The original modules are staged directly into the local APK build and remain
-ignored by Git.  The resulting app is landscape-only and supports Android
+local to the APK build.  The resulting app is landscape-only and supports Android
 gamepads: d-pad/stick moves, A fires, B uses a smart bomb, and START pauses.
 
 ## Soundtrack
@@ -77,5 +94,4 @@ demo matched over 4,000 frames, and the renderer compared pixel for pixel
 ## Legal
 
 Battle Squadron is © Innerprise Software. This is a preservation project, not
-affiliated with or endorsed by the rights holders, and contains none of the game's
-data or code. If you are a rights holder and want it taken down, get in touch.
+affiliated with or endorsed by the rights holders, and retains the contents of the original Amiga project under `amiga/`. If you are a rights holder and want it taken down, get in touch.

@@ -1,11 +1,11 @@
 /* audio.c -- LODGAM sequencer + Paula mixer, native.
  *
  * The music/SFX driver is a byte-for-byte port of the parity-pinned
- * translation in ~/BattleSquadron-Amiga/src/recomp/runtime.c (LODGAM $24856/
+ * translation in amiga/src/recomp/runtime.c (LODGAM $24856/
  * $24F34 sequencer, $24DDE SelectMusic, $24D6E PlaySoundEffect, $247C8
  * channel init) operating on the chip image via rd/wr helpers; writes to the
  * custom-chip range go to a Paula model ported from
- * ~/BattleSquadron-Amiga/src/platform/paula_audio.c.
+ * amiga/src/platform/paula_audio.c.
  *
  * Channel state (62 B at $252A4/$252E2/$25320/$2535E), instruments $25504
  * (23 x 32 B), driver state $251F8 (+1 master volume, +4 mute-all/music-off,

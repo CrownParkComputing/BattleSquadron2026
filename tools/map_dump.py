@@ -10,8 +10,8 @@ import struct, sys, os
 from PIL import Image
 here = os.path.dirname(os.path.abspath(__file__))
 stage = int(sys.argv[1])
-mods = sys.argv[2] if len(sys.argv) > 2 else os.path.expanduser('~/BattleSquadron-Amiga/original/modules')
-loader = sys.argv[3] if len(sys.argv) > 3 else os.path.expanduser('~/BattleSquadron-Amiga/original/whdload/BattleSquadron/data/LOADER')
+mods = sys.argv[2] if len(sys.argv) > 2 else os.path.expanduser('amiga/original/modules')
+loader = sys.argv[3] if len(sys.argv) > 3 else os.path.expanduser('amiga/original/whdload/BattleSquadron/data/LOADER')
 out = sys.argv[4] if len(sys.argv) > 4 else os.path.join(here, '..', 're', 'assets_preview', 'map_stage%d.png' % stage)
 files = {0: ('LODS0T', 278528), 1: ('LODST1', 190618), 2: ('LODST2', 189632), 3: ('LODST3', 190528)}
 name, la = files[stage]

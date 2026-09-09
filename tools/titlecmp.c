@@ -43,7 +43,7 @@ static int in_band(int y) { return (y >= 120 && y <= 139) || (y >= 147 && y <= 1
 
 int main(int argc, char **argv)
 {
-    const char *dir = "/home/jon/BattleSquadron-Amiga/original/whdload/BattleSquadron/data";
+    const char *dir = "amiga/original/whdload/BattleSquadron/data";
     const char *ref = "re/trace/shots/title_36000.ppm";
     for (int i = 1; i < argc; i++) {
         if (!strcmp(argv[i], "--data") && i + 1 < argc) dir = argv[++i];

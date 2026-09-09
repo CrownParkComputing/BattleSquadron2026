@@ -1,7 +1,7 @@
 /* engine.c -- Battle Squadron native engine core (route B; see re/ENGINE.md).
  *
  * Literal translation of the LOADER main loop LAB_AA0..LAB_CE6 and every
- * engine verb, against ~/BattleSquadron-Amiga/asm/loader.asm (addresses in
+ * engine verb, against amiga/asm/loader.asm (addresses in
  * comments) and the measured specs in re/ENGINE_*.md.  Behaviour handlers live
  * in src/behaviours/{hostiles,objects}.c; this file provides weak stubs so the
  * core links and runs before they land.
@@ -1278,11 +1278,75 @@ void game_over_check(void)                           /* LAB_410A */
     }
 }
 
-void stage_clear(void)                               /* LAB_7002 (stub: records that the gate fired) */
+int (*eng_stage_load_hook)(int stage);
+
+void stage_clear(void)                               /* LAB_7180..7330 */
 {
-    if (!g.gate4100) return;
-    g.done7232 = g.pending7230 ? g.stage7228 : g.done7232;
-    /* the full overlay/bonus/advance flow is (L); simrun stops or re-inits per stage instead */
+    if (!g.gate4100 || g.demo || !eng_stage_load_hook) return;
+    int next = g.pending7230, previous = g.stage7228;
+    if (next < 0 || next > 3 || eng_stage_load_hook(next)) return;
+    g.done7232 = (int16_t)previous;
+    g.stage7228 = (int16_t)next;
+    g.stage_desc7224 = 0x14EA + (uint32_t)next * 0x8C;
+    /* LAB_11C6 resets only transient stage state, not scores, weapons,
+     * lives, random state or the completed-hangar mask. */
+    memset(g.hostiles, 0, sizeof g.hostiles);
+    memset(g.objects, 0, sizeof g.objects);
+    memset(g.effects, 0, sizeof g.effects);
+    for (int i = 0; i < 12; i++) g.hostiles[i].slot = i;
+    for (int i = 0; i < 18; i++) g.objects[i].slot = i;
+    render_count = 0;
+    g.pending7230 = g.hold7234 = g.msg8514 = g.game_over8524 = 0;
+    g.gate4100 = g.boss_hold1570 = g.nova25334 = g.final_boss26242 = 0;
+    g.finished4096 = 0;
+    g.hold_a14c = 0;
+    g_8397 = g_27618 = 0;
+    g_14390 = g_14388 = 0;
+    memset(g_790A, 0, sizeof g_790A);
+    g.cam7204 = 0x130;
+    g.ring7208 = 0x65000;
+    g.rowphase7212 = g.scrolled7222 = 0;
+    g.rows7218 = 0x100;
+    g.wave2736 = cl(g.stage_desc7224);
+    static const int rows[] = { 0, 0xEA, 0x142, 0x1D7 };
+    static const uint32_t waves[] = { 0, 0xD3BE, 0xD562, 0xD796 };
+    int row = 0;
+    if (previous > 0 && previous <= 3) {
+        g.hangars4099 |= (uint8_t)(1u << previous);
+        row = rows[previous];
+        g.wave2736 = waves[previous];
+    }
+    g.progress7206 = (int16_t)(row * 16);
+    g.maprow7214 = 0x4A000 - (uint32_t)row * 0x30;
+    for (int i = 0; i < 2; i++) {                    /* LAB_74E8 */
+        Player *p = &g.players[i];
+        p->nova90 = 0;
+        memset(p->shots, 0, sizeof p->shots);
+        if (p->state38 >= 0xAF) { p->f45 = 0xFF; continue; }
+        if (p->explode49) continue;
+        p->entry48 = 0x91;
+        p->hud68 = p->hud70 = 0x80;
+        p->hud72 = 0;
+        p->f76 = p->f80;
+        p->state38 = 0x96;
+        p->x = p->spawn_x54;
+        p->y = 0x200;
+        p->bank10 = 6;
+        p->invuln52 = 0x12C;
+        p->free_respawn41 = 0xFF;
+    }
+    for (int i = 0; i < 256; i++) {                  /* LAB_72F2 */
+        scroll_frame();
+        object_update_all();
+        object_spawner();
+    }
+    if (next == 0) {                                /* LAB_7336 */
+        int amount = 5 * (g.difficulty10066 + 1);
+        for (int i = 0; i < 6; i++) g.armour[i] -= amount;
+        g_8414 -= 2;
+        g_8413 -= 10;
+    }
+    sfx(-0x720);                                    /* restart jingle */
 }
 
 /* ================= init + frame ================= */

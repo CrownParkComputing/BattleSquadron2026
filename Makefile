@@ -3,14 +3,14 @@ CC      ?= gcc
 CFLAGS  ?= -O2 -g -Wall -Wextra -Wno-unused-parameter
 CFLAGS  += -Isrc -Isrc/engine
 
-DATA    ?= /home/jon/BattleSquadron-Amiga/original/whdload/BattleSquadron/data
-REFMODS ?= /home/jon/BattleSquadron-Amiga/original/modules
+DATA    ?= amiga/original/whdload/BattleSquadron/data
+REFMODS ?= amiga/original/modules
 
 CORE    := src/bsdata.c src/overlay.c src/bond.c
 ENGINE  := src/engine/engine.c $(wildcard src/behaviours/*.c)
 HDRS    := src/engine/engine.h src/bsdata.h src/overlay.h src/bond.h
 
-all: build/simrun build/bsdata_test build/framecmp
+all: build/bsview build/simrun build/bsdata_test build/framecmp
 
 build:
 	mkdir -p build build/assets_check
@@ -22,7 +22,7 @@ build/bsdata_test: tools/bsdata_test.c $(CORE) $(HDRS) | build
 	$(CC) $(CFLAGS) tools/bsdata_test.c $(CORE) -o $@
 
 # make test: bsdata identity (native renders == python renders) + a parity smoke
-test: build/simrun build/bsdata_test
+test: build/simrun build/bsdata_test regression-test
 	sh tools/test_bsdata.sh
 	sh tools/test_parity_smoke.sh
 
@@ -94,3 +94,21 @@ build/bobscan: tools/bobscan.c $(ENGINE) $(CORE) $(HDRS) | build
 
 build/spritecheck: tools/spritecheck.c src/render.c $(ENGINE) $(CORE) $(HDRS) src/render.h | build
 	$(CC) $(CFLAGS) tools/spritecheck.c src/render.c $(ENGINE) $(CORE) -o $@
+
+# Original Amiga sources and reference runner retained in the combined tree.
+amiga-verify:
+	$(MAKE) -C amiga verify
+
+.PHONY: amiga-verify
+
+build/test_stage_transition: tests/test_stage_transition.c src/render.c src/render.h $(ENGINE) $(CORE) $(HDRS) | build
+	$(CC) $(CFLAGS) $< src/render.c $(ENGINE) $(CORE) -o $@
+
+build/test_title_audio: tests/test_title_audio.c src/audio.c src/audio.h $(ENGINE) $(CORE) $(HDRS) | build
+	$(CC) $(CFLAGS) $< $(ENGINE) $(CORE) -lm -o $@
+
+regression-test: build/test_stage_transition build/test_title_audio
+	./build/test_stage_transition
+	./build/test_title_audio
+
+.PHONY: regression-test

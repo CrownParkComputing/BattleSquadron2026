@@ -20,6 +20,7 @@
 #include "../src/engine/engine.h"
 
 static BsData data;
+static int load_stage(int stage) { return bs_load_stage(&data, stage); }
 static FILE *out;
 static long fbase;
 
@@ -69,7 +70,7 @@ static void log_frame(void)
 
 int main(int argc, char **argv)
 {
-    const char *dir = "/home/jon/BattleSquadron-Amiga/original/whdload/BattleSquadron/data";
+    const char *dir = "amiga/original/whdload/BattleSquadron/data";
     int stage = 0, mode_fire = 0, mode_autofire = 0, mode_autopilot = 0, invuln = 0, players = 1;
     int mode_demo = 0;
     long frames = 500;
@@ -95,6 +96,7 @@ int main(int argc, char **argv)
     if (bs_open(&data, dir)) return 1;
     if (bs_load_stage(&data, stage)) return 1;
     bs_chip = data.chip;
+    eng_stage_load_hook = load_stage;
     out = fopen(path, "w");
     if (!out) { perror(path); return 1; }
     /* options match the captures: 3 lives, weapon 3, difficulty 1, 1 player */
