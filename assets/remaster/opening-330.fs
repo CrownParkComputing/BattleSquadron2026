@@ -111,6 +111,20 @@ void main() {
             // Restrained finish for panel interiors, with fixed geometry.
             colour=mix(colour,smoothColour,0.65);
             colour*=0.97+0.04*noise2(world*0.7);
+        } else if(material==6.0) {
+            // Deep pools: darker slow-moving interior, hotter edges against
+            // the original rock walls. Foreground entrance text stays above it.
+            float edge=0.0;
+            for(int direction=0;direction<4;direction++) {
+                vec2 offset=direction==0?vec2(5,0):direction==1?vec2(-5,0):
+                            direction==2?vec2(0,5):vec2(0,-5);
+                float neighbour=floor(SAMPLE(texture0,(pixel+offset)/size).a*255.0+0.5);
+                edge+=step(0.5,abs(neighbour-6.0))*0.25;
+            }
+            float flow=cloudNoise(world/25.0+vec2(animationTime*0.025,-animationTime*0.04));
+            float molten=smoothstep(0.36,0.66,flow);
+            colour=mix(vec3(0.11,0.006,0.002),lava(world*0.55),0.25+molten*0.40+edge*0.25);
+            colour+=vec3(0.22,0.045,0.004)*edge;
         }
         OUTPUT=vec4(colour,1.0)*fragColor;
         return;

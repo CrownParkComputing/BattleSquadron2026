@@ -55,3 +55,18 @@ produces both desktop and Android shaders from the same source.
 For visual regression checks, `BS_SMOKE_STAGE=0..3` selects a stage only when
 `--smoke` is active. Headless regression traverses all maps, checking original
 RGB, foreground rendering, map/game immutability, and unchanged demo output.
+
+## Volcanic openings and entrance chasms
+
+`tools/build_lava_mask.py` flood-fills the original surface map's black areas.
+Only openings with an entirely olive-rock boundary are selected, excluding
+mechanical cut-outs and the starfield. The generated bit mask preserves their
+exact shapes: 749 crater/fissure openings, including the three large entrance
+chasms. Large pools have darker moving centres and hotter edges to suggest
+depth. The original entrance markers and all entry/gameplay logic are retained.
+The mask is optional; missing data retains the previous material treatment.
+
+`BS_SMOKE_PROGRESS` can position the visual smoke test at a later map section;
+it is ignored in normal play. Tests verify all three gate positions are inside
+the lava mask, deep lava is restricted to original black surface terrain, and
+renderer state/map/foreground invariants hold across the complete game.

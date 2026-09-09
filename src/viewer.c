@@ -406,6 +406,10 @@ static void start_game(void)
     if (stage < 0 || stage > 3) stage = 0;
     bs_load_stage(&data, stage);
     eng_init(stage, players_sel, opt.weapon, opt.lives, opt.difficulty);
+    if(smoke && getenv("BS_SMOKE_PROGRESS")) {
+        int progress=atoi(getenv("BS_SMOKE_PROGRESS"));
+        if(progress>=1 && progress<=8192) g.progress7206=progress;
+    }
     g.continues_left[0] = g.continues_left[1] = CONTINUE_LIMITS[opt.continues];
     render_stage(&data);
     audio_start_game();
@@ -1454,6 +1458,12 @@ int main(int argc, char **argv)
     Image material_image=GenImageColor(BS_VIEW_W,BS_VIEW_H,BLACK);
     terrain_material_texture=LoadTextureFromImage(material_image);
     UnloadImage(material_image);
+    int lava_mask_size=0;
+    render_lava_mask=LoadFileData("assets/remaster/surface-lava-mask.bin",&lava_mask_size);
+    if(lava_mask_size!=384*8192/8) {
+        if(render_lava_mask) UnloadFileData(render_lava_mask);
+        render_lava_mask=NULL;
+    }
     if (getenv("BS_AI_PREVIEW")) opt.graphics = 2;
     options_apply();
 
@@ -1763,6 +1773,7 @@ int main(int argc, char **argv)
     if (opening_land.id) UnloadTexture(opening_land);
     if (opening_land_reference.id) UnloadTexture(opening_land_reference);
     if (terrain_material_texture.id) UnloadTexture(terrain_material_texture);
+    if (render_lava_mask) UnloadFileData(render_lava_mask);
     if (opening_reference.id) UnloadTexture(opening_reference);
     if (opening_indices.id) UnloadTexture(opening_indices);
     if (opening_shader.id) UnloadShader(opening_shader);

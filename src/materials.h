@@ -2,7 +2,7 @@
 #define BS_MATERIALS_H
 #include "remaster.h"
 /* Original palette indices, never sprite colours. Class 0 remains unchanged. */
-enum { MAT_ORIGINAL, MAT_ROCK, MAT_CLOUD, MAT_LAVA, MAT_STARS, MAT_METAL };
+enum { MAT_ORIGINAL, MAT_ROCK, MAT_CLOUD, MAT_LAVA, MAT_STARS, MAT_METAL, MAT_DEEP_LAVA };
 static inline int terrain_material(int stage, uint16_t tile, int colour, int mechanical) {
     int purple = colour >= 8 && colour <= 12;
     int rock = colour == 1 || colour == 6 || colour == 15 || colour == 16 ||

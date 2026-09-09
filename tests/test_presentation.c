@@ -123,10 +123,19 @@ int main(void) {
     /* Exercise every environment away from the opening, plus returning surface
      * palettes. Material capture must never mutate map/game state or RGB. */
     static uint8_t chip_before[BS_CHIP_SIZE];
+    static unsigned char lava_mask[384*8192/8];
+    FILE *mask_file=fopen("assets/remaster/surface-lava-mask.bin","rb");
+    assert(mask_file && fread(lava_mask,1,sizeof lava_mask,mask_file)==sizeof lava_mask);
+    fclose(mask_file); render_lava_mask=lava_mask;
+    const int gate_progress[3]={0xF10,0x1490,0x1DD0}, gate_col[3]={11,9,12};
+    for(int gate=0;gate<3;gate++) {
+        unsigned i=(8192-gate_progress[gate])*384+gate_col[gate]*16+8;
+        assert(lava_mask[i>>3]&(1u<<(i&7)));
+    }
     for(int stage=0;stage<4;stage++) {
         assert(bs_load_stage(&data,stage)==0);
         eng_init(stage,1,0,3,1);
-        int seen[6]={0};
+        int seen[7]={0};
         for(int progress=300;progress<8100;progress+=173) {
             g.progress7206=progress;
             if(stage==0) g.hangars4099=3;
@@ -140,17 +149,21 @@ int main(void) {
             for(int i=0;i<BS_VIEW_W*BS_VIEW_H;i++) {
                 assert((original[i]&0xFFFFFFu)==(enhanced[i]&0xFFFFFFu));
                 int material=render_materials[i]>>24;
-                assert(material>=0 && material<=MAT_METAL);
+                assert(material>=0 && material<=MAT_DEEP_LAVA);
+                if(material==MAT_DEEP_LAVA) assert(stage==0 && !(render_materials[i]&0xFFFFFFu));
                 seen[material]++;
             }
         }
         assert(seen[MAT_ROCK]>0 && seen[MAT_CLOUD]>0 && seen[MAT_METAL]>0);
+        if(stage==0) assert(seen[MAT_DEEP_LAVA]>10000);
+        else assert(seen[MAT_DEEP_LAVA]==0);
         g.demo=1;
         render_remaster_full=0; render_frame(original,BS_L_ALL);
         render_remaster_full=1; render_frame(enhanced,BS_L_ALL);
         assert(!memcmp(original,enhanced,sizeof original));
     }
     render_remaster=0; render_remaster_full=0;
+    render_lava_mask=NULL;
     puts("PASS: materials across all four complete maps, surface returns, foreground RGB, chip/game state and demos preserved");
     puts("PASS: land preview changes only olive/black terrain alpha, preserves coloured structures and state, stops after opening strip");
     puts("PASS: opening preview preserves RGB/game state, fades out, excludes later terrain/demo/other stages/sublevels");

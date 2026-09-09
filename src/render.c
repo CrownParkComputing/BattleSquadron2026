@@ -43,6 +43,7 @@ int render_hiscore = 1000000;
 int render_enhanced;
 int render_remaster;
 int render_remaster_full;
+unsigned char *render_lava_mask;
 uint32_t render_materials[BS_VIEW_W * BS_VIEW_H];
 static uint8_t material_tile_flags[65536];
 static int material_cache_stage = -1;
@@ -229,8 +230,13 @@ static void draw_terrain(uint32_t *rgba)
                 for (int p = 0; p < 5; p++) c |= ((pl[p] >> bit) & 1) << p;
                 uint32_t colour = pal_rgba[c];
                 if (render_remaster_full && !g.demo) {
+                    int material=terrain_material(g.stage7228, word, c, mechanical);
+                    if (g.stage7228==0 && render_lava_mask && !(colour&0xFFFFFFu) && q>=1 && q<=8192) {
+                        unsigned index=(8192-q)*384+cx;
+                        if (render_lava_mask[index>>3] & (1u<<(index&7))) material=MAT_DEEP_LAVA;
+                    }
                     render_materials[(size_t)sy * BS_VIEW_W + sx] =
-                        (colour & 0xFFFFFFu) | ((uint32_t)terrain_material(g.stage7228, word, c, mechanical) << 24);
+                        (colour & 0xFFFFFFu) | ((uint32_t)material << 24);
                 }
                 if (render_remaster && !g.demo && g.stage7228 == 0 && !g.hangars4099 &&
                     sy >= g.progress7206) colour &= 0x00FFFFFFu;
